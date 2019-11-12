@@ -50,6 +50,6 @@ public class Member {
     }
 
     public void setId(long id){
-        this.id = this.id;
+        this.id = id;
     }
 }
