@@ -3,28 +3,31 @@ package no.kristiania.taskManager.http;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
-import java.util.IdentityHashMap;
 import java.util.Map;
 
 
 public class HttpServer {
     private ServerSocket serverSocket;
-    private String fileLocation;
     private String assetRoot;
-    private IdentityHashMap<String, Object> controllers;
+
+
+    private HttpController defaultController = new FileHttpController(this);
+
+    private Map<String, HttpController> controllers = new HashMap<>();
 
     public HttpServer(int port) throws IOException {
         //Opens up a socket, so that we have somewhere to send and receive data.
         serverSocket = new ServerSocket(port);
+        controllers.put("/echo", new EchoHttpController());
     }
 
     public static void main(String[] args) throws IOException {
 
         HttpServer httpServer = new HttpServer(8080);
-        httpServer.setFileLocation("src/main/resources");
         httpServer.start();
 
     }
@@ -41,40 +44,21 @@ public class HttpServer {
                 HttpServerRequest request = new HttpServerRequest(socket.getInputStream());
                 String requestLine = request.getStartLine();
 
-
-                String requestTarget = requestLine.split(" ")[1];
-                Map<String, String> requestParameters = parseRequestParameters(requestTarget);
-
-                String statusCode = requestParameters.getOrDefault("status", "200");
-                String location = requestParameters.get("location");
-                String body = requestParameters.getOrDefault("body", "Hello World");
-
-                int questionPos = requestTarget.indexOf("?");
-
+                String requestTarget = requestLine.split(" ")[1];//OK
+                int questionPos = requestTarget.indexOf('?');
                 String requestPath = questionPos == -1 ? requestTarget : requestTarget.substring(0, questionPos);
+                Map<String, String> query = parseRequestParameters(requestTarget);
 
-                //If /echo isn't in the requestPath, return a file from the specified file location
-                if (!requestPath.equals("/echo")) {
-                    File file = new File(fileLocation + requestPath);
-                    socket.getOutputStream().write(("HTTP:/1.1 200 OK\r\n" +
-                            "Content-length: " + file.length() + "\r\n" +
-                            "Connection: close \r\n" +
-                            "\r\n").getBytes());
-
-                    new FileInputStream(file).transferTo(socket.getOutputStream());
-                }
-                //Writes Hello World
-                socket.getOutputStream().write(("HTTP/1.0 " + statusCode + " OK\r\n" +
-                        "Content-length: " + body.length() + "\r\n" +
-                        (location != null ? "Location: " + location + "\r\n" : "") +
-                        "\r\n" +
-                        body).getBytes());
+                controllers
+                        .getOrDefault(requestPath, defaultController)
+                        .handle(requestPath, socket.getOutputStream(), query);
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
+
 
 
     private Map<String, String> parseRequestParameters(String requestTarget) {
@@ -99,10 +83,6 @@ public class HttpServer {
 
     public int getPort() {
         return serverSocket.getLocalPort();
-    }
-
-    public void setFileLocation(String fileLocation) {
-        this.fileLocation = fileLocation;
     }
 
     public void setAssetRoot(String assetRoot) {

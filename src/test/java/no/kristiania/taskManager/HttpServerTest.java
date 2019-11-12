@@ -52,7 +52,7 @@ class HttpServerTest {
     @Test
     void shouldReturnFileFromDisk() throws IOException {
         Files.writeString(Paths.get("target/mytestfile.txt"), "Hello Kristiania");
-        server.setFileLocation("target");
+        server.setAssetRoot("target");
         HttpClient client = new HttpClient("localhost", server.getPort(), "/mytestfile.txt");
         HttpClientResponse response = client.execute();
         assertEquals("Hello Kristiania", response.getBody());
