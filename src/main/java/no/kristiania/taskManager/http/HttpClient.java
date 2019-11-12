@@ -1,4 +1,4 @@
-package no.kristiania.taskManager;
+package no.kristiania.taskManager.http;
 
 import java.io.IOException;
 import java.net.Socket;

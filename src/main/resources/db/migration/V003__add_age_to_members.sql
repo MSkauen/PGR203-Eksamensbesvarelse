@@ -1,0 +1,1 @@
+ALTER TABLE MEMBERS add age numeric;

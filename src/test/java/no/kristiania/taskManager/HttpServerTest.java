@@ -1,5 +1,8 @@
 package no.kristiania.taskManager;
 
+import no.kristiania.taskManager.http.HttpClient;
+import no.kristiania.taskManager.http.HttpClientResponse;
+import no.kristiania.taskManager.http.HttpServer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

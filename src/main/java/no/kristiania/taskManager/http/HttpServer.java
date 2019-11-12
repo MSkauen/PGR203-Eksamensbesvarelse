@@ -1,4 +1,4 @@
-package no.kristiania.taskManager;
+package no.kristiania.taskManager.http;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -6,12 +6,15 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
+import java.util.IdentityHashMap;
 import java.util.Map;
 
 
 public class HttpServer {
     private ServerSocket serverSocket;
     private String fileLocation;
+    private String assetRoot;
+    private IdentityHashMap<String, Object> controllers;
 
     public HttpServer(int port) throws IOException {
         //Opens up a socket, so that we have somewhere to send and receive data.
@@ -26,7 +29,7 @@ public class HttpServer {
 
     }
 
-    void start() {
+    public void start() {
         new Thread(this::run).start();
     }
 
@@ -101,4 +104,13 @@ public class HttpServer {
     public void setFileLocation(String fileLocation) {
         this.fileLocation = fileLocation;
     }
+
+    public void setAssetRoot(String assetRoot) {
+        this.assetRoot = assetRoot;
+    }
+
+    public String getAssetRoot(){
+        return assetRoot;
+    }
+
 }

@@ -1,5 +1,6 @@
 package no.kristiania.taskManager;
 
+import no.kristiania.taskManager.http.HttpClient;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
