@@ -28,13 +28,14 @@ public class TaskManagerServer {
         server = new HttpServer(port);
         server.setAssetRoot("src/main/resources/taskManager");
         server.addController("/api/members", new MembersController(new MemberDao(dataSource)));
+        server.addController("/members", new AddMemberController(new MemberDao(dataSource)));
     }
 
     public static void main(String[] args) throws IOException {
         new TaskManagerServer(8080).start();
     }
 
-    private void start() {
+    public void start() {
         server.start();
     }
 }

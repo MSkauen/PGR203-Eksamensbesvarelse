@@ -14,31 +14,31 @@ public class HttpClientTest {
     @Test
     void shouldExecuteHttpRequest() throws IOException {
         HttpClient client = new HttpClient(URLECHO, 80, "/echo");
-        assertEquals(200, client.execute().getStatusCode());
+        assertEquals(200, client.executeGet().getStatusCode());
     }
 
     @Test
     void shouldReadStatusCode() throws IOException {
         HttpClient client = new HttpClient(URLECHO, 80, "/echo?status=401");
-        assertEquals(401, client.execute().getStatusCode());
+        assertEquals(401, client.executeGet().getStatusCode());
     }
 
     @Test
     void shouldReadHeaders() throws IOException {
         HttpClient client = new HttpClient(URLECHO, 80, "/echo?content-type=text/plain");
-        assertEquals("text/plain; charset=utf-8", client.execute().getHeader("Content-type"));
+        assertEquals("text/plain; charset=utf-8", client.executeGet().getHeader("Content-type"));
     }
 
     @Test
     void shouldReadContentLength() throws IOException {
         HttpClient client = new HttpClient(URLECHO, 80, "/echo?body=Hello+world!");
-        assertEquals(12, client.execute().getContentLength());
+        assertEquals(12, client.executeGet().getContentLength());
     }
 
     @Test
     void shouldReadBody() throws IOException {
         HttpClient client = new HttpClient(URLECHO, 80, "/echo?body=Hello+world!");
-        assertEquals("Hello world!", client.execute().getBody());
+        assertEquals("Hello world!", client.executeGet().getBody());
     }
 
 }

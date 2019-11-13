@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +14,6 @@ import java.util.Map;
 public class HttpServer {
     private ServerSocket serverSocket;
     private String assetRoot;
-
 
     private HttpController defaultController = new FileHttpController(this);
 
@@ -45,19 +45,32 @@ public class HttpServer {
                 //The accept method is used to accept incoming requests to the socket.
                 Socket socket = serverSocket.accept();
                 HttpServerRequest request = new HttpServerRequest(socket.getInputStream());
+
                 String requestLine = request.getStartLine();
                 logger.info("Handling request{}", requestLine);
 
+                String requestType = requestLine.split(" ")[0];
                 String requestTarget = requestLine.split(" ")[1];//OK
+
                 int questionPos = requestTarget.indexOf('?');
                 String requestPath = questionPos == -1 ? requestTarget : requestTarget.substring(0, questionPos);
-                Map<String, String> query = parseRequestParameters(requestTarget);
 
-                controllers
-                        .getOrDefault(requestPath, defaultController)
-                        .handle(requestPath, socket.getOutputStream(), query);
+                if(requestType.equals("GET")){
+                    Map<String, String> query = parseRequestParameters(requestTarget);
 
-            } catch (IOException e) {
+                    controllers
+                            .getOrDefault(requestPath, defaultController)
+                            .handle(requestPath, socket.getOutputStream(), query);
+
+                } else if(requestType.equals("POST")){
+                    Map<String, String> postData = parsePostRequestBody(request.getBody());
+
+                    controllers
+                            .getOrDefault(requestPath, defaultController)
+                            .handle(requestPath, socket.getOutputStream(), postData);
+                }
+
+            } catch (IOException | SQLException e) {
                 e.printStackTrace();
             }
         }
@@ -80,6 +93,19 @@ public class HttpServer {
             }
         }
         return requestParameters;
+    }
+
+    private Map<String, String> parsePostRequestBody(String body){
+
+        Map<String, String> dataInput = new HashMap<>();
+
+        for (String parameter : body.split("&")) {
+            int equalsPos = body.indexOf('=');
+            String parameterValue = body.substring(equalsPos + 1);
+            String parameterName = body.substring(0, equalsPos);
+            dataInput.put(parameterName, parameterValue);
+        }
+        return dataInput;
     }
 
     public int getPort() {

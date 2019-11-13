@@ -16,7 +16,7 @@ public class HttpClient extends HttpMessage {
         this.requestTarget = requestTarget;
     }
 
-    public HttpClientResponse execute() throws IOException {
+    public HttpClientResponse executeGet() throws IOException {
         Socket socket = new Socket(hostname, port);
 
         socket.getOutputStream().write(("GET " + requestTarget + " HTTP/1.1\r\n" +
@@ -27,5 +27,4 @@ public class HttpClient extends HttpMessage {
 
         return new HttpClientResponse(socket.getInputStream());
     }
-
 }

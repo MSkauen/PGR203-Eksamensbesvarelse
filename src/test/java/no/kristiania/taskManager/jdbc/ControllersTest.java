@@ -5,13 +5,13 @@ import no.kristiania.taskManager.TestDatabase;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class MembersControllerTest {
-
-
-
+class ControllersTest {
+    
     @Test
     void shouldReturnMembersFromDatabase() throws SQLException {
         MemberDao dao = new MemberDao(TestDatabase.testDataSource());
@@ -25,5 +25,24 @@ class MembersControllerTest {
         assertThat(controller.getBody())
                     .contains(String.format("<option id='%s'>%s</option>", member1.getId(), member1.getName(), member1.getAge()))
                     .contains(String.format("<option id='%s'>%s</option>", member2.getId(), member2.getName(), member2.getAge()));
+    }
+
+    @Test
+    void shouldInsertMembersToDatabase() throws SQLException {
+        MemberDao dao = new MemberDao(TestDatabase.testDataSource());
+
+        Member member1 = MemberDaoTest.sampleMember();
+
+        Map<String, String> data = new HashMap<>();
+        data.put("name", member1.getName());
+        data.put("age", Integer.toString(member1.getAge()));
+
+        AddMemberController controller = new AddMemberController(dao);
+        controller.addMember(data);
+
+        assertThat(dao.listAll())
+                .contains(member1);
+
+        System.out.println(dao.listAll());
     }
 }

@@ -9,8 +9,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class MembersController implements HttpController {
-    private final MemberDao dao;
 
+    private final MemberDao dao;
     public MembersController(MemberDao dao) {
         this.dao = dao;
     }
@@ -41,6 +41,7 @@ public class MembersController implements HttpController {
                     "\r\n" + body).getBytes());
         }
     }
+
 
     String getBody() throws SQLException {
         return dao.listAll().stream()
