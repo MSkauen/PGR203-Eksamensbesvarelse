@@ -1,10 +1,10 @@
-package no.kristiania.taskManager.http;
+package no.kristiania.taskManager.controllers;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Map;
 
-class EchoHttpController implements HttpController {
+public class EchoHttpController implements HttpController {
     @Override
     public void handle(String requestPath, OutputStream outputStream, Map<String, String> query) throws IOException {
 

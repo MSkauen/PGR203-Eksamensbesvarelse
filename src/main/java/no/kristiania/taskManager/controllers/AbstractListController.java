@@ -1,6 +1,4 @@
-package no.kristiania.taskManager.jdbc;
-
-import no.kristiania.taskManager.http.HttpController;
+package no.kristiania.taskManager.controllers;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -8,14 +6,14 @@ import java.sql.SQLException;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class MembersController implements HttpController {
+public abstract class AbstractListController<ENTITY> implements HttpController {
 
-    private final MemberDao dao;
-    public MembersController(MemberDao dao) {
-        this.dao = dao;
+    protected ENTITY dao;
+
+    public AbstractListController(ENTITY o){
+        this.dao = o;
     }
 
-    @Override
     public void handle(String requestPath, OutputStream outputStream, Map<String, String> query) throws IOException {
         try {
             int statusCode = 200;
@@ -41,12 +39,5 @@ public class MembersController implements HttpController {
                     "\r\n" + body).getBytes());
         }
     }
-
-
-    String getBody() throws SQLException {
-        return dao.listAll().stream()
-                .map(p -> String.format("<option id='%s'>%s</option>", p.getId(), p.getName()))
-                .collect(Collectors.joining(""));
-    }
-
+    protected abstract String getBody() throws SQLException;
 }

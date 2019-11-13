@@ -1,6 +1,8 @@
-package no.kristiania.taskManager.jdbc;
+package no.kristiania.taskManager.controllers;
 
-import no.kristiania.taskManager.http.HttpController;
+import no.kristiania.taskManager.controllers.HttpController;
+import no.kristiania.taskManager.jdbc.Member;
+import no.kristiania.taskManager.jdbc.MemberDao;
 
 import java.io.OutputStream;
 import java.sql.SQLException;

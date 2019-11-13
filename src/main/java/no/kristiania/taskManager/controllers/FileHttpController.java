@@ -1,4 +1,6 @@
-package no.kristiania.taskManager.http;
+package no.kristiania.taskManager.controllers;
+
+import no.kristiania.taskManager.http.HttpServer;
 
 import java.io.File;
 import java.io.FileInputStream;

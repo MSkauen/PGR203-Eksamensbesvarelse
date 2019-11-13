@@ -1,5 +1,8 @@
 package no.kristiania.taskManager.http;
 
+import no.kristiania.taskManager.controllers.EchoHttpController;
+import no.kristiania.taskManager.controllers.FileHttpController;
+import no.kristiania.taskManager.controllers.HttpController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,6 +15,7 @@ import java.util.Map;
 
 
 public class HttpServer {
+
     private ServerSocket serverSocket;
     private String assetRoot;
 
@@ -55,14 +59,14 @@ public class HttpServer {
                 int questionPos = requestTarget.indexOf('?');
                 String requestPath = questionPos == -1 ? requestTarget : requestTarget.substring(0, questionPos);
 
-                if(requestType.equals("GET")){
+                if(requestType.equals("GET") || requestType.equals("FETCH")){
                     Map<String, String> query = parseRequestParameters(requestTarget);
 
                     controllers
                             .getOrDefault(requestPath, defaultController)
                             .handle(requestPath, socket.getOutputStream(), query);
 
-                } else if(requestType.equals("POST")){
+                } else if(requestType.equals("POST")) {
                     Map<String, String> postData = parsePostRequestBody(request.getBody());
 
                     controllers

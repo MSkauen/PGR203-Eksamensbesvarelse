@@ -31,7 +31,8 @@ public class ProjectDao extends AbstractDao<Project>{
 
 
     public void insert(Project project) throws SQLException {
-        insert(project, "INSERT INTO projects (name) values (?)");
+        long id = insert(project, "INSERT INTO projects (name) values (?)");
+        project.setId(id);
     }
 
     public List<Project> listAll() throws SQLException {

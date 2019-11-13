@@ -145,8 +145,8 @@ body {
 
 ### Funksjonalitet
 
-* [ ] Programmet kan liste prosjektdeltagere fra databasen
-* [ ] Programmet lar bruker opprette nye prosjektdeltagere i databasen
+* [x] Programmet kan liste prosjektdeltagere fra databasen
+* [x] Programmet lar bruker opprette nye prosjektdeltagere i databasen
 * [ ] Programmet kan opprette og liste prosjektoppgaver fra databasen
 
 

@@ -1,4 +1,4 @@
-package no.kristiania.taskManager.http;
+package no.kristiania.taskManager.controllers;
 
 import java.io.IOException;
 import java.io.OutputStream;
