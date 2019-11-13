@@ -16,6 +16,7 @@ public class TaskManager {
     private BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
     private MemberDao memberDao;
     private ProjectDao projectDao;
+    private Task_MemberDao task_memberDao;
 
 
     public TaskManager() throws IOException {
@@ -31,6 +32,7 @@ public class TaskManager {
 
         memberDao = new MemberDao(dataSource);
         projectDao = new ProjectDao(dataSource);
+        task_memberDao = new Task_MemberDao(dataSource);
     }
 
     public static void main(String[] args) throws IOException, SQLException {
@@ -38,7 +40,7 @@ public class TaskManager {
     }
 
     public void run() throws SQLException, IOException {
-        System.out.println("Choose action: create [member] | create [project]");
+        System.out.println("Choose action: create [member] | create [project] | create [membership]");
         String action = input.readLine();
 
         switch (action.toLowerCase()){
@@ -47,6 +49,9 @@ public class TaskManager {
                 break;
             case "project":
                 insertProject();
+                break;
+            case "membership":
+                insertTask_Member();
                 break;
         }
     }
@@ -71,5 +76,18 @@ public class TaskManager {
 
         memberDao.insert(member);
         System.out.println(memberDao.listAll());
+    }
+
+    private void insertTask_Member() throws IOException, SQLException {
+        TaskMember task_member = new TaskMember();
+
+        System.out.println("Enter the project id");
+        task_member.setProjectId(Long.parseLong(input.readLine()));
+
+        System.out.println("Enter the member id");
+        task_member.setMemberId(Long.parseLong(input.readLine()));
+
+        task_memberDao.insert(task_member);
+        System.out.println(task_memberDao.listAll());
     }
 }

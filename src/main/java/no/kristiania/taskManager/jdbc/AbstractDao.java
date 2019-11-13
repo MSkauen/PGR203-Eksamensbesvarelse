@@ -30,7 +30,6 @@ public abstract class AbstractDao<ENTITY> {
         }
     }
 
-
     public List<ENTITY> listAll(String sql) throws SQLException {
         try(Connection connection = dataSource.getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(sql)){
@@ -44,6 +43,7 @@ public abstract class AbstractDao<ENTITY> {
             }
         }
     }
+
 
     protected abstract void mapToStatement(ENTITY o, PreparedStatement stmt) throws SQLException;
 

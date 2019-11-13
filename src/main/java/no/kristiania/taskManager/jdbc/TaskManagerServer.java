@@ -1,9 +1,6 @@
 package no.kristiania.taskManager.jdbc;
 
-import no.kristiania.taskManager.controllers.AddMemberController;
-import no.kristiania.taskManager.controllers.AddProjectController;
-import no.kristiania.taskManager.controllers.MembersController;
-import no.kristiania.taskManager.controllers.ProjectsController;
+import no.kristiania.taskManager.controllers.*;
 import no.kristiania.taskManager.http.HttpServer;
 import org.flywaydb.core.Flyway;
 import org.postgresql.ds.PGSimpleDataSource;
@@ -35,6 +32,7 @@ public class TaskManagerServer {
         server.addController("/api/projects", new ProjectsController(new ProjectDao(dataSource)));
         server.addController("/members", new AddMemberController(new MemberDao(dataSource)));
         server.addController("/projects", new AddProjectController(new ProjectDao(dataSource)));
+        server.addController("/setMemberResponsible", new MemberToTaskController(new ProjectDao(dataSource)));
     }
 
     public static void main(String[] args) throws IOException {

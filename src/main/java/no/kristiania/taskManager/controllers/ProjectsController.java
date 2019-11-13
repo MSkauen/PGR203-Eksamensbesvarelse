@@ -14,7 +14,7 @@ public class ProjectsController extends AbstractListController<ProjectDao> {
     @Override
     public String getBody() throws SQLException {
         return dao.listAll().stream()
-                .map(p -> String.format("<option id='%s'>%s</option>", p.getId(), p.getName()))
+                .map(p -> String.format("<option value='%s' id='%s'>%s</option>", p.getId(), p.getId(), p.getName()))
                 .collect(Collectors.joining(""));
     }
 }

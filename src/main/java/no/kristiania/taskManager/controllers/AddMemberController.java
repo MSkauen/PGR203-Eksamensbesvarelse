@@ -1,6 +1,5 @@
 package no.kristiania.taskManager.controllers;
 
-import no.kristiania.taskManager.controllers.HttpController;
 import no.kristiania.taskManager.jdbc.Member;
 import no.kristiania.taskManager.jdbc.MemberDao;
 

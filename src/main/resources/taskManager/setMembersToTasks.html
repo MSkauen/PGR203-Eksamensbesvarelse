@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add project member</title>
+</head>
+<body>
+<h1>Set member as responsible for project</h1>
+<form method="POST" action="/setMemberResponsible">
+    <label>Select project <select name="project" id="projects"></select></label>
+    <label>Select member <select name="member" id="members"></select></label>
+    <button type="submit">Confirm</button>
+    </form>
+<script>
+    var projects = document.getElementById("projects");
+    fetch("/api/projects")
+        .then(function (result) {
+            return result.text();
+        })
+        .then(function (text) {
+            projects.innerHTML = text;
+        })
+
+    var members = document.getElementById("members");
+    fetch("/api/members")
+        .then(function (result) {
+            return result.text();
+        })
+        .then(function (text) {
+            members.innerHTML = text;
+        })
+</script>
+</body>
+</html>

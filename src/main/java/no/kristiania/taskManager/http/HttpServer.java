@@ -103,11 +103,13 @@ public class HttpServer {
 
         Map<String, String> dataInput = new HashMap<>();
 
-        for(String parameter : body.split("&")){
-            int equalsPos = parameter.indexOf('=');
-            String parameterValue = parameter.substring(equalsPos + 1);
-            String parameterName = parameter.substring(0, equalsPos);
-            dataInput.put(parameterName, parameterValue);
+        if(body.contains("&")){
+            for(String parameter : body.split("&")){
+                int equalsPos = parameter.indexOf('=');
+                String parameterValue = parameter.substring(equalsPos + 1);
+                String parameterName = parameter.substring(0, equalsPos);
+                dataInput.put(parameterName, parameterValue);
+            }
         }
 
         return dataInput;

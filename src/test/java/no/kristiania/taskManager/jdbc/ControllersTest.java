@@ -26,8 +26,8 @@ class ControllersTest {
 
         MembersController controller = new MembersController(dao);
         assertThat(controller.getBody())
-                    .contains(String.format("<option id='%s'>%s</option>", member1.getId(), member1.getName(), member1.getAge()))
-                    .contains(String.format("<option id='%s'>%s</option>", member2.getId(), member2.getName(), member2.getAge()));
+                    .contains(String.format("<option id='%s'>%s</option>", member1.getId(), member1.getName()))
+                    .contains(String.format("<option id='%s'>%s</option>", member2.getId(), member2.getName()));
     }
 
     @Test
