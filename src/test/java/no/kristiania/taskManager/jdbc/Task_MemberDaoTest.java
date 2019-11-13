@@ -14,8 +14,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class Task_MemberDaoTest {
 
     private TaskMemberDao taskMemberDao;
-    private MemberDao memberDao;
-    private ProjectDao projectDao;
     private JdbcDataSource dataSource = TestDatabase.testDataSource();
     private Member member = sampleMember();
     private Project project = sampleProject();
@@ -24,8 +22,8 @@ public class Task_MemberDaoTest {
     @BeforeEach
     void setUp() throws SQLException {
         taskMemberDao = new TaskMemberDao(dataSource);
-        memberDao = new MemberDao(dataSource);
-        projectDao = new ProjectDao(dataSource);
+        MemberDao memberDao = new MemberDao(dataSource);
+        ProjectDao projectDao = new ProjectDao(dataSource);
 
         memberDao.insert(member);
         projectDao.insert(project);

@@ -35,7 +35,7 @@ class ControllersTest {
         Map<String, String> data = getMemberDataMap(member1);
 
         AddMemberController controller = new AddMemberController(dao);
-        controller.addMember(data);
+        controller.insertData(data);
 
         assertThat(dao.listAll())
                 .contains(member1);

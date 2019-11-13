@@ -7,19 +7,14 @@ import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.Map;
 
-public class AddMemberController implements HttpController {
+public class AddMemberController extends AbstractAddController {
     private final MemberDao dao;
     public AddMemberController(MemberDao memberDao) {
         this.dao = memberDao;
     }
 
     @Override
-    public void handle(String requestPath, OutputStream outputStream, Map<String, String> query) throws SQLException {
-        addMember(query);
-    }
-
-    public void addMember(Map<String, String> query) throws SQLException {
-
+    public void insertData(Map<String, String> query) throws SQLException {
         //Gets data from POST-request hashMap
         String name = query.get("name");
         int age = Integer.parseInt(query.get("age"));
@@ -32,5 +27,4 @@ public class AddMemberController implements HttpController {
         //Inserts member in database
         dao.insert(member);
     }
-
 }
