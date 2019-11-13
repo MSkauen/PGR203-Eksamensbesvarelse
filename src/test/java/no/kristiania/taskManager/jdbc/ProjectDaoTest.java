@@ -1,8 +1,5 @@
-package no.kristiania.taskManager;
+package no.kristiania.taskManager.jdbc;
 
-import no.kristiania.taskManager.jdbc.Member;
-import no.kristiania.taskManager.jdbc.Project;
-import no.kristiania.taskManager.jdbc.ProjectDao;
 import org.junit.jupiter.api.Test;
 
 import javax.sql.DataSource;

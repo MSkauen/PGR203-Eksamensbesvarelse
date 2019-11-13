@@ -16,7 +16,7 @@ public class TaskManager {
     private BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
     private MemberDao memberDao;
     private ProjectDao projectDao;
-    private Task_MemberDao task_memberDao;
+    private TaskMemberDao task_memberDao;
 
 
     public TaskManager() throws IOException {
@@ -32,7 +32,7 @@ public class TaskManager {
 
         memberDao = new MemberDao(dataSource);
         projectDao = new ProjectDao(dataSource);
-        task_memberDao = new Task_MemberDao(dataSource);
+        task_memberDao = new TaskMemberDao(dataSource);
     }
 
     public static void main(String[] args) throws IOException, SQLException {

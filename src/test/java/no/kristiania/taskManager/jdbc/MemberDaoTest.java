@@ -1,7 +1,5 @@
-package no.kristiania.taskManager;
+package no.kristiania.taskManager.jdbc;
 
-import no.kristiania.taskManager.jdbc.Member;
-import no.kristiania.taskManager.jdbc.MemberDao;
 import org.h2.jdbcx.JdbcDataSource;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

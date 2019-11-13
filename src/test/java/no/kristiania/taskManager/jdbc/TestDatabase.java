@@ -1,4 +1,4 @@
-package no.kristiania.taskManager;
+package no.kristiania.taskManager.jdbc;
 
 import org.flywaydb.core.Flyway;
 import org.h2.jdbcx.JdbcDataSource;

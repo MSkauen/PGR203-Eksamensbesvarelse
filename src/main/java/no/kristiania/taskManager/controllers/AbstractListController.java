@@ -8,7 +8,6 @@ import java.util.Map;
 public abstract class AbstractListController<ENTITY> implements HttpController {
 
     protected ENTITY dao;
-
     public AbstractListController(ENTITY o){
         this.dao = o;
     }

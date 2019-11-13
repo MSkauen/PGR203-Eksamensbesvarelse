@@ -44,7 +44,6 @@ public abstract class AbstractDao<ENTITY> {
         }
     }
 
-
     protected abstract void mapToStatement(ENTITY o, PreparedStatement stmt) throws SQLException;
 
     protected abstract ENTITY mapFromResultSet(ResultSet rs) throws SQLException;

@@ -1,7 +1,5 @@
 package no.kristiania.taskManager.jdbc;
 
-import no.kristiania.taskManager.MemberDaoTest;
-import no.kristiania.taskManager.TestDatabase;
 import no.kristiania.taskManager.controllers.AddMemberController;
 import no.kristiania.taskManager.controllers.MembersController;
 import org.junit.jupiter.api.Test;
@@ -26,8 +24,8 @@ class ControllersTest {
 
         MembersController controller = new MembersController(dao);
         assertThat(controller.getBody())
-                    .contains(String.format("<option id='%s'>%s</option>", member1.getId(), member1.getName()))
-                    .contains(String.format("<option id='%s'>%s</option>", member2.getId(), member2.getName()));
+                    .contains(String.format("<option value='%s' id='%s'>%s</option>", member1.getId(), member1.getId(), member1.getName()))
+                    .contains(String.format("<option value='%s' id='%s'>%s</option>", member2.getId(), member2.getId(), member2.getName()));
     }
 
     @Test

@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class Task_MemberDao extends AbstractDao<TaskMember>{
-    public Task_MemberDao(DataSource dataSource) {
+public class TaskMemberDao extends AbstractDao<TaskMember>{
+    public TaskMemberDao(DataSource dataSource) {
         super(dataSource);
     }
 
