@@ -5,9 +5,9 @@ import no.kristiania.taskManager.jdbc.ProjectDao;
 import java.sql.SQLException;
 import java.util.stream.Collectors;
 
-public class ProjectsController extends AbstractListController<ProjectDao> {
+public class ListProjectsController extends AbstractListController<ProjectDao> {
 
-    public ProjectsController(ProjectDao o) {
+    public ListProjectsController(ProjectDao o) {
         super(o);
     }
 

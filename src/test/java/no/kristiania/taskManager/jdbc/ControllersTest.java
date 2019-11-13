@@ -1,7 +1,7 @@
 package no.kristiania.taskManager.jdbc;
 
 import no.kristiania.taskManager.controllers.AddMemberController;
-import no.kristiania.taskManager.controllers.MembersController;
+import no.kristiania.taskManager.controllers.ListMembersController;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
@@ -22,7 +22,7 @@ class ControllersTest {
         dao.insert(member1);
         dao.insert(member2);
 
-        MembersController controller = new MembersController(dao);
+        ListMembersController controller = new ListMembersController(dao);
         assertThat(controller.getBody())
                     .contains(String.format("<option value='%s' id='%s'>%s</option>", member1.getId(), member1.getId(), member1.getName()))
                     .contains(String.format("<option value='%s' id='%s'>%s</option>", member2.getId(), member2.getId(), member2.getName()));

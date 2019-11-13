@@ -51,7 +51,7 @@ public class HttpServer {
                 HttpServerRequest request = new HttpServerRequest(socket.getInputStream());
 
                 String requestLine = request.getStartLine();
-                logger.info("Handling request{}", requestLine);
+                logger.info("Handling request{} ", requestLine);
 
                 String requestType = requestLine.split(" ")[0];
                 String requestTarget = requestLine.split(" ")[1];//OK

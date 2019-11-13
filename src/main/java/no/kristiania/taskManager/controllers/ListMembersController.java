@@ -6,10 +6,10 @@ import java.sql.SQLException;
 import java.util.stream.Collectors;
 
 
-public class MembersController extends AbstractListController<MemberDao> {
+public class ListMembersController extends AbstractListController<MemberDao> {
 
 
-    public MembersController(MemberDao o) {
+    public ListMembersController(MemberDao o) {
         super(o);
     }
 

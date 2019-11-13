@@ -1,5 +1,10 @@
 package no.kristiania.taskManager.jdbc;
 
+import no.kristiania.taskManager.http.HttpServer;
+import org.postgresql.util.PSQLException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,6 +15,7 @@ import java.util.List;
 
 public abstract class AbstractDao<ENTITY> {
 
+    private static final Logger logger = LoggerFactory.getLogger(AbstractDao.class);
     protected DataSource dataSource;
 
     public AbstractDao(DataSource dataSource) {

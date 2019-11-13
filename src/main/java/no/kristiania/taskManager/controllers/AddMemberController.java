@@ -3,7 +3,6 @@ package no.kristiania.taskManager.controllers;
 import no.kristiania.taskManager.jdbc.Member;
 import no.kristiania.taskManager.jdbc.MemberDao;
 
-import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.Map;
 

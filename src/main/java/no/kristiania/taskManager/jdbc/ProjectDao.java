@@ -13,6 +13,20 @@ public class ProjectDao extends AbstractDao<Project>{
     }
 
     @Override
+    protected Project retrieve(long id) throws SQLException {
+        return retrieve(id, "SELECT * FROM projects where id = ?");
+    }
+
+    public List<Project> listAll() throws SQLException {
+        return listAll("SELECT * FROM projects");
+    }
+
+    public void insert(Project project) throws SQLException {
+        long id = insert(project, "INSERT INTO projects (name) VALUES (?)");
+        project.setId(id);
+    }
+
+    @Override
     protected void mapToStatement(Project project, PreparedStatement stmt) throws SQLException {
         stmt.setString(1, project.getName());
     }
@@ -20,22 +34,14 @@ public class ProjectDao extends AbstractDao<Project>{
     @Override
     protected Project mapFromResultSet(ResultSet rs) throws SQLException {
         Project project = new Project();
+        project.setId(rs.getLong("id"));
         project.setName(rs.getString("name"));
         return project;
     }
 
-    @Override
-    protected Project retrieve(long id) throws SQLException {
-        return null;
-    }
 
 
-    public void insert(Project project) throws SQLException {
-        long id = insert(project, "INSERT INTO projects (name) values (?)");
-        project.setId(id);
-    }
 
-    public List<Project> listAll() throws SQLException {
-        return listAll("SELECT * FROM projects");
-    }
+
+
 }

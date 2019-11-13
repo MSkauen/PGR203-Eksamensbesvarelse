@@ -28,10 +28,11 @@ public class TaskManagerServer {
 
         server = new HttpServer(port);
         server.setAssetRoot("src/main/resources/taskManager");
-        server.addController("/api/members", new MembersController(new MemberDao(dataSource)));
-        server.addController("/api/projects", new ProjectsController(new ProjectDao(dataSource)));
+        server.addController("/api/members", new ListMembersController(new MemberDao(dataSource)));
+        server.addController("/api/projects", new ListProjectsController(new ProjectDao(dataSource)));
         server.addController("/members", new AddMemberController(new MemberDao(dataSource)));
         server.addController("/projects", new AddProjectController(new ProjectDao(dataSource)));
+        server.addController("/setMemberResponsible", new MemberToTaskController(new TaskMemberDao(dataSource)));
     }
 
     public static void main(String[] args) throws IOException {

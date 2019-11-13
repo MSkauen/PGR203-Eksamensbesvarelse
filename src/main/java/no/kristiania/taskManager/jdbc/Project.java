@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class Project {
 
-    private long id;
     private String name;
+    private long id;
 
     public void setName(String name) {
         this.name = name;
@@ -32,8 +32,10 @@ public class Project {
     public String toString() {
         return "Project{" +
                 "name='" + name + '\'' +
+                ", id=" + id +
                 '}';
     }
+
     public long getId() {
         return id;
     }
@@ -41,4 +43,4 @@ public class Project {
     public void setId(long id){
         this.id = id;
     }
-}
+ }

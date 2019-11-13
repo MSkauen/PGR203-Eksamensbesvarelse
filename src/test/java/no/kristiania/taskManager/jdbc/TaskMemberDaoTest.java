@@ -11,7 +11,7 @@ import static no.kristiania.taskManager.jdbc.MemberDaoTest.sampleMember;
 import static no.kristiania.taskManager.jdbc.ProjectDaoTest.sampleProject;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class Task_MemberDaoTest {
+public class TaskMemberDaoTest {
 
     private TaskMemberDao taskMemberDao;
     private JdbcDataSource dataSource = TestDatabase.testDataSource();

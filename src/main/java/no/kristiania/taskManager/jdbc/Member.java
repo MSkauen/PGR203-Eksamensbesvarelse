@@ -5,7 +5,7 @@ import java.util.Objects;
 public class Member {
     private String name;
     private int age;
-    private Long id;
+    private long id;
 
     public void setName(String name) {
         this.name = name;

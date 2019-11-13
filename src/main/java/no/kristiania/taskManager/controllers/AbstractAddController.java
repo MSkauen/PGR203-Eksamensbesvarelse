@@ -1,8 +1,5 @@
 package no.kristiania.taskManager.controllers;
 
-import no.kristiania.taskManager.jdbc.Member;
-
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.SQLException;

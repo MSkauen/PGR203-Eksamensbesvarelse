@@ -147,7 +147,7 @@ body {
 
 * [x] Programmet kan liste prosjektdeltagere fra databasen
 * [x] Programmet lar bruker opprette nye prosjektdeltagere i databasen
-* [ ] Programmet kan opprette og liste prosjektoppgaver fra databasen
+* [x] Programmet kan opprette og liste prosjektoppgaver fra databasen
 
 
 ## Vedlegg: Mulighet for ekstrapoeng
