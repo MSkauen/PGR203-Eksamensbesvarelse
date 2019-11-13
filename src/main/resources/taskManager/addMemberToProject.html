@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Member To Project</title>
+</head>
+<body>
+<h1>Add Member To Project</h1>
+    <form action=""><label>Member <select name="" id="members"></select></label></form>
+</body>
+
+<script>
+    var members = document.getElementById("members");
+    fetch("/api/members")
+        .then(function (result) {
+            return result.text();
+        })
+        .then(function (text) {
+            members.innerHTML = text;
+        })
+</script>
+</html>

@@ -41,19 +41,19 @@ public class MemberDaoTest {
                 .isEqualToComparingFieldByField(member);
     }
 
-    private Member sampleMember() {
+    public static Member sampleMember() {
         Member product = new Member();
         product.setName(sampleMemberName());
         product.setAge(randomAge());
         return product;
     }
 
-    private int randomAge() {
+    private static int randomAge() {
         return new Random().nextInt(100);
     }
 
 
-    private String sampleMemberName() {
+    private static String sampleMemberName() {
         String[] members = {"Remi", "Guro", "Christoffer"};
         return members[new Random().nextInt(members.length)];
     }

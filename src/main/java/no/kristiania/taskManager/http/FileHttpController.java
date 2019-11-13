@@ -17,7 +17,7 @@ public class FileHttpController implements HttpController {
     public void handle(String requestPath, OutputStream outputStream, Map<String, String> query) throws IOException {
         File file = new File(httpServer.getAssetRoot() + requestPath);
         if(file.isDirectory()){
-            file = new File(file, "index.html");
+            file = new File(file, "taskManager/index.html");
         }
         if(file.exists()){
             long length = file.length();

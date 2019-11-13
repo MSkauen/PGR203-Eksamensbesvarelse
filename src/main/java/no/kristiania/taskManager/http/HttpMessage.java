@@ -1,12 +1,16 @@
 package no.kristiania.taskManager.http;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
 public class HttpMessage {
+    private static final Logger logger = LoggerFactory.getLogger(HttpMessage.class);
 
     private String body;
     private String startLine;
@@ -50,6 +54,7 @@ public class HttpMessage {
             }
             line.append((char) c);
         }
+        logger.debug("Read line {}", line);
         return line.toString();
     }
 
