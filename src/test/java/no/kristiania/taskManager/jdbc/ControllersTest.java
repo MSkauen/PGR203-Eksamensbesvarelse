@@ -11,10 +11,11 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ControllersTest {
-    
+
+    private MemberDao dao = new MemberDao(TestDatabase.testDataSource());;
+
     @Test
     void shouldReturnMembersFromDatabase() throws SQLException {
-        MemberDao dao = new MemberDao(TestDatabase.testDataSource());
         Member member1 = MemberDaoTest.sampleMember();
         Member member2 = MemberDaoTest.sampleMember();
 
@@ -29,13 +30,9 @@ class ControllersTest {
 
     @Test
     void shouldInsertMembersToDatabase() throws SQLException {
-        MemberDao dao = new MemberDao(TestDatabase.testDataSource());
-
         Member member1 = MemberDaoTest.sampleMember();
 
-        Map<String, String> data = new HashMap<>();
-        data.put("name", member1.getName());
-        data.put("age", Integer.toString(member1.getAge()));
+        Map<String, String> data = getMemberDataMap(member1);
 
         AddMemberController controller = new AddMemberController(dao);
         controller.addMember(data);
@@ -43,6 +40,15 @@ class ControllersTest {
         assertThat(dao.listAll())
                 .contains(member1);
 
-        System.out.println(dao.listAll());
     }
+
+    private Map<String, String> getMemberDataMap(Member member1) {
+
+        Map<String, String> data = new HashMap<>();
+        data.put("name", member1.getName());
+        data.put("age", Integer.toString(member1.getAge()));
+
+        return data;
+    }
+
 }

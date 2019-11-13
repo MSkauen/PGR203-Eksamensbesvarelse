@@ -2,7 +2,6 @@ package no.kristiania.taskManager.jdbc;
 
 import no.kristiania.taskManager.http.HttpController;
 
-import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.Map;
@@ -19,12 +18,17 @@ public class AddMemberController implements HttpController {
     }
 
     public void addMember(Map<String, String> query) throws SQLException {
+
+        //Gets data from POST-request hashMap
         String name = query.get("name");
         int age = Integer.parseInt(query.get("age"));
+
+        //Creates new member object from POST-request data
         Member member = new Member();
         member.setName(name);
         member.setAge(age);
 
+        //Inserts member in database
         dao.insert(member);
     }
 
