@@ -59,6 +59,8 @@ public class HttpServer {
                 int questionPos = requestTarget.indexOf('?');
                 String requestPath = questionPos == -1 ? requestTarget : requestTarget.substring(0, questionPos);
 
+
+                // HANDLE REQUESTS SOMEWHERE ELSE (SEE ENUM!?)
                 if(requestType.equals("GET") || requestType.equals("FETCH")){
                     Map<String, String> query = parseRequestParameters(requestTarget);
 
@@ -103,6 +105,8 @@ public class HttpServer {
 
         Map<String, String> dataInput = new HashMap<>();
 
+
+        //EXTRACT THIS TO METHOD
         if(body.contains("&")){
             for(String parameter : body.split("&")){
                 int equalsPos = parameter.indexOf('=');
@@ -110,10 +114,16 @@ public class HttpServer {
                 String parameterName = parameter.substring(0, equalsPos);
                 dataInput.put(parameterName, parameterValue);
             }
+        } else {
+            int equalsPos = body.indexOf('=');
+            String parameterValue = body.substring(equalsPos + 1);
+            String parameterName = body.substring(0, equalsPos);
+            dataInput.put(parameterName, parameterValue);
         }
 
         return dataInput;
     }
+
 
     public int getPort() {
         return serverSocket.getLocalPort();

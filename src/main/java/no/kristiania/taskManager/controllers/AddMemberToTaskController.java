@@ -6,12 +6,11 @@ import no.kristiania.taskManager.jdbc.TaskMemberDao;
 import java.sql.SQLException;
 import java.util.Map;
 
-public class MemberToTaskController extends AbstractAddController {
-    private final TaskMemberDao taskMemberDao;
+public class AddMemberToTaskController extends AbstractAddController<TaskMemberDao> {
 
-    public MemberToTaskController(TaskMemberDao taskMemberDao) {
-        this.taskMemberDao = taskMemberDao;
 
+    public AddMemberToTaskController(TaskMemberDao o) {
+        super(o);
     }
 
     @Override
@@ -23,6 +22,6 @@ public class MemberToTaskController extends AbstractAddController {
         taskMember.setMemberId(memberId);
         taskMember.setProjectId(projectId);
 
-        taskMemberDao.insert(taskMember);
+        dao.insert(taskMember);
     }
 }

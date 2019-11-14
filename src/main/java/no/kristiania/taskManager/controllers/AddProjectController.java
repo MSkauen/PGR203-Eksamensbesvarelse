@@ -6,11 +6,10 @@ import no.kristiania.taskManager.jdbc.ProjectDao;
 import java.sql.SQLException;
 import java.util.Map;
 
-public class AddProjectController extends AbstractAddController {
+public class AddProjectController extends AbstractAddController<ProjectDao> {
 
-    private final ProjectDao dao;
-    public AddProjectController(ProjectDao projectDao) {
-        this.dao = projectDao;
+    public AddProjectController(ProjectDao o) {
+        super(o);
     }
 
 

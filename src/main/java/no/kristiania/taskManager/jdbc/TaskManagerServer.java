@@ -32,7 +32,7 @@ public class TaskManagerServer {
         server.addController("/api/projects", new ListProjectsController(new ProjectDao(dataSource)));
         server.addController("/members", new AddMemberController(new MemberDao(dataSource)));
         server.addController("/projects", new AddProjectController(new ProjectDao(dataSource)));
-        server.addController("/setMemberResponsible", new MemberToTaskController(new TaskMemberDao(dataSource)));
+        server.addController("/setMemberResponsible", new AddMemberToTaskController(new TaskMemberDao(dataSource)));
     }
 
     public static void main(String[] args) throws IOException {

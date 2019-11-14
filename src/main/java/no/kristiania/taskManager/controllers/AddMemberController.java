@@ -6,10 +6,10 @@ import no.kristiania.taskManager.jdbc.MemberDao;
 import java.sql.SQLException;
 import java.util.Map;
 
-public class AddMemberController extends AbstractAddController {
-    private final MemberDao dao;
-    public AddMemberController(MemberDao memberDao) {
-        this.dao = memberDao;
+public class AddMemberController extends AbstractAddController<MemberDao> {
+
+    public AddMemberController(MemberDao o) {
+        super(o);
     }
 
     @Override

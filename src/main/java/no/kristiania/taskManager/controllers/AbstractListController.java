@@ -14,6 +14,9 @@ public abstract class AbstractListController<ENTITY> implements HttpController {
 
     public void handle(String requestPath, OutputStream outputStream, Map<String, String> query) throws IOException {
         try {
+            // CLEAN THIS UP
+            //METHODS CAN BE EXTRACTED WITHOUT DOUBT
+            //
             int statusCode = 200;
             String body = getBody();
             String contentType = "text/html";
