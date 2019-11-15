@@ -33,7 +33,7 @@ public class TaskManagerServer {
         server.addController("/api/memberships", new ListMembershipsController(new MembershipDao(dataSource), new MemberDao(dataSource),new TaskDao(dataSource)));
         server.addController("/members", new AddMemberController(new MemberDao(dataSource)));
         server.addController("/tasks", new AddTaskController(new TaskDao(dataSource)));
-        server.addController("/memberships", new AddMembershipController(new MembershipDao(dataSource)));
+        server.addController("/memberships", new AddMembershipController(new MembershipDao(dataSource), new MemberDao(dataSource), new TaskDao(dataSource)));
 
     }
 

@@ -2,7 +2,7 @@ package no.kristiania.taskManager.jdbc;
 
 import java.util.Objects;
 
-public class Member {
+public class Member{
     private String name;
     private int age;
     private long id;

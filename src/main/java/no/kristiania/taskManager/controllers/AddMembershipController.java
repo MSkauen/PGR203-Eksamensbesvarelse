@@ -1,16 +1,22 @@
 package no.kristiania.taskManager.controllers;
 
+import no.kristiania.taskManager.jdbc.MemberDao;
 import no.kristiania.taskManager.jdbc.Membership;
 import no.kristiania.taskManager.jdbc.MembershipDao;
+import no.kristiania.taskManager.jdbc.TaskDao;
 
 import java.sql.SQLException;
 import java.util.Map;
 
 public class AddMembershipController extends AbstractAddController<MembershipDao> {
 
+    private MemberDao memberDao;
+    private TaskDao taskDao;
 
-    public AddMembershipController(MembershipDao o) {
+    public AddMembershipController(MembershipDao o, MemberDao memberDao, TaskDao taskDao) {
         super(o);
+        this.memberDao = memberDao;
+        this.taskDao = taskDao;
     }
 
     @Override

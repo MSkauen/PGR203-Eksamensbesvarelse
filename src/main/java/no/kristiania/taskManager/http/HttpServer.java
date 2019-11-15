@@ -59,8 +59,6 @@ public class HttpServer {
                 int questionPos = requestTarget.indexOf('?');
                 String requestPath = questionPos == -1 ? requestTarget : requestTarget.substring(0, questionPos);
 
-
-                // HANDLE REQUESTS SOMEWHERE ELSE (SEE ENUM!?)
                 if(requestType.equals("GET") || requestType.equals("FETCH")){
                     Map<String, String> query = parseRequestParameters(requestTarget);
 

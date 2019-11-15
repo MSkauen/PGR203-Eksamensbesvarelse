@@ -52,6 +52,10 @@ public class ListMembershipsController extends AbstractListController<Membership
             taskList.add(taskDao.retrieve(membership.getTaskId())); //Adds tasks from tasks table to own list
         }
 
+        if(taskList.isEmpty()){
+            return "There are no tasks assigned to this member <br> Back to http://localhost:8080/index.html";
+        }
+
         return taskList.stream()
                 .map(p -> String.format("<li id='%s'>%s</li>", p.getId(), p.getName()))
                 .collect(Collectors.joining("")); //Parses this to list being shown in browser
@@ -65,7 +69,10 @@ public class ListMembershipsController extends AbstractListController<Membership
             memberList.add(memberDao.retrieve(membership.getMemberId()));
         }
 
-        System.out.println(memberList);
+        if(memberList.isEmpty()){
+            return "There are no tasks assigned to this member <br> Back to http://localhost:8080/index.html";
+        }
+
         return memberList.stream()
                 .map(p -> String.format("<li id='%s'>%s</li>", p.getId(), p.getName()))
                 .collect(Collectors.joining(""));

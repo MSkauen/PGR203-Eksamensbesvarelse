@@ -57,7 +57,6 @@ public abstract class AbstractDao<ENTITY> {
                     while(rs.next()){
                         result.add(mapFromResultSet(rs));
                     }
-                    System.out.println(result);
                     return result;
 
                 }
