@@ -25,7 +25,6 @@ public abstract class AbstractAddController<ENTITY> implements HttpController{
         this.outputStream = outputStream;
         this.requestBodyParameters = request.parsePostRequestBody(request.getBody());
 
-
         try {
             insertData(requestBodyParameters);
 

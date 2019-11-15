@@ -7,18 +7,18 @@ import java.util.Map;
 
 public class HttpServerRequest extends HttpMessage {
 
-
+    private String requestTarget;
 
     public HttpServerRequest(InputStream inputStream) throws IOException {
         super(inputStream);
+        requestTarget = getStartLine().split(" ")[1];//OK
     }
 
-    public Map<String, String> parseRequestParameters(String requestTarget) {
+    public Map<String, String> parseRequestParameters() {
         Map<String, String> requestParameters = new HashMap<>();
 
         int questionPos = requestTarget.indexOf('?');
         if (questionPos != -1) {
-
             String query = requestTarget.substring(questionPos + 1);
 
             for (String parameter : query.split("&")) {
@@ -29,6 +29,7 @@ public class HttpServerRequest extends HttpMessage {
             }
         }
         return requestParameters;
+
     }
 
 
@@ -53,5 +54,9 @@ public class HttpServerRequest extends HttpMessage {
         }
 
         return dataInput;
+    }
+
+    public String getRequestTarget() {
+        return requestTarget;
     }
 }

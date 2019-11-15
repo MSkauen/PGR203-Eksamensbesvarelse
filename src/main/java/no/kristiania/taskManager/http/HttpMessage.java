@@ -12,7 +12,6 @@ public class HttpMessage {
     private String body;
     private String startLine;
     private Map<String, String> headers = new HashMap<>();
-    private String requestTarget;
 
     public HttpMessage() {
 
@@ -31,7 +30,6 @@ public class HttpMessage {
             this.body = readBytes(inputStream, getContentLength());
         }
 
-        requestTarget = getStartLine().split(" ")[1];//OK
     }
 
 
@@ -74,10 +72,6 @@ public class HttpMessage {
 
     public int getStatusCode() {
         return Integer.parseInt(startLine.split(" ")[1]);
-    }
-
-    public String getRequestTarget() {
-        return requestTarget;
     }
 
 }

@@ -30,11 +30,8 @@ public class HttpServer {
     }
 
     public static void main(String[] args) throws IOException {
-
         HttpServer httpServer = new HttpServer(8080);
-        httpServer.setAssetRoot("src/main/resources/taskManager");
         httpServer.start();
-
     }
 
     public void start() {
@@ -44,33 +41,18 @@ public class HttpServer {
     private static final Logger logger = LoggerFactory.getLogger(HttpServer.class);
 
     private void run() {
-        while(true) {
+        while (true) {
             try {
                 //The accept method is used to accept incoming requests to the socket.
                 Socket socket = serverSocket.accept();
                 HttpServerRequest request = new HttpServerRequest(socket.getInputStream());
 
-                String requestLine = request.getStartLine();
-                logger.info("Handling request{} ", requestLine);
+                logger.info("Handling request{} ", request.getStartLine());
+                
+                controllers
+                        .getOrDefault(parseTargetIfEcho(request), defaultController)
+                        .handle(socket.getOutputStream(), request);
 
-                //implementation in HttpMessage can replace this.
-                String requestType = requestLine.split(" ")[0];
-                String requestTarget = requestLine.split(" ")[1];//OK
-
-                if(requestType.equals("GET") || requestType.equals("FETCH")){
-                    Map<String, String> query = parseRequestParameters(requestTarget);
-
-                    controllers
-                            .getOrDefault(requestTarget, defaultController)
-                            .handle(socket.getOutputStream(), request);
-
-                } else if(requestType.equals("POST")) {
-                    Map<String, String> postData = parsePostRequestBody(request.getBody());
-
-                    controllers
-                            .getOrDefault(requestTarget, defaultController)
-                            .handle(socket.getOutputStream(), request);
-                }
 
             } catch (IOException | SQLException e) {
                 e.printStackTrace();
@@ -78,48 +60,6 @@ public class HttpServer {
         }
 
     }
-
-    private Map<String, String> parseRequestParameters(String requestTarget) {
-        Map<String, String> requestParameters = new HashMap<>();
-
-        int questionPos = requestTarget.indexOf('?');
-        if (questionPos != -1) {
-
-            String query = requestTarget.substring(questionPos + 1);
-
-            for (String parameter : query.split("&")) {
-                int equalsPos = parameter.indexOf('=');
-                String parameterValue = parameter.substring(equalsPos + 1);
-                String parameterName = parameter.substring(0, equalsPos);
-                requestParameters.put(parameterName, parameterValue);
-            }
-        }
-        return requestParameters;
-    }
-
-    private Map<String, String> parsePostRequestBody(String body){
-
-        Map<String, String> dataInput = new HashMap<>();
-
-
-        //EXTRACT THIS TO METHOD
-        if(body.contains("&")){
-            for(String parameter : body.split("&")){
-                int equalsPos = parameter.indexOf('=');
-                String parameterValue = parameter.substring(equalsPos + 1);
-                String parameterName = parameter.substring(0, equalsPos);
-                dataInput.put(parameterName, parameterValue);
-            }
-        } else {
-            int equalsPos = body.indexOf('=');
-            String parameterValue = body.substring(equalsPos + 1);
-            String parameterName = body.substring(0, equalsPos);
-            dataInput.put(parameterName, parameterValue);
-        }
-
-        return dataInput;
-    }
-
 
     public int getPort() {
         return serverSocket.getLocalPort();
@@ -129,11 +69,21 @@ public class HttpServer {
         this.assetRoot = assetRoot;
     }
 
-    public String getAssetRoot(){
+    public String getAssetRoot() {
         return assetRoot;
     }
 
     public void addController(String requestPath, HttpController controller) {
         controllers.put(requestPath, controller);
+    }
+
+    public String parseTargetIfEcho(HttpServerRequest request) {
+        String requestTarget = request.getRequestTarget();
+
+        //If requestTarget includes a ?, ergo is an /echo? request, it should return just the echo part to find the right controller.
+        int questionPos = requestTarget.indexOf("?");
+        String requestPath = questionPos == -1 ? requestTarget : requestTarget.substring(0, questionPos);
+
+        return requestPath;
     }
 }

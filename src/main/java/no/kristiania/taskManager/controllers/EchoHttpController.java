@@ -8,24 +8,22 @@ import java.util.Map;
 
 public class EchoHttpController implements HttpController {
 
-    private Map<String, String> requestBodyParameters;
+    private Map<String, String> requestHeaderParameters;
 
     @Override
     public void handle(OutputStream outputStream, HttpServerRequest request) throws IOException {
 
-        requestBodyParameters = request.parsePostRequestBody(request.getBody());
+        requestHeaderParameters = request.parseRequestParameters();
 
-        String statusCode = requestBodyParameters.getOrDefault("status", "200");
-        String contentType = requestBodyParameters.getOrDefault("content-type", "text/plain");
-        String location = requestBodyParameters.get("location");
-        String body = requestBodyParameters.getOrDefault("body", "Hello World");
-
-        int contentLength = body.length();
+        String statusCode = requestHeaderParameters.getOrDefault("status", "200");
+        String contentType = requestHeaderParameters.getOrDefault("content-type", "text/plain");
+        String location = requestHeaderParameters.get("location");
+        String body = requestHeaderParameters.getOrDefault("body", "Hello World");
 
         outputStream.write(("HTTP:/1.1 " + statusCode + " OK\r\n" +
                  "Content-type: " + contentType + "\r\n" +
-                 "Content-length: " + contentLength + "\r\n" +
-                 (location != null ? "Location: " + location + "\r\n" : "") +
+                 "Content-length: " + body.length() + "\r\n" +
+                (location != null ? "Location: " + location + "\r\n" : "") +
                  "Connection: close \r\n" +
                  "\r\n" + body).getBytes());
     }

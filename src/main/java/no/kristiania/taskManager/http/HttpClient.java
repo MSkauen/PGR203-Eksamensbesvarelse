@@ -8,8 +8,6 @@ public class HttpClient extends HttpMessage {
     private final int port;
     private final String requestTarget;
 
-
-
     public HttpClient(String hostname, int port, String requestTarget) {
         super();
         this.hostname = hostname;
