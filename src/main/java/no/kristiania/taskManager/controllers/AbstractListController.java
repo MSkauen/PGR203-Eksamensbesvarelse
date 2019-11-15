@@ -1,5 +1,7 @@
 package no.kristiania.taskManager.controllers;
 
+import no.kristiania.taskManager.http.HttpServerRequest;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.SQLException;
@@ -13,7 +15,7 @@ public abstract class AbstractListController<ENTITY> implements HttpController {
         this.dao = o;
     }
 
-    public void handle(String requestPath, OutputStream outputStream, Map<String, String> query) throws IOException, SQLException {
+    public void handle(OutputStream outputStream, HttpServerRequest request) throws IOException, SQLException {
         try {
             // CLEAN THIS UP
             //METHODS CAN BE EXTRACTED WITHOUT DOUBT

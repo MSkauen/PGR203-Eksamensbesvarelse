@@ -1,11 +1,12 @@
 package no.kristiania.taskManager.controllers;
 
+import no.kristiania.taskManager.http.HttpServerRequest;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.SQLException;
-import java.util.Map;
 
 public interface HttpController {
-    void handle(String requestPath, OutputStream outputStream, Map<String, String> query) throws IOException, SQLException;
+    void handle(OutputStream outputStream, HttpServerRequest request) throws IOException, SQLException;
 
 }

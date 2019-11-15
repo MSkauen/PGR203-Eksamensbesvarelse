@@ -1,17 +1,24 @@
 package no.kristiania.taskManager.controllers;
 
+import no.kristiania.taskManager.http.HttpServerRequest;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Map;
 
 public class EchoHttpController implements HttpController {
-    @Override
-    public void handle(String requestPath, OutputStream outputStream, Map<String, String> query) throws IOException {
 
-        String statusCode = query.getOrDefault("status", "200");
-        String contentType = query.getOrDefault("content-type", "text/plain");
-        String location = query.get("location");
-        String body = query.getOrDefault("body", "Hello World");
+    private Map<String, String> requestBodyParameters;
+
+    @Override
+    public void handle(OutputStream outputStream, HttpServerRequest request) throws IOException {
+
+        requestBodyParameters = request.parsePostRequestBody(request.getBody());
+
+        String statusCode = requestBodyParameters.getOrDefault("status", "200");
+        String contentType = requestBodyParameters.getOrDefault("content-type", "text/plain");
+        String location = requestBodyParameters.get("location");
+        String body = requestBodyParameters.getOrDefault("body", "Hello World");
 
         int contentLength = body.length();
 

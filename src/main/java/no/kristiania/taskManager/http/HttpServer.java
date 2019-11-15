@@ -53,25 +53,23 @@ public class HttpServer {
                 String requestLine = request.getStartLine();
                 logger.info("Handling request{} ", requestLine);
 
+                //implementation in HttpMessage can replace this.
                 String requestType = requestLine.split(" ")[0];
                 String requestTarget = requestLine.split(" ")[1];//OK
-
-                int questionPos = requestTarget.indexOf('?');
-                String requestPath = questionPos == -1 ? requestTarget : requestTarget.substring(0, questionPos);
 
                 if(requestType.equals("GET") || requestType.equals("FETCH")){
                     Map<String, String> query = parseRequestParameters(requestTarget);
 
                     controllers
-                            .getOrDefault(requestPath, defaultController)
-                            .handle(requestPath, socket.getOutputStream(), query);
+                            .getOrDefault(requestTarget, defaultController)
+                            .handle(socket.getOutputStream(), request);
 
                 } else if(requestType.equals("POST")) {
                     Map<String, String> postData = parsePostRequestBody(request.getBody());
 
                     controllers
-                            .getOrDefault(requestPath, defaultController)
-                            .handle(requestPath, socket.getOutputStream(), postData);
+                            .getOrDefault(requestTarget, defaultController)
+                            .handle(socket.getOutputStream(), request);
                 }
 
             } catch (IOException | SQLException e) {

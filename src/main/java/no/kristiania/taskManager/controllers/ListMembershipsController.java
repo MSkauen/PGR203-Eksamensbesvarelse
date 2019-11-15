@@ -1,5 +1,7 @@
 package no.kristiania.taskManager.controllers;
 
+import no.kristiania.taskManager.http.HttpResponse;
+import no.kristiania.taskManager.http.HttpServerRequest;
 import no.kristiania.taskManager.jdbc.*;
 
 import java.io.IOException;
@@ -25,9 +27,9 @@ public class ListMembershipsController extends AbstractListController<Membership
     }
 
 
-    public void handle(String requestPath, OutputStream outputStream, Map<String, String> query) throws IOException, SQLException {
+    public void handle(OutputStream outputStream, HttpServerRequest request) throws IOException, SQLException {
         this.query = query;
-        super.handle(requestPath, outputStream, query);
+        super.handle(outputStream, request);
     }
 
 

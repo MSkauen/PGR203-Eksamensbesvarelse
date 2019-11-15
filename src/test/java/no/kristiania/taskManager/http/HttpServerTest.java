@@ -1,8 +1,5 @@
 package no.kristiania.taskManager.http;
 
-import no.kristiania.taskManager.http.HttpClient;
-import no.kristiania.taskManager.http.HttpClientResponse;
-import no.kristiania.taskManager.http.HttpServer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -56,6 +53,11 @@ class HttpServerTest {
         HttpClient client = new HttpClient("localhost", server.getPort(), "/mytestfile.txt");
         HttpClientResponse response = client.executeGet();
         assertEquals("Hello Kristiania", response.getBody());
+    }
+
+    @Test
+    void shouldReturn(){
+
     }
 
 }
