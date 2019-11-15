@@ -1,7 +1,5 @@
 package no.kristiania.taskManager.jdbc;
 
-import no.kristiania.taskManager.http.HttpServer;
-import org.postgresql.util.PSQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,6 +43,23 @@ public abstract class AbstractDao<ENTITY> {
                         result.add(mapFromResultSet(rs));
                     }
                     return result;
+                }
+            }
+        }
+    }
+
+    public List<ENTITY> listById(long id, String sql) throws SQLException {
+        try(Connection connection = dataSource.getConnection()){
+            try(PreparedStatement statement = connection.prepareStatement(sql)){
+                statement.setLong(1, id);
+                try(ResultSet rs = statement.executeQuery()){
+                    List<ENTITY> result = new ArrayList<>();
+                    while(rs.next()){
+                        result.add(mapFromResultSet(rs));
+                    }
+                    System.out.println(result);
+                    return result;
+
                 }
             }
         }

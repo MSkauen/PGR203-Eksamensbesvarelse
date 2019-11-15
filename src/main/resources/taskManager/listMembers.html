@@ -2,17 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>List of project tasks</title>
+    <title>Add Member To Task</title>
 </head>
 <body>
-<h1>List of Project Tasks</h1>
-
-<form action=""><label>Project <select name="" id="projects"></select></label></form>
+<h1>Add Member To Task</h1>
+    <form action=""><label>Member <select name="" id="members"></select></label></form>
 </body>
 
 <script>
-    var members = document.getElementById("projects");
-    fetch("/api/projects")
+    var members = document.getElementById("members");
+    fetch("/api/members")
         .then(function (result) {
             return result.text();
         })
@@ -20,5 +19,4 @@
             members.innerHTML = text;
         })
 </script>
-</body>
 </html>

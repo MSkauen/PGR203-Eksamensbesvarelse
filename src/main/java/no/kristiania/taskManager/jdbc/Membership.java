@@ -2,10 +2,10 @@ package no.kristiania.taskManager.jdbc;
 
 import java.util.Objects;
 
-public class TaskMember {
+public class Membership {
 
     private long id;
-    private long projectId;
+    private long taskId;
     private long memberId;
 
 
@@ -13,7 +13,7 @@ public class TaskMember {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TaskMember task_member = (TaskMember) o;
+        Membership task_member = (Membership) o;
         return Objects.equals(memberId, task_member.memberId);
     }
 
@@ -21,7 +21,7 @@ public class TaskMember {
     public String toString() {
         return "TaskMember{" +
                 "id=" + id +
-                ", projectId=" + projectId +
+                ", taskId=" + taskId +
                 ", memberId=" + memberId +
                 '}';
     }
@@ -36,12 +36,12 @@ public class TaskMember {
         this.memberId = memberId;
     }
 
-    public void setProjectId(long projectId) {
-        this.projectId = projectId;
+    public void setTaskId(long taskId) {
+        this.taskId = taskId;
     }
 
-    public long getProjectId() {
-        return projectId;
+    public long getTaskId() {
+        return taskId;
     }
 
     public long getMemberId() {

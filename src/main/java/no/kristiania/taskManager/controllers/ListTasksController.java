@@ -1,13 +1,13 @@
 package no.kristiania.taskManager.controllers;
 
-import no.kristiania.taskManager.jdbc.ProjectDao;
+import no.kristiania.taskManager.jdbc.TaskDao;
 
 import java.sql.SQLException;
 import java.util.stream.Collectors;
 
-public class ListProjectsController extends AbstractListController<ProjectDao> {
+public class ListTasksController extends AbstractListController<TaskDao> {
 
-    public ListProjectsController(ProjectDao o) {
+    public ListTasksController(TaskDao o) {
         super(o);
     }
 

@@ -2,24 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add project member</title>
+    <title>Add task member</title>
 </head>
 <body>
-<h1>Set member as responsible for project</h1>
-<form method="POST" action="/setMemberResponsible">
-    <label>Select project <select name="projectId" id="projects"></select></label>
+<h1>Set member as responsible for task</h1>
+<form method="POST" action="/memberships">
+    <label>Select task <select name="taskId" id="tasks"></select></label>
     <label>Select member <select name="memberId" id="members"></select></label>
     <button type="submit">Confirm</button>
     </form>
 <script>
-    var projects = document.getElementById("projects");
-    fetch("/api/projects")
+    var tasks = document.getElementById("tasks");
+    fetch("/api/tasks")
         .then(function (result) {
             return result.text();
         })
         .then(function (text) {
-            projects.innerHTML = text;
-        })
+            tasks.innerHTML = text;
+        });
 
     var members = document.getElementById("members");
     fetch("/api/members")
@@ -28,7 +28,7 @@
         })
         .then(function (text) {
             members.innerHTML = text;
-        })
+        });
 </script>
 </body>
 </html>

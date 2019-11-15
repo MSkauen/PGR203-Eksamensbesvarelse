@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class ControllersTest {
 
-    private MemberDao dao = new MemberDao(TestDatabase.testDataSource());;
+    private MemberDao dao = new MemberDao(TestDatabase.testDataSource());
 
     @Test
     void shouldReturnMembersFromDatabase() throws SQLException {
@@ -21,6 +21,7 @@ class ControllersTest {
 
         dao.insert(member1);
         dao.insert(member2);
+
 
         ListMembersController controller = new ListMembersController(dao);
         assertThat(controller.getBody())

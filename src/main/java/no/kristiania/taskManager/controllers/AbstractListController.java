@@ -8,11 +8,13 @@ import java.util.Map;
 public abstract class AbstractListController<ENTITY> implements HttpController {
 
     protected ENTITY dao;
+    protected long id;
+
     public AbstractListController(ENTITY o){
         this.dao = o;
     }
 
-    public void handle(String requestPath, OutputStream outputStream, Map<String, String> query) throws IOException {
+    public void handle(String requestPath, OutputStream outputStream, Map<String, String> query) throws IOException, SQLException {
         try {
             // CLEAN THIS UP
             //METHODS CAN BE EXTRACTED WITHOUT DOUBT
@@ -40,5 +42,7 @@ public abstract class AbstractListController<ENTITY> implements HttpController {
                     "\r\n" + body).getBytes());
         }
     }
+
     protected abstract String getBody() throws SQLException;
+
 }

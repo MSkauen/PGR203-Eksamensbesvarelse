@@ -2,7 +2,7 @@ package no.kristiania.taskManager.jdbc;
 
 import java.util.Objects;
 
-public class Project {
+public class Task {
 
     private String name;
     private long id;
@@ -19,8 +19,8 @@ public class Project {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Project project = (Project) o;
-        return Objects.equals(name, project.name);
+        Task task = (Task) o;
+        return Objects.equals(name, task.name);
     }
 
     @Override
@@ -30,7 +30,7 @@ public class Project {
 
     @Override
     public String toString() {
-        return "Project{" +
+        return "Task{" +
                 "name='" + name + '\'' +
                 ", id=" + id +
                 '}';
