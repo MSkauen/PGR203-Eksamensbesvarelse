@@ -21,7 +21,7 @@ public abstract class AbstractDao<ENTITY> {
     }
 
     public long insert(ENTITY o, String sql) throws SQLException {
-        try(Connection connection = dataSource.getConnection()) {
+        try (Connection connection = dataSource.getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
                 mapToStatement(o, statement);
                 statement.executeUpdate();
@@ -35,11 +35,11 @@ public abstract class AbstractDao<ENTITY> {
     }
 
     public List<ENTITY> listAll(String sql) throws SQLException {
-        try(Connection connection = dataSource.getConnection()) {
-            try (PreparedStatement statement = connection.prepareStatement(sql)){
+        try (Connection connection = dataSource.getConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 try (ResultSet rs = statement.executeQuery()) {
                     List<ENTITY> result = new ArrayList<>();
-                    while(rs.next()){
+                    while (rs.next()) {
                         result.add(mapFromResultSet(rs));
                     }
                     return result;
@@ -51,21 +51,31 @@ public abstract class AbstractDao<ENTITY> {
     public void alter(String name, long id, String sql) throws SQLException {
         try (Connection connection = dataSource.getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                    statement.setString(1, name);
-                    statement.setLong(2, id);
-                    statement.executeUpdate();
-                }
+                statement.setString(1, name);
+                statement.setLong(2, id);
+                statement.executeUpdate();
             }
         }
+    }
+
+    public void alter(int age, long id, String sql) throws SQLException {
+        try (Connection connection = dataSource.getConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setInt(1, age);
+                statement.setLong(2, id);
+                statement.executeUpdate();
+            }
+        }
+    }
 
 
-        public List<ENTITY> listById(long id, String sql) throws SQLException {
-        try(Connection connection = dataSource.getConnection()){
-            try(PreparedStatement statement = connection.prepareStatement(sql)){
+    public List<ENTITY> listById(long id, String sql) throws SQLException {
+        try (Connection connection = dataSource.getConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setLong(1, id);
-                try(ResultSet rs = statement.executeQuery()){
+                try (ResultSet rs = statement.executeQuery()) {
                     List<ENTITY> result = new ArrayList<>();
-                    while(rs.next()){
+                    while (rs.next()) {
                         result.add(mapFromResultSet(rs));
                     }
                     return result;
@@ -75,6 +85,7 @@ public abstract class AbstractDao<ENTITY> {
         }
     }
 
+
     protected abstract void mapToStatement(ENTITY o, PreparedStatement stmt) throws SQLException;
 
     protected abstract ENTITY mapFromResultSet(ResultSet rs) throws SQLException;
@@ -82,11 +93,11 @@ public abstract class AbstractDao<ENTITY> {
     protected abstract ENTITY retrieve(long id) throws SQLException;
 
     public ENTITY retrieve(long id, String sql) throws SQLException {
-        try(Connection connection = dataSource.getConnection()){
-            try(PreparedStatement statement = connection.prepareStatement(sql)){
+        try (Connection connection = dataSource.getConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setLong(1, id);
-                try(ResultSet rs = statement.executeQuery()){
-                    if(rs.next()){
+                try (ResultSet rs = statement.executeQuery()) {
+                    if (rs.next()) {
                         return mapFromResultSet(rs);
                     } else {
                         return null;

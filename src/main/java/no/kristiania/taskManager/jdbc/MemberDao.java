@@ -29,6 +29,11 @@ public class MemberDao extends AbstractDao<Member> {
         alter(name, id, "UPDATE members set name = ? WHERE id = ?");
     }
 
+    public void alter(int age, long id) throws SQLException {
+        alter(age, id, "UPDATE members set age = ? WHERE id = ?");
+    }
+
+
     @Override
     protected void mapToStatement(Member member, PreparedStatement stmt) throws SQLException {
         stmt.setString(1, member.getName());

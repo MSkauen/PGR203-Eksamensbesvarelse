@@ -82,7 +82,6 @@ public class HttpServer {
 
         //If requestTarget includes a ?, ergo is a /echo?foo=bar request, it should return /echo to find the right controller.
         int questionPos = requestTarget.indexOf("?");
-
         return questionPos == -1 ? requestTarget : requestTarget.substring(0, questionPos);
     }
 }
