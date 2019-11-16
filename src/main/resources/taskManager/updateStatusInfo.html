@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Edit Task</h1>
+<form method="POST" action="/api/updateProject">
+    <label>Task
+        <select id="tasks" name="id"></select>
+        <br>
+    </label>
+    <label>Task name<input type="text" name="name"/></label>
+    <br>
+    <label>Task status
+        <select name="status">
+            <option value="Not Started">Not Started</option>
+            <option value="In progress">In progress</option>
+            <option value="Finished">Finished</option>
+        </select>
+    </label>
+    <br>
+    <button>Edit</button>
+</form>
+<script>
+    var tasks = document.getElementById("tasks");
+    fetch("/api/tasks")
+        .then(function (result) {
+            return result.text();
+        })
+        .then(function (text) {
+            tasks.innerHTML = text;
+        })
+</script>
+</body>
+</html>

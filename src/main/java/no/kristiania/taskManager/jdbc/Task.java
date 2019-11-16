@@ -4,7 +4,21 @@ import java.util.Objects;
 
 public class Task {
 
+
+    public enum TASK_STATUS {
+        NOT_STARTED("Not started"),
+        IN_PROGRESS("In progress"),
+        FINISHED("Finished");
+
+        String statusString;
+
+        TASK_STATUS(String statusString){
+            this.statusString = statusString;
+        }
+    }
+
     private String name;
+    private String statusString;
     private long id;
 
     public void setName(String name) {
@@ -42,5 +56,13 @@ public class Task {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public void setTaskStatus(TASK_STATUS taskStatus) {
+        this.statusString = taskStatus.statusString;
+    }
+
+    public String getTaskStatus() {
+        return statusString;
     }
 }

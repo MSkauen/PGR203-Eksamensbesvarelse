@@ -1,6 +1,8 @@
 package no.kristiania.taskManager.jdbc;
 
 import no.kristiania.taskManager.controllers.AddTaskController;
+import no.kristiania.taskManager.controllers.AlterMemberController;
+import no.kristiania.taskManager.controllers.AlterTaskController;
 import no.kristiania.taskManager.controllers.ListTasksController;
 import org.junit.jupiter.api.Test;
 
@@ -9,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskControllersTest {
 
@@ -41,6 +44,33 @@ public class TaskControllersTest {
                 .contains(task1);
 
     }
+
+    @Test
+    void shouldAlterExistingMember() throws SQLException {
+        Task task1 = TaskDaoTest.sampleTask();
+        Task task2 = TaskDaoTest.sampleTask();
+
+        dao.insert(task1);
+        dao.insert(task2);
+
+        AlterTaskController controller = new AlterTaskController(dao);
+        controller.alterData(getDataMapForAltering(task1, task2));
+
+        assertEquals(dao.retrieve(task1.getId()).getName(), dao.retrieve(task2.getId()).getName());
+        System.out.println(dao.retrieve(task1.getId()).getTaskStatus());
+
+
+    }
+
+    private Map<String, String> getDataMapForAltering(Task task1, Task task2) {
+        Map<String, String> data = new HashMap<>();
+        data.put("id", Long.toString(task1.getId()));
+        data.put("name", task2.getName());
+        data.put("status", task2.getTaskStatus());
+
+        return data;
+    }
+
 
     private Map<String, String> getTaskDataMap(Task task) {
 

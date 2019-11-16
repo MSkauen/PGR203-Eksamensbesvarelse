@@ -14,8 +14,8 @@ public class AlterMemberController extends AbstractAlterController<MemberDao> {
     @Override
     public void alterData(Map<String, String> requestBodyParameters) throws SQLException {
 
+        System.out.println(requestBodyParameters);
         if (requestBodyParameters.containsKey("id") && requestBodyParameters.containsKey("name") && requestBodyParameters.containsKey("age")) {
-
             if (!(requestBodyParameters.get("name").isBlank())) {
                 dao.alter(requestBodyParameters.get("name"), Long.parseLong(requestBodyParameters.get("id")));
             }
