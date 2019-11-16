@@ -25,10 +25,9 @@ public class MemberDao extends AbstractDao<Member> {
         member.setId(id);
     }
 
-    public List<Member> listById(long id) throws SQLException {
-       return listById(id, "SELECT * FROM MEMBERS WHERE id = ?");
+    public void alter(String name, long id) throws SQLException {
+        alter(name, id, "UPDATE members set name = ? WHERE id = ?");
     }
-
 
     @Override
     protected void mapToStatement(Member member, PreparedStatement stmt) throws SQLException {

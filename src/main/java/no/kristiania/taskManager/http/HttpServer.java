@@ -80,10 +80,9 @@ public class HttpServer {
     public String parseTargetIfEcho(HttpServerRequest request) {
         String requestTarget = request.getRequestTarget();
 
-        //If requestTarget includes a ?, ergo is an /echo? request, it should return just the echo part to find the right controller.
+        //If requestTarget includes a ?, ergo is a /echo?foo=bar request, it should return /echo to find the right controller.
         int questionPos = requestTarget.indexOf("?");
-        String requestPath = questionPos == -1 ? requestTarget : requestTarget.substring(0, questionPos);
 
-        return requestPath;
+        return questionPos == -1 ? requestTarget : requestTarget.substring(0, questionPos);
     }
 }

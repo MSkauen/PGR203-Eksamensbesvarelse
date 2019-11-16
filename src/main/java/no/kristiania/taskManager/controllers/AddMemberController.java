@@ -8,22 +8,20 @@ import java.util.Map;
 
 public class AddMemberController extends AbstractAddController<MemberDao> {
 
-    private String name;
-    private int age;
     public AddMemberController(MemberDao o) {
         super(o);
     }
 
     @Override
-    public void insertData(Map<String, String> query) throws SQLException {
-        //Gets data from POST-request hashMap
+    public void insertData(Map<String, String> requestBodyParameters) throws SQLException {
 
-        if(query.containsKey("name")){
-            name = query.get("name");
-        }
-        if(query.containsKey("age")){
-            age = Integer.parseInt(query.get("age"));
-        } else {
+        String name;
+        int age;
+
+        if(requestBodyParameters.containsKey("name") && requestBodyParameters.containsKey("age")){
+            name = requestBodyParameters.get("name");
+            age = Integer.parseInt(requestBodyParameters.get("age"));
+        }else {
             throw new IllegalArgumentException();
         }
 

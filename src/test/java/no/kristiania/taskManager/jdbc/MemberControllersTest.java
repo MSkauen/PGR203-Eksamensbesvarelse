@@ -42,6 +42,19 @@ public class MemberControllersTest {
 
     }
 
+    @Test
+    void shouldAlterExistingMember() throws SQLException {
+        Member member1 = MemberDaoTest.sampleMember();
+        Member member2 = MemberDaoTest.sampleMember();
+
+        dao.insert(member1);
+        dao.insert(member2);
+
+
+
+
+    }
+
     private Map<String, String> getMemberDataMap(Member member1) {
 
         Map<String, String> data = new HashMap<>();

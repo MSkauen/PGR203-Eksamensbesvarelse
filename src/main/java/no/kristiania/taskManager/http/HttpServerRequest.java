@@ -10,21 +10,22 @@ import java.util.Map;
 public class HttpServerRequest extends HttpMessage {
 
     private String requestTarget;
-    String decodedRequest;
 
     public HttpServerRequest(InputStream inputStream) throws IOException {
         super(inputStream);
 
         //Get the requestTarget from the HTTP request
-        requestTarget = getStartLine().split(" ")[1];
+        try{
+            requestTarget = getStartLine().split(" ")[1];
+        } catch (ArrayIndexOutOfBoundsException e){
+            //ADD LOGGER
+        }
+
     }
 
-    /*
-        The difference b
-    */
+//ADD MORE explanations to this part
     public Map<String, String> parseRequestParameters() {
         Map<String, String> requestParameters = new HashMap<>();
-
 
         int questionPos = requestTarget.indexOf('?');
         if (questionPos != -1) {
@@ -35,7 +36,7 @@ public class HttpServerRequest extends HttpMessage {
     }
 
     public Map<String, String> parseRequestBody(String request) {
-        decodedRequest = URLDecoder.decode(request, StandardCharsets.UTF_8);
+       String decodedRequest = URLDecoder.decode(request, StandardCharsets.UTF_8);
         return parametersToMap(decodedRequest);
     }
 

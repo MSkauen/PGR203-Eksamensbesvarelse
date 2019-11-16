@@ -6,7 +6,6 @@ import org.flywaydb.core.Flyway;
 import org.postgresql.ds.PGSimpleDataSource;
 
 import javax.sql.DataSource;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
@@ -44,6 +43,7 @@ public class TaskManagerServer {
         server.addController("/members", new AddMemberController(new MemberDao(dataSource)));
         server.addController("/tasks", new AddTaskController(new TaskDao(dataSource)));
         server.addController("/memberships", new AddMembershipController(new MembershipDao(dataSource), new MemberDao(dataSource), new TaskDao(dataSource)));
+        server.addController("/api/updateMemberName", new AlterMemberController(new MemberDao(dataSource)));
     }
 
     public static void main(String[] args) throws IOException {

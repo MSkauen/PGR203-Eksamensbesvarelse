@@ -48,7 +48,18 @@ public abstract class AbstractDao<ENTITY> {
         }
     }
 
-    public List<ENTITY> listById(long id, String sql) throws SQLException {
+    public void alter(String name, long id, String sql) throws SQLException {
+        try (Connection connection = dataSource.getConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                    statement.setString(1, name);
+                    statement.setLong(2, id);
+                    statement.executeUpdate();
+                }
+            }
+        }
+
+
+        public List<ENTITY> listById(long id, String sql) throws SQLException {
         try(Connection connection = dataSource.getConnection()){
             try(PreparedStatement statement = connection.prepareStatement(sql)){
                 statement.setLong(1, id);
