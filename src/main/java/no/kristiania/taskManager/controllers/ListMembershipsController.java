@@ -28,10 +28,9 @@ public class ListMembershipsController extends AbstractListController<Membership
 
 
     public void handle(OutputStream outputStream, HttpServerRequest request) throws IOException, SQLException {
-        this.query = query;
         super.handle(outputStream, request);
+        query = request.parseRequestBody(request.getBody());
     }
-
 
     @Override
     public String getBody() throws SQLException {
@@ -41,7 +40,7 @@ public class ListMembershipsController extends AbstractListController<Membership
         } else if (query.get("taskId") != null) {
             return getMembers();
         } else {
-            return "Oops, this didn't work <br> Back to http://localhost:8080/index.html"; //Would be better if it returned a 404 but oh well
+            throw new SQLException();
         }
     }
 

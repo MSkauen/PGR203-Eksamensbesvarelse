@@ -22,7 +22,7 @@ public abstract class AbstractAddController<ENTITY> implements HttpController{
     }
 
     @Override
-    public void handle(OutputStream outputStream, HttpServerRequest request) throws SQLException, IOException {
+    public void handle(OutputStream outputStream, HttpServerRequest request) throws IOException {
         this.outputStream = outputStream;
         this.requestBodyParameters = request.parseRequestBody(request.getBody());
         response = new HttpResponse(request, outputStream);
@@ -32,7 +32,7 @@ public abstract class AbstractAddController<ENTITY> implements HttpController{
             response.setHeader("Location", "http://localhost:8080/index.html");
             response.executeResponse(STATUS_CODE.FOUND);
 
-        } catch (PSQLException p) {
+        } catch (SQLException | IllegalArgumentException e)  {
             response.executeResponse(STATUS_CODE.INTERNAL_SERVER_ERROR);
         }
 

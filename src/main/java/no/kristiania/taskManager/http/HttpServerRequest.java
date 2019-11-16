@@ -14,11 +14,17 @@ public class HttpServerRequest extends HttpMessage {
 
     public HttpServerRequest(InputStream inputStream) throws IOException {
         super(inputStream);
-        requestTarget = getStartLine().split(" ")[1];//OK
+
+        //Get the requestTarget from the HTTP request
+        requestTarget = getStartLine().split(" ")[1];
     }
 
+    /*
+        The difference b
+    */
     public Map<String, String> parseRequestParameters() {
         Map<String, String> requestParameters = new HashMap<>();
+
 
         int questionPos = requestTarget.indexOf('?');
         if (questionPos != -1) {

@@ -18,6 +18,7 @@ public class HttpMessage {
     }
 
     public HttpMessage(InputStream inputStream) throws IOException {
+
         startLine = readLine(inputStream);
         String headerLine;
         while (!(headerLine = readLine(inputStream)).isBlank()) {
@@ -29,7 +30,6 @@ public class HttpMessage {
         if (getHeader("Content-length") != null) {
             this.body = readBytes(inputStream, getContentLength());
         }
-
     }
 
 
@@ -73,5 +73,7 @@ public class HttpMessage {
     public int getStatusCode() {
         return Integer.parseInt(startLine.split(" ")[1]);
     }
+
+
 
 }

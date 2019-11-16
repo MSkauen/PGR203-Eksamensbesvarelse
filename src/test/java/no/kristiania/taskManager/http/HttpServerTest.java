@@ -23,7 +23,6 @@ class HttpServerTest {
     void shouldReturnStatusCode200() throws IOException {
         HttpClient client = new HttpClient("localhost", server.getPort(), "/echo");
         assertEquals(200, client.executeGet().getStatusCode());
-
     }
 
     @Test
@@ -35,9 +34,9 @@ class HttpServerTest {
     @Test
     void shouldReturnHeaders() throws IOException {
         HttpClient client = new HttpClient("localhost", server.getPort(), "/echo?status=302&location=http://www.example.com");
-        HttpClientResponse response = client.executeGet();
-        assertEquals(302, response.getStatusCode());
-        assertEquals("http://www.example.com", response.getHeader("location"));
+
+        assertEquals(302, client.executeGet().getStatusCode());
+        assertEquals("http://www.example.com", client.executeGet().getHeader("location"));
     }
 
     @Test
@@ -51,13 +50,13 @@ class HttpServerTest {
         Files.writeString(Paths.get("target/mytestfile.txt"), "Hello Kristiania");
         server.setAssetRoot("target");
         HttpClient client = new HttpClient("localhost", server.getPort(), "/mytestfile.txt");
-        HttpClientResponse response = client.executeGet();
-        assertEquals("Hello Kristiania", response.getBody());
+        assertEquals("Hello Kristiania", client.executeGet().getBody());
     }
 
     @Test
-    void shouldReturn(){
-
+    void shouldReturnStatusCode404() throws IOException {
+        HttpClient client = new HttpClient("localhost", server.getPort(), "/foo");
+        assertEquals(404, client.executeGet().getStatusCode());
     }
 
 }

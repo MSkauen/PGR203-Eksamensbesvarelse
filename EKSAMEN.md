@@ -141,7 +141,7 @@ body {
 * [x] Programmet leser `dataSource.url`, `dataSource.username` og `dataSource.password` fra `task-manager.properties` for å connecte til databasen
 * [x] Programmet bruker Flywaydb for å sette opp databaseskjema
 * [x] Server skriver nyttige loggmeldinger, inkludert informasjon om hvilken URL den kjører på ved oppstart
-* [ ] `.gitignore` inneholder nødvendige filer
+* [x] `.gitignore` inneholder nødvendige filer
 
 ### Funksjonalitet
 
@@ -157,7 +157,7 @@ body {
 * [ ] Implementasjon av cookies for å konstruere sesjoner
 * [ ] UML diagram som dokumenterer datamodell og/eller arkitektur (presentert i README.md)
 * [ ] Rammeverk rundt Http-håndtering (en god HttpMessage class med HttpRequest og HttpResponse subtyper) som gjenspeiler RFC7230
-* [ ] Korrekt håndtering av norske tegn i HTTP
+* [x] Korrekt håndtering av norske tegn i HTTP
 * [ ] God bruk av DAO-pattern
 * [ ] Link til video med god demonstrasjon av ping-pong programmering
 * [ ] Annet

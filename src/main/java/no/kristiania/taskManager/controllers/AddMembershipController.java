@@ -10,13 +10,8 @@ import java.util.Map;
 
 public class AddMembershipController extends AbstractAddController<MembershipDao> {
 
-    private MemberDao memberDao;
-    private TaskDao taskDao;
-
     public AddMembershipController(MembershipDao o, MemberDao memberDao, TaskDao taskDao) {
         super(o);
-        this.memberDao = memberDao;
-        this.taskDao = taskDao;
     }
 
     @Override
