@@ -2,12 +2,15 @@ package no.kristiania.taskManager.http;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
 public class HttpServerRequest extends HttpMessage {
 
     private String requestTarget;
+    String decodedRequest;
 
     public HttpServerRequest(InputStream inputStream) throws IOException {
         super(inputStream);
@@ -25,24 +28,13 @@ public class HttpServerRequest extends HttpMessage {
         return requestParameters;
     }
 
-
-    public Map<String, String> parseRequestBody(String request){
-        Map<String, String> dataInput = parametersToMap(replaceSpecialCharacters(request));
-        return dataInput;
-    }
-
-    private String replaceSpecialCharacters(String request) {
-        String replaceString;
-        replaceString = request.replaceAll("\\+", " ");
-        replaceString = replaceString.replaceAll("%C3%A6", "æ");
-        replaceString = replaceString.replaceAll("%C3%98", "ø");
-        replaceString = replaceString.replaceAll("%C3%A5", "å");
-
-        return replaceString;
+    public Map<String, String> parseRequestBody(String request) {
+        decodedRequest = URLDecoder.decode(request, StandardCharsets.UTF_8);
+        return parametersToMap(decodedRequest);
     }
 
     private Map<String, String> parametersToMap(String request) {
-        Map<String, String> dataInput = new HashMap<>();;
+        Map<String, String> dataInput = new HashMap<>();
 
         for(String parameter : request.split("&")){
             int equalsPos = parameter.indexOf('=');
