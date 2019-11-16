@@ -32,16 +32,13 @@ public class HttpResponse {
 
         StringBuilder responseString = new StringBuilder();
 
-        responseString.append(
-
-                "HTTP:/1.1 ").append(status_code.code).append(" ").append(status_code.status).append("\r\n");
-
+        responseString.append("HTTP:/1.1 ").append(status_code.code).append(" ").append(status_code.status).append("\r\n");
 
         for(Map.Entry header : headers.entrySet()){
             responseString.append(header.getKey()).append(": ").append(header.getValue()).append("\r\n");
         }
 
-        responseString.append("Connection: close\r\n\n").append(body);
+        responseString.append("Connection: close\r\n\r\n").append(body);
 
         return responseString.toString();
 
