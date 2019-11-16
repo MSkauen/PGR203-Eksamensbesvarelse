@@ -11,14 +11,14 @@ public enum STATUS_CODE {
     public int code;
     public String status;
 
-    STATUS_CODE(int code, String status){
+    STATUS_CODE(int code, String status) {
         this.code = code;
         this.status = status;
     }
 
-    public static STATUS_CODE getCode(int code){
-        for(STATUS_CODE e : STATUS_CODE.values()){
-            if(e.code == code){
+    public static STATUS_CODE getCode(int code) {
+        for (STATUS_CODE e : STATUS_CODE.values()) {
+            if (e.code == code) {
                 return e;
             }
         }

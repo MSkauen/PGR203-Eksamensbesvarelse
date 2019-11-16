@@ -12,7 +12,7 @@ public abstract class AbstractListController<ENTITY> implements HttpController {
 
     protected ENTITY dao;
 
-    public AbstractListController(ENTITY o){
+    public AbstractListController(ENTITY o) {
         this.dao = o;
     }
 

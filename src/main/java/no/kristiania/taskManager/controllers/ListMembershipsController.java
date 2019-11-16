@@ -49,11 +49,11 @@ public class ListMembershipsController extends AbstractListController<Membership
 
         list = dao.listTasksByMemberId(Long.parseLong(query.get("memberId"))); //List of tasks owned by a member
 
-        for(Membership membership : list){
+        for (Membership membership : list) {
             taskList.add(taskDao.retrieve(membership.getTaskId())); //Adds tasks from tasks table to own list
         }
 
-        if(taskList.isEmpty()){
+        if (taskList.isEmpty()) {
             return "There are no tasks assigned to this member <br> Back to http://localhost:8080/index.html";
         }
 
@@ -66,11 +66,11 @@ public class ListMembershipsController extends AbstractListController<Membership
         list = dao.listMembersByTaskId(Long.parseLong(query.get("taskId"))); //List of tasks owned by a member
 
         List<Member> memberList = new ArrayList<>();
-        for(Membership membership : list){
+        for (Membership membership : list) {
             memberList.add(memberDao.retrieve(membership.getMemberId()));
         }
 
-        if(memberList.isEmpty()){
+        if (memberList.isEmpty()) {
             return "There are no tasks assigned to this member <br> Back to http://localhost:8080/index.html";
         }
 

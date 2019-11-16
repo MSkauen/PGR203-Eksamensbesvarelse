@@ -3,14 +3,13 @@ package no.kristiania.taskManager.controllers;
 import no.kristiania.taskManager.http.HttpResponse;
 import no.kristiania.taskManager.http.HttpServerRequest;
 import no.kristiania.taskManager.http.STATUS_CODE;
-import no.kristiania.taskManager.jdbc.MemberDao;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.Map;
 
-public abstract class AbstractAlterController<ENTITY> implements HttpController{
+public abstract class AbstractAlterController<ENTITY> implements HttpController {
 
     protected ENTITY dao;
 
@@ -30,7 +29,7 @@ public abstract class AbstractAlterController<ENTITY> implements HttpController{
             response.setHeader("Location", "http://localhost:8080/index.html");
             response.executeResponse(STATUS_CODE.FOUND);
 
-        } catch (IllegalArgumentException | SQLException e)  {
+        } catch (IllegalArgumentException | SQLException e) {
             System.out.println(e);
             response.executeResponse(STATUS_CODE.INTERNAL_SERVER_ERROR);
         }

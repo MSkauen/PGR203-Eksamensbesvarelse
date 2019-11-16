@@ -6,9 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class TaskDao extends AbstractDao<Task>{
+public class TaskDao extends AbstractDao<Task> {
 
-    public TaskDao(DataSource dataSource){
+    public TaskDao(DataSource dataSource) {
         super(dataSource);
     }
 
@@ -42,10 +42,6 @@ public class TaskDao extends AbstractDao<Task>{
         task.setName(rs.getString("name"));
         return task;
     }
-
-
-
-
 
 
 }

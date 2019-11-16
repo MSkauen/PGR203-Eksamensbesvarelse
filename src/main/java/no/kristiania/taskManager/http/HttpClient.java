@@ -26,7 +26,7 @@ public class HttpClient extends HttpMessage {
 
     public HttpClientResponse executePost() throws IOException {
         Socket socket = new Socket(hostname, port);
-        String request = "POST "  + requestTarget + " HTTP/1.1\r\n" +
+        String request = "POST " + requestTarget + " HTTP/1.1\r\n" +
                 "Host: " + hostname + "\r\n" +
                 "Content-length: " + body.length() + "\r\n" +
                 "\r\n" + body;

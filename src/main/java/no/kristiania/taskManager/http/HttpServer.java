@@ -48,7 +48,7 @@ public class HttpServer {
                 HttpServerRequest request = new HttpServerRequest(socket.getInputStream());
 
                 logger.info("Handling request{} ", request.getStartLine());
-                
+
                 controllers
                         .getOrDefault(parseTargetIfEcho(request), defaultController)
                         .handle(socket.getOutputStream(), request);

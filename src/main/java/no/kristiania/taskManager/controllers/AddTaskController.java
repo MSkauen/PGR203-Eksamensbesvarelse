@@ -19,9 +19,9 @@ public class AddTaskController extends AbstractAddController<TaskDao> {
     public void insertData(Map<String, String> query) throws SQLException {
 
         //Gets data from POST-request hashMap
-        if(query.containsKey("name")){
+        if (query.containsKey("name")) {
             name = query.get("name");
-        }  else {
+        } else {
             throw new IllegalArgumentException();
         }
 

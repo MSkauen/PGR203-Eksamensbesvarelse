@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class MembershipDao extends AbstractDao<Membership>{
+public class MembershipDao extends AbstractDao<Membership> {
     public MembershipDao(DataSource dataSource) {
         super(dataSource);
     }
@@ -19,16 +19,16 @@ public class MembershipDao extends AbstractDao<Membership>{
         return listAll("SELECT * FROM task_members");
     }
 
-    public List<Membership> listTasksByMemberId(long id) throws SQLException{
+    public List<Membership> listTasksByMemberId(long id) throws SQLException {
         return listById(id, "SELECT * FROM task_members where member_id = ?");
     }
 
-    public List<Membership> listMembersByTaskId(long id) throws SQLException{
+    public List<Membership> listMembersByTaskId(long id) throws SQLException {
         return listById(id, "SELECT * FROM task_members where task_id = ?");
     }
 
     public void insert(Membership task_member) throws SQLException {
-        long id = insert(task_member,"INSERT INTO task_members (task_id, member_id) VALUES (?, ?)");
+        long id = insert(task_member, "INSERT INTO task_members (task_id, member_id) VALUES (?, ?)");
         task_member.setId(id);
     }
 

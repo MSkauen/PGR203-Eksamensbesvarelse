@@ -32,7 +32,7 @@ public class Membership {
     }
 
 
-    public void setMemberId(long memberId){
+    public void setMemberId(long memberId) {
         this.memberId = memberId;
     }
 

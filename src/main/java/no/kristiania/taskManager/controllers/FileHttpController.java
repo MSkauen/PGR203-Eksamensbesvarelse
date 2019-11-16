@@ -24,15 +24,15 @@ public class FileHttpController implements HttpController {
         HttpResponse response = new HttpResponse(request, outputStream);
 
         File file = new File(httpServer.getAssetRoot() + request.getRequestTarget());
-        if(file.isDirectory()){
+        if (file.isDirectory()) {
             file = new File(file, "taskManager/index.html");
         }
-        if(file.exists()){
+        if (file.exists()) {
             long length = file.length();
             response.setHeader("Content-length", Long.toString(length));
             response.executeResponse(STATUS_CODE.OK);
 
-            try (FileInputStream fileInputStream = new FileInputStream(file)){
+            try (FileInputStream fileInputStream = new FileInputStream(file)) {
                 fileInputStream.transferTo(outputStream);
             }
         } else {

@@ -15,7 +15,7 @@ public class MemberDaoTest {
     private MemberDao dao;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         dao = new MemberDao(dataSource);
     }
 

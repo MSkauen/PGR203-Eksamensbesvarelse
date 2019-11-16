@@ -1,6 +1,7 @@
 package no.kristiania.taskManager.jdbc;
 
 import no.kristiania.taskManager.controllers.AddMemberController;
+import no.kristiania.taskManager.controllers.AlterMemberController;
 import no.kristiania.taskManager.controllers.ListMembersController;
 import org.junit.jupiter.api.Test;
 

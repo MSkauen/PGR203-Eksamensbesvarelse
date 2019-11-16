@@ -10,14 +10,14 @@ public class HttpResponse {
     private String body = "";
     private Map<String, String> headers;
 
-    public HttpResponse(HttpServerRequest request, OutputStream outputStream){
+    public HttpResponse(HttpServerRequest request, OutputStream outputStream) {
         this.outputStream = outputStream;
         headers = request.parseRequestParameters();
         headers.putIfAbsent("status", "200");
     }
 
     private void alterHeaderTable() {
-        if(headers.containsKey("body")){
+        if (headers.containsKey("body")) {
             setBody(headers.get("body"));
             headers.remove("body");
         }
@@ -26,13 +26,13 @@ public class HttpResponse {
         headers.putIfAbsent("Content-length", Integer.toString(body.length()));
     }
 
-    private String responseString(STATUS_CODE status_code){
+    private String responseString(STATUS_CODE status_code) {
 
         alterHeaderTable();
         StringBuilder responseString = new StringBuilder();
         responseString.append("HTTP:/1.1 ").append(status_code.code).append(" ").append(status_code.status).append("\r\n");
 
-        for(Map.Entry header : headers.entrySet()){
+        for (Map.Entry header : headers.entrySet()) {
             responseString.append(header.getKey()).append(": ").append(header.getValue()).append("\r\n");
         }
 
@@ -45,7 +45,7 @@ public class HttpResponse {
         outputStream.write(responseString(status_code).getBytes());
     }
 
-    public void setBody(String body){
+    public void setBody(String body) {
         this.body = body;
     }
 
@@ -53,7 +53,7 @@ public class HttpResponse {
         headers.put(key, value);
     }
 
-    public String getHeader(String key){
+    public String getHeader(String key) {
         return headers.get(key);
     }
 }

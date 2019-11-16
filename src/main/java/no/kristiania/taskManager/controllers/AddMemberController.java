@@ -18,10 +18,10 @@ public class AddMemberController extends AbstractAddController<MemberDao> {
         String name;
         int age;
 
-        if(requestBodyParameters.containsKey("name") && requestBodyParameters.containsKey("age")){
+        if (requestBodyParameters.containsKey("name") && requestBodyParameters.containsKey("age")) {
             name = requestBodyParameters.get("name");
             age = Integer.parseInt(requestBodyParameters.get("age"));
-        }else {
+        } else {
             throw new IllegalArgumentException();
         }
 

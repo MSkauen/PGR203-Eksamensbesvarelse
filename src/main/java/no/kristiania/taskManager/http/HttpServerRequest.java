@@ -15,15 +15,15 @@ public class HttpServerRequest extends HttpMessage {
         super(inputStream);
 
         //Get the requestTarget from the HTTP request
-        try{
+        try {
             requestTarget = getStartLine().split(" ")[1];
-        } catch (ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             //ADD LOGGER
         }
 
     }
 
-//ADD MORE explanations to this part
+    //ADD MORE explanations to this part
     public Map<String, String> parseRequestParameters() {
         Map<String, String> requestParameters = new HashMap<>();
 
@@ -36,14 +36,14 @@ public class HttpServerRequest extends HttpMessage {
     }
 
     public Map<String, String> parseRequestBody(String request) {
-       String decodedRequest = URLDecoder.decode(request, StandardCharsets.UTF_8);
+        String decodedRequest = URLDecoder.decode(request, StandardCharsets.UTF_8);
         return parametersToMap(decodedRequest);
     }
 
     private Map<String, String> parametersToMap(String request) {
         Map<String, String> dataInput = new HashMap<>();
 
-        for(String parameter : request.split("&")){
+        for (String parameter : request.split("&")) {
             int equalsPos = parameter.indexOf('=');
             String parameterValue = parameter.substring(equalsPos + 1);
             String parameterName = parameter.substring(0, equalsPos);

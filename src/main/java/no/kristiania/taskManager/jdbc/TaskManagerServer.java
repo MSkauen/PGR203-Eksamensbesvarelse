@@ -16,7 +16,7 @@ public class TaskManagerServer {
 
     public TaskManagerServer(int port) throws IOException {
         Properties properties = new Properties();
-        try(FileReader fileReader = new FileReader("task-manager.properties")) {
+        try (FileReader fileReader = new FileReader("task-manager.properties")) {
             properties.load(fileReader);
         }
 

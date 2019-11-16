@@ -3,14 +3,13 @@ package no.kristiania.taskManager.controllers;
 import no.kristiania.taskManager.http.HttpResponse;
 import no.kristiania.taskManager.http.HttpServerRequest;
 import no.kristiania.taskManager.http.STATUS_CODE;
-import org.postgresql.util.PSQLException;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.Map;
 
-public abstract class AbstractAddController<ENTITY> implements HttpController{
+public abstract class AbstractAddController<ENTITY> implements HttpController {
 
     protected ENTITY dao;
     protected OutputStream outputStream;
@@ -32,7 +31,7 @@ public abstract class AbstractAddController<ENTITY> implements HttpController{
             response.setHeader("Location", "http://localhost:8080/index.html");
             response.executeResponse(STATUS_CODE.FOUND);
 
-        } catch (SQLException | IllegalArgumentException e)  {
+        } catch (SQLException | IllegalArgumentException e) {
             response.executeResponse(STATUS_CODE.INTERNAL_SERVER_ERROR);
         }
 

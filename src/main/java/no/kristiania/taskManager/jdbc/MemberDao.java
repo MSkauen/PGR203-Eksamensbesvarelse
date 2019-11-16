@@ -21,7 +21,7 @@ public class MemberDao extends AbstractDao<Member> {
     }
 
     public void insert(Member member) throws SQLException {
-        long id = insert(member,"INSERT INTO members (name, age) VALUES (?, ?)");
+        long id = insert(member, "INSERT INTO members (name, age) VALUES (?, ?)");
         member.setId(id);
     }
 
