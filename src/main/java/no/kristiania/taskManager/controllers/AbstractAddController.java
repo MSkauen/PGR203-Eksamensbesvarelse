@@ -29,12 +29,12 @@ public abstract class AbstractAddController<ENTITY> implements HttpController{
 
         try {
             insertData(requestBodyParameters);
+            response.setHeader("Location", "http://localhost:8080/index.html");
+            response.executeResponse(STATUS_CODE.FOUND);
 
         } catch (PSQLException p) {
             response.executeResponse(STATUS_CODE.INTERNAL_SERVER_ERROR);
         }
-
-        response.executeResponse(STATUS_CODE.OK); //should probably make this its own thing
 
     }
 

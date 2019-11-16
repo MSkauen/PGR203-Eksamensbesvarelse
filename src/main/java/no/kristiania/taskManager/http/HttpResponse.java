@@ -23,15 +23,13 @@ public class HttpResponse {
         }
 
         headers.remove("status");
-        headers.putIfAbsent("Content-type", "text/plain");
         headers.putIfAbsent("Content-length", Integer.toString(body.length()));
     }
 
     private String responseString(STATUS_CODE status_code){
+
         alterHeaderTable();
-
         StringBuilder responseString = new StringBuilder();
-
         responseString.append("HTTP:/1.1 ").append(status_code.code).append(" ").append(status_code.status).append("\r\n");
 
         for(Map.Entry header : headers.entrySet()){
@@ -39,9 +37,7 @@ public class HttpResponse {
         }
 
         responseString.append("Connection: close\r\n\r\n").append(body);
-
         return responseString.toString();
-
 
     }
 

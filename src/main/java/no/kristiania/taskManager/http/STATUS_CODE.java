@@ -15,4 +15,13 @@ public enum STATUS_CODE {
         this.code = code;
         this.status = status;
     }
+
+    public static STATUS_CODE getCode(int code){
+        for(STATUS_CODE e : STATUS_CODE.values()){
+            if(e.code == code){
+                return e;
+            }
+        }
+        return STATUS_CODE.INTERNAL_SERVER_ERROR;
+    }
 }
