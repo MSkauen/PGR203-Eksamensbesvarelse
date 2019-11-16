@@ -6,23 +6,6 @@ import java.util.Map;
 
 public class HttpResponse {
 
-    public enum STATUS_CODE {
-        OK(200, "OK"),
-        FOUND(302, "FOUND"),
-        BAD_REQUEST(400, "BAD REQUEST"),
-        UNAUTHORISED(401, "UNAUTHORISED"),
-        NOT_FOUND(404, "NOT FOUND"),
-        INTERNAL_SERVER_ERROR(500, "INTERNAL SERVER ERROR");
-
-        public int code;
-        public String status;
-
-        STATUS_CODE(int code, String status){
-            this.code = code;
-            this.status = status;
-        }
-    }
-
     private OutputStream outputStream;
     private String body = "";
     private Map<String, String> headers;
@@ -50,17 +33,16 @@ public class HttpResponse {
         StringBuilder responseString = new StringBuilder();
 
         responseString.append(
-                "HTTP:/1.1 " + status_code.code + " " + status_code.status + "\r\n"
-        );
+
+                "HTTP:/1.1 ").append(status_code.code).append(" ").append(status_code.status).append("\r\n");
+
 
         for(Map.Entry header : headers.entrySet()){
-            responseString.append(
-                    header.getKey() + ": " + header.getValue() + "\r\n"
-            );
+            responseString.append(header.getKey()).append(": ").append(header.getValue()).append("\r\n");
         }
-        responseString.append("Connection: close\r\n"+"\r\n" + body);
 
-        System.out.println(responseString.toString());
+        responseString.append("Connection: close\r\n\n").append(body);
+
         return responseString.toString();
 
 

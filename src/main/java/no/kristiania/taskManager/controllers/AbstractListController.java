@@ -2,6 +2,7 @@ package no.kristiania.taskManager.controllers;
 
 import no.kristiania.taskManager.http.HttpResponse;
 import no.kristiania.taskManager.http.HttpServerRequest;
+import no.kristiania.taskManager.http.STATUS_CODE;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -25,14 +26,14 @@ public abstract class AbstractListController<ENTITY> implements HttpController {
             response.setHeader("Content-length", Integer.toString(getBody().length()));
             response.setBody(getBody());
 
-            response.executeResponse(HttpResponse.STATUS_CODE.OK);
+            response.executeResponse(STATUS_CODE.OK);
 
         } catch (SQLException e) {
 
             response.setHeader("Content-length", Integer.toString(e.toString().length()));
             response.setBody(e.toString());
 
-            response.executeResponse(HttpResponse.STATUS_CODE.INTERNAL_SERVER_ERROR);
+            response.executeResponse(STATUS_CODE.INTERNAL_SERVER_ERROR);
 
         }
     }

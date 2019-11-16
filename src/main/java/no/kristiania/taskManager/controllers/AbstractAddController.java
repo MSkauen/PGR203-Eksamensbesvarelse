@@ -2,6 +2,7 @@ package no.kristiania.taskManager.controllers;
 
 import no.kristiania.taskManager.http.HttpResponse;
 import no.kristiania.taskManager.http.HttpServerRequest;
+import no.kristiania.taskManager.http.STATUS_CODE;
 import org.postgresql.util.PSQLException;
 
 import java.io.IOException;
@@ -30,10 +31,10 @@ public abstract class AbstractAddController<ENTITY> implements HttpController{
             insertData(requestBodyParameters);
 
         } catch (PSQLException p) {
-            response.executeResponse(HttpResponse.STATUS_CODE.INTERNAL_SERVER_ERROR);
+            response.executeResponse(STATUS_CODE.INTERNAL_SERVER_ERROR);
         }
 
-        response.executeResponse(HttpResponse.STATUS_CODE.OK); //should probably make this its own thing
+        response.executeResponse(STATUS_CODE.OK); //should probably make this its own thing
 
     }
 

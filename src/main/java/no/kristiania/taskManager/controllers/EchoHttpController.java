@@ -2,6 +2,7 @@ package no.kristiania.taskManager.controllers;
 
 import no.kristiania.taskManager.http.HttpResponse;
 import no.kristiania.taskManager.http.HttpServerRequest;
+import no.kristiania.taskManager.http.STATUS_CODE;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -14,7 +15,7 @@ public class EchoHttpController implements HttpController {
     @Override
     public void handle(OutputStream outputStream, HttpServerRequest request) throws IOException {
         HttpResponse response = new HttpResponse(request, outputStream);
-        HttpResponse.STATUS_CODE status = getCode(Integer.parseInt(response.getHeader("status")));
+        STATUS_CODE status = getCode(Integer.parseInt(response.getHeader("status")));
         response.executeResponse(status);
 
         /* outputStream.write(("HTTP:/1.1 " + statusCode + " OK\r\n" +
@@ -25,13 +26,13 @@ public class EchoHttpController implements HttpController {
                  "\r\n" + body).getBytes());*/
     }
 
-    HttpResponse.STATUS_CODE getCode(int code){
-        for(HttpResponse.STATUS_CODE e : HttpResponse.STATUS_CODE.values()){
+    STATUS_CODE getCode(int code){
+        for(STATUS_CODE e : STATUS_CODE.values()){
             if(e.code == code){
                 return e;
             }
         }
-        return HttpResponse.STATUS_CODE.INTERNAL_SERVER_ERROR;
+        return STATUS_CODE.INTERNAL_SERVER_ERROR;
     }
 
 }
