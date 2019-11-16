@@ -23,24 +23,17 @@ public abstract class AbstractAddController<ENTITY> implements HttpController{
     @Override
     public void handle(OutputStream outputStream, HttpServerRequest request) throws SQLException, IOException {
         this.outputStream = outputStream;
-        this.requestBodyParameters = request.parsePostRequestBody(request.getBody());
+        this.requestBodyParameters = request.parseRequestBody(request.getBody());
+        response = new HttpResponse(request, outputStream);
 
         try {
             insertData(requestBodyParameters);
 
         } catch (PSQLException p) {
-            outputStream.write(("HTTP:/1.1 500 Internal server error\r\n" +
-                    "Content-type: text/plain\r\n" +
-                    "Content-length: 0\r\n" +
-                    "Connection: close \r\n" +
-                    "\r\n").getBytes());
+            response.executeResponse(HttpResponse.STATUS_CODE.INTERNAL_SERVER_ERROR);
         }
-        outputStream.write(("HTTP:/1.1 200 OK\r\n" +
-                "Content-type: text/plain\r\n" +
-                "Content-length: 0\r\n" +
-                "Connection: close \r\n" +
-                "\r\n").getBytes());
 
+        response.executeResponse(HttpResponse.STATUS_CODE.OK); //should probably make this its own thing
 
     }
 

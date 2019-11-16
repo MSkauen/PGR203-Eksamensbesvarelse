@@ -20,39 +20,36 @@ public class HttpServerRequest extends HttpMessage {
         int questionPos = requestTarget.indexOf('?');
         if (questionPos != -1) {
             String query = requestTarget.substring(questionPos + 1);
-
-            for (String parameter : query.split("&")) {
-                int equalsPos = parameter.indexOf('=');
-                String parameterValue = parameter.substring(equalsPos + 1);
-                String parameterName = parameter.substring(0, equalsPos);
-                requestParameters.put(parameterName, parameterValue);
-            }
+            requestParameters = parametersToMap(query);
         }
         return requestParameters;
-
     }
 
 
-    public Map<String, String> parsePostRequestBody(String body){
+    public Map<String, String> parseRequestBody(String request){
+        Map<String, String> dataInput = parametersToMap(replaceSpecialCharacters(request));
+        return dataInput;
+    }
 
-        Map<String, String> dataInput = new HashMap<>();
+    private String replaceSpecialCharacters(String request) {
+        String replaceString;
+        replaceString = request.replaceAll("\\+", " ");
+        replaceString = replaceString.replaceAll("%C3%A6", "æ");
+        replaceString = replaceString.replaceAll("%C3%98", "ø");
+        replaceString = replaceString.replaceAll("%C3%A5", "å");
 
+        return replaceString;
+    }
 
-        //EXTRACT THIS TO METHOD
-        if(body.contains("&")){
-            for(String parameter : body.split("&")){
-                int equalsPos = parameter.indexOf('=');
-                String parameterValue = parameter.substring(equalsPos + 1);
-                String parameterName = parameter.substring(0, equalsPos);
-                dataInput.put(parameterName, parameterValue);
-            }
-        } else {
-            int equalsPos = body.indexOf('=');
-            String parameterValue = body.substring(equalsPos + 1);
-            String parameterName = body.substring(0, equalsPos);
+    private Map<String, String> parametersToMap(String request) {
+        Map<String, String> dataInput = new HashMap<>();;
+
+        for(String parameter : request.split("&")){
+            int equalsPos = parameter.indexOf('=');
+            String parameterValue = parameter.substring(equalsPos + 1);
+            String parameterName = parameter.substring(0, equalsPos);
             dataInput.put(parameterName, parameterValue);
         }
-
         return dataInput;
     }
 

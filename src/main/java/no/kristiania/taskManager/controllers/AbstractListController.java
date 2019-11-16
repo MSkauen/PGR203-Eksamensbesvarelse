@@ -1,46 +1,39 @@
 package no.kristiania.taskManager.controllers;
 
+import no.kristiania.taskManager.http.HttpResponse;
 import no.kristiania.taskManager.http.HttpServerRequest;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.SQLException;
-import java.util.Map;
 
 public abstract class AbstractListController<ENTITY> implements HttpController {
 
     protected ENTITY dao;
+    private HttpResponse response;
 
     public AbstractListController(ENTITY o){
         this.dao = o;
     }
 
     public void handle(OutputStream outputStream, HttpServerRequest request) throws IOException, SQLException {
-        try {
-            // CLEAN THIS UP
-            //METHODS CAN BE EXTRACTED WITHOUT DOUBT
-            //
-            int statusCode = 200;
-            String body = getBody();
-            String contentType = "text/html";
+        response = new HttpResponse(request, outputStream);
+        response.setHeader("Content-type", "text/html");
 
-            outputStream.write(("HTTP:/1.1 " + statusCode + " OK\r\n" +
-                    "Content-type: " + contentType + "\r\n" +
-                    "Content-length: " + body.length() + "\r\n" +
-                    "Connection: close \r\n" +
-                    "\r\n" + body).getBytes());
+        try {
+
+            response.setHeader("Content-length", Integer.toString(getBody().length()));
+            response.setBody(getBody());
+
+            response.executeResponse(HttpResponse.STATUS_CODE.OK);
+
         } catch (SQLException e) {
 
-            int statusCode = 200;
-            String body = e.toString();
-            int contentLength = body.length();
-            String contentType = "text/html";
+            response.setHeader("Content-length", Integer.toString(e.toString().length()));
+            response.setBody(e.toString());
 
-            outputStream.write(("HTTP:/1.1 " + statusCode + " OK\r\n" +
-                    "Content-type: " + contentType + "\r\n" +
-                    "Content-length: " + contentLength + "\r\n" +
-                    "Connection: close \r\n" +
-                    "\r\n" + body).getBytes());
+            response.executeResponse(HttpResponse.STATUS_CODE.INTERNAL_SERVER_ERROR);
+
         }
     }
 
