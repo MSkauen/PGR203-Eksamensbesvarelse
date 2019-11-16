@@ -14,7 +14,7 @@ public class TaskManagerServerTest {
 
     @BeforeEach
     void setUp() throws IOException {
-        server = new TaskManagerServer(0);
+        server = new TaskManagerServer(0, TestDatabase.testDataSource());
         server.start();
     }
 

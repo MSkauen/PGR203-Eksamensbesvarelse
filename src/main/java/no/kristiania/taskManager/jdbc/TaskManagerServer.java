@@ -5,6 +5,8 @@ import no.kristiania.taskManager.http.HttpServer;
 import org.flywaydb.core.Flyway;
 import org.postgresql.ds.PGSimpleDataSource;
 
+import javax.sql.DataSource;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
@@ -26,6 +28,14 @@ public class TaskManagerServer {
 
         Flyway.configure().dataSource(dataSource).load().migrate();
 
+        setUpTaskManagerServer(port, dataSource);
+    }
+
+    public TaskManagerServer(int port, DataSource dataSource) throws IOException {
+        setUpTaskManagerServer(port, dataSource);
+    }
+
+    public void setUpTaskManagerServer(int port, DataSource dataSource) throws IOException {
         server = new HttpServer(port);
         server.setAssetRoot("src/main/resources/taskManager");
         server.addController("/api/members", new ListMembersController(new MemberDao(dataSource)));
@@ -34,7 +44,6 @@ public class TaskManagerServer {
         server.addController("/members", new AddMemberController(new MemberDao(dataSource)));
         server.addController("/tasks", new AddTaskController(new TaskDao(dataSource)));
         server.addController("/memberships", new AddMembershipController(new MembershipDao(dataSource), new MemberDao(dataSource), new TaskDao(dataSource)));
-
     }
 
     public static void main(String[] args) throws IOException {
