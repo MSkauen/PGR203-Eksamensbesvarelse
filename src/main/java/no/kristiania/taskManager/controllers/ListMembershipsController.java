@@ -1,6 +1,5 @@
 package no.kristiania.taskManager.controllers;
 
-import no.kristiania.taskManager.http.HttpResponse;
 import no.kristiania.taskManager.http.HttpServerRequest;
 import no.kristiania.taskManager.jdbc.*;
 

@@ -5,9 +5,9 @@ import no.kristiania.taskManager.jdbc.MemberDao;
 import java.sql.SQLException;
 import java.util.Map;
 
-public class AlterMemberController extends AbstractAlterController<MemberDao> {
+public class UpdateMemberController extends AbstractUpdateController<MemberDao> {
 
-    public AlterMemberController(MemberDao o) {
+    public UpdateMemberController(MemberDao o) {
         super(o);
     }
 
@@ -17,10 +17,10 @@ public class AlterMemberController extends AbstractAlterController<MemberDao> {
         System.out.println(requestBodyParameters);
         if (requestBodyParameters.containsKey("id") && requestBodyParameters.containsKey("name") && requestBodyParameters.containsKey("age")) {
             if (!(requestBodyParameters.get("name").isBlank())) {
-                dao.alter(requestBodyParameters.get("name"), Long.parseLong(requestBodyParameters.get("id")));
+                dao.update(requestBodyParameters.get("name"), Long.parseLong(requestBodyParameters.get("id")));
             }
             if (!(requestBodyParameters.get("age").isBlank())) {
-                dao.alter(Integer.parseInt(requestBodyParameters.get("age")), Long.parseLong(requestBodyParameters.get("id")));
+                dao.update(Integer.parseInt(requestBodyParameters.get("age")), Long.parseLong(requestBodyParameters.get("id")));
             }
         } else {
             throw new IllegalArgumentException();

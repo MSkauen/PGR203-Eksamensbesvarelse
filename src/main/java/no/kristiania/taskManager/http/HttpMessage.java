@@ -8,7 +8,6 @@ import java.util.Map;
 
 public class HttpMessage {
 
-    //IN HTTP MESSAGE - implement METHOD and REQUESTLINE instead of startLine
     private String body;
     private String startLine;
     private Map<String, String> headers = new HashMap<>();
@@ -18,7 +17,6 @@ public class HttpMessage {
     }
 
     public HttpMessage(InputStream inputStream) throws IOException {
-
         startLine = readLine(inputStream);
         String headerLine;
         while (!(headerLine = readLine(inputStream)).isBlank()) {
@@ -32,21 +30,12 @@ public class HttpMessage {
         }
     }
 
-
-    public String getHeader(String headerName) {
-        return headers.get(headerName.toLowerCase());
-    }
-
-    public int getContentLength() {
-        return Integer.parseInt(getHeader("Content-length"));
-    }
-
     public static String readLine(InputStream inputStream) throws IOException {
         StringBuilder line = new StringBuilder();
         int c;
         while ((c = inputStream.read()) != -1) {
             if (c == '\r') {
-                inputStream.read(); // the following \n
+                inputStream.read();
                 break;
             }
             line.append((char) c);
@@ -62,6 +51,16 @@ public class HttpMessage {
         return body.toString();
     }
 
+    /*GETTERS*/
+
+    public String getHeader(String headerName) {
+        return headers.get(headerName.toLowerCase());
+    }
+
+    public int getContentLength() {
+        return Integer.parseInt(getHeader("Content-length"));
+    }
+
     public String getStartLine() {
         return startLine;
     }
@@ -73,6 +72,8 @@ public class HttpMessage {
     public int getStatusCode() {
         return Integer.parseInt(startLine.split(" ")[1]);
     }
+
+
 
 
 }

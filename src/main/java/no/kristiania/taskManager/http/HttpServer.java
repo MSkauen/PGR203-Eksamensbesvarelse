@@ -15,16 +15,15 @@ import java.util.Map;
 
 
 public class HttpServer {
+    private static final Logger logger = LoggerFactory.getLogger(HttpServer.class);
 
     private ServerSocket serverSocket;
     private String assetRoot;
 
     private HttpController defaultController = new FileHttpController(this);
-
     private Map<String, HttpController> controllers = new HashMap<>();
 
     public HttpServer(int port) throws IOException {
-        //Opens up a socket, so that we have somewhere to send and receive data.
         serverSocket = new ServerSocket(port);
         controllers.put("/echo", new EchoHttpController());
     }
@@ -37,8 +36,6 @@ public class HttpServer {
     public void start() {
         new Thread(this::run).start();
     }
-
-    private static final Logger logger = LoggerFactory.getLogger(HttpServer.class);
 
     private void run() {
         while (true) {
@@ -61,27 +58,32 @@ public class HttpServer {
 
     }
 
-    public int getPort() {
-        return serverSocket.getLocalPort();
-    }
-
-    public void setAssetRoot(String assetRoot) {
-        this.assetRoot = assetRoot;
-    }
-
-    public String getAssetRoot() {
-        return assetRoot;
-    }
-
     public void addController(String requestPath, HttpController controller) {
         controllers.put(requestPath, controller);
     }
 
-    public String parseTargetIfEcho(HttpServerRequest request) {
+    private String parseTargetIfEcho(HttpServerRequest request) {
         String requestTarget = request.getRequestTarget();
 
         //If requestTarget includes a ?, ergo is a /echo?foo=bar request, it should return /echo to find the right controller.
         int questionPos = requestTarget.indexOf("?");
         return questionPos == -1 ? requestTarget : requestTarget.substring(0, questionPos);
     }
+
+    /*Getters and setters*/
+
+    public int getPort() {
+        return serverSocket.getLocalPort();
+    }
+
+    public String getAssetRoot() {
+        return assetRoot;
+    }
+
+    public void setAssetRoot(String assetRoot) {
+        this.assetRoot = assetRoot;
+    }
+
+
+
 }

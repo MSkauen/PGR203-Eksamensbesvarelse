@@ -25,12 +25,12 @@ public class MemberDao extends AbstractDao<Member> {
         member.setId(id);
     }
 
-    public void alter(String name, long id) throws SQLException {
-        alter(name, id, "UPDATE members set name = ? WHERE id = ?");
+    public void update(String name, long id) throws SQLException {
+        update(name, id, "UPDATE members set name = ? WHERE id = ?");
     }
 
-    public void alter(int age, long id) throws SQLException {
-        alter(age, id, "UPDATE members set age = ? WHERE id = ?");
+    public void update(int age, long id) throws SQLException {
+        update(age, id, "UPDATE members set age = ? WHERE id = ?");
     }
 
 

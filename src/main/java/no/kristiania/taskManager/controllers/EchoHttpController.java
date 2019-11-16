@@ -1,6 +1,6 @@
 package no.kristiania.taskManager.controllers;
 
-import no.kristiania.taskManager.http.HttpResponse;
+import no.kristiania.taskManager.http.HttpServerResponse;
 import no.kristiania.taskManager.http.HttpServerRequest;
 import no.kristiania.taskManager.http.STATUS_CODE;
 
@@ -14,7 +14,7 @@ public class EchoHttpController implements HttpController {
 
     @Override
     public void handle(OutputStream outputStream, HttpServerRequest request) throws IOException {
-        HttpResponse response = new HttpResponse(request, outputStream);
+        HttpServerResponse response = new HttpServerResponse(request, outputStream);
         STATUS_CODE status = STATUS_CODE.getCode(Integer.parseInt(response.getHeader("status")));
         response.executeResponse(status);
     }

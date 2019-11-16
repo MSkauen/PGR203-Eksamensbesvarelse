@@ -31,9 +31,7 @@ public class HttpClient extends HttpMessage {
                 "Content-length: " + body.length() + "\r\n" +
                 "\r\n" + body;
 
-        System.out.println(request);
         socket.getOutputStream().write(request.getBytes());
-
         socket.getOutputStream().flush();
 
         return new HttpClientResponse(socket.getInputStream());
@@ -42,7 +40,8 @@ public class HttpClient extends HttpMessage {
     public HttpClientResponse executeGet() throws IOException {
         Socket socket = new Socket(hostname, port);
         String request = "GET " + requestTarget + " HTTP/1.1\r\n" +
-                "Host: " + hostname + "\r\n\r\n";
+                "Host: " + hostname + "\r\n" +
+                "\r\n";
 
         socket.getOutputStream().write(request.getBytes());
         socket.getOutputStream().flush();

@@ -1,7 +1,7 @@
 package no.kristiania.taskManager.jdbc;
 
 import no.kristiania.taskManager.controllers.AddMemberController;
-import no.kristiania.taskManager.controllers.AlterMemberController;
+import no.kristiania.taskManager.controllers.UpdateMemberController;
 import no.kristiania.taskManager.controllers.ListMembersController;
 import org.junit.jupiter.api.Test;
 
@@ -52,7 +52,7 @@ public class MemberControllersTest {
         dao.insert(member1);
         dao.insert(member2);
 
-        AlterMemberController controller = new AlterMemberController(dao);
+        UpdateMemberController controller = new UpdateMemberController(dao);
         controller.alterData(getDataMapForAltering(member1, member2));
 
         assertEquals(dao.retrieve(member1.getId()).getName(), dao.retrieve(member2.getId()).getName());

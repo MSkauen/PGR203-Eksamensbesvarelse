@@ -48,7 +48,7 @@ public abstract class AbstractDao<ENTITY> {
         }
     }
 
-    public void alter(String name, long id, String sql) throws SQLException {
+    public void update(String name, long id, String sql) throws SQLException {
         try (Connection connection = dataSource.getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, name);
@@ -58,7 +58,7 @@ public abstract class AbstractDao<ENTITY> {
         }
     }
 
-    public void alter(int age, long id, String sql) throws SQLException {
+    public void update(int age, long id, String sql) throws SQLException {
         try (Connection connection = dataSource.getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setInt(1, age);

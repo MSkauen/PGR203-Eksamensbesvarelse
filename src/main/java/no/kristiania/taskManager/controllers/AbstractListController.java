@@ -1,6 +1,6 @@
 package no.kristiania.taskManager.controllers;
 
-import no.kristiania.taskManager.http.HttpResponse;
+import no.kristiania.taskManager.http.HttpServerResponse;
 import no.kristiania.taskManager.http.HttpServerRequest;
 import no.kristiania.taskManager.http.STATUS_CODE;
 
@@ -17,7 +17,7 @@ public abstract class AbstractListController<ENTITY> implements HttpController {
     }
 
     public void handle(OutputStream outputStream, HttpServerRequest request) throws IOException, SQLException {
-        HttpResponse response = new HttpResponse(request, outputStream);
+        HttpServerResponse response = new HttpServerResponse(request, outputStream);
         response.setHeader("Content-type", "text/html");
 
         try {

@@ -43,8 +43,8 @@ public class TaskManagerServer {
         server.addController("/members", new AddMemberController(new MemberDao(dataSource)));
         server.addController("/tasks", new AddTaskController(new TaskDao(dataSource)));
         server.addController("/memberships", new AddMembershipController(new MembershipDao(dataSource), new MemberDao(dataSource), new TaskDao(dataSource)));
-        server.addController("/api/updateMemberName", new AlterMemberController(new MemberDao(dataSource)));
-        server.addController("/api/updateProject",new AlterTaskController(new TaskDao(dataSource)));
+        server.addController("/api/updateMemberName", new UpdateMemberController(new MemberDao(dataSource)));
+        server.addController("/api/updateProject",new UpdateTaskController(new TaskDao(dataSource)));
     }
 
     public static void main(String[] args) throws IOException {
