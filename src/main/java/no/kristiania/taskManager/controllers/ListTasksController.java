@@ -17,6 +17,6 @@ public class ListTasksController extends TaskController {
 
     public void handle(OutputStream outputStream, HttpRequest request) throws IOException, SQLException {
         super.handle(outputStream, request);
-        handleList();
+        handleList("option");
     }
 }

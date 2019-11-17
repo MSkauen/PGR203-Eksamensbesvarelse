@@ -25,7 +25,7 @@ public class MemberControllersTest {
         dao.insert(member2);
 
         ListMembersController controller = new ListMembersController(dao);
-        assertThat(controller.getBody())
+        assertThat(controller.getBody("option"))
                 .contains(String.format("<option value='%s' id='%s'>%s</option>", member1.getId(), member1.getId(), member1.getName()))
                 .contains(String.format("<option value='%s' id='%s'>%s</option>", member2.getId(), member2.getId(), member2.getName()));
     }

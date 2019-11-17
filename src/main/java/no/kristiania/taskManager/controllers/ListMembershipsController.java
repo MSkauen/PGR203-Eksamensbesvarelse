@@ -20,7 +20,7 @@ public class ListMembershipsController extends MembershipController {
     public void handle(OutputStream outputStream, HttpRequest request) throws IOException, SQLException {
         super.handle(outputStream, request);
         setQuery(request.parseRequestBody(request.getBody()));
-        handleUpdate();
+        handleList("li");
     }
 
 }

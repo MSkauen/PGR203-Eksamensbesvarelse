@@ -43,12 +43,12 @@ public abstract class AbstractDaoController<DAO> implements HttpController {
 
     }
 
-    public void handleList() throws IOException {
+    public void handleList(String htmlObject) throws IOException {
         response.setHeader("Content-type", "text/html");
 
         try {
-            response.setHeader("Content-length", Integer.toString(getBody().length()));
-            response.setBody(getBody());
+            response.setHeader("Content-length", Integer.toString(getBody(htmlObject).length()));
+            response.setBody(getBody(htmlObject));
             response.executeResponse(STATUS_CODE.OK);
         } catch (SQLException e) {
             response.setHeader("Content-length", Integer.toString(e.toString().length()));
@@ -69,7 +69,7 @@ public abstract class AbstractDaoController<DAO> implements HttpController {
         }
     }
 
-    abstract String getBody() throws SQLException;
+    abstract String getBody(String htmlObject) throws SQLException;
     abstract void insertData(Map<String, String> query) throws SQLException;
     abstract void alterData(Map<String, String> requestBodyParameters) throws SQLException;
 }

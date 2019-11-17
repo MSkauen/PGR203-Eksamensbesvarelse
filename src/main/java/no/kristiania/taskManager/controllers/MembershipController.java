@@ -21,18 +21,18 @@ public class MembershipController extends AbstractDaoController<MembershipDao> {
     }
 
     @Override
-    public String getBody() throws SQLException {
+    public String getBody(String htmlObject) throws SQLException {
 
         if (query.get("memberId") != null) {
-            return getTasks();
+            return getTasks(htmlObject);
         } else if (query.get("taskId") != null) {
-            return getMembers();
+            return getMembers(htmlObject);
         } else {
             throw new SQLException();
         }
     }
 
-    private String getTasks() throws SQLException {
+    private String getTasks(String htmlObject) throws SQLException {
         List<Task> taskList = new ArrayList<>();
 
         list = dao.listTasksByMemberId(Long.parseLong(query.get("memberId"))); //List of tasks owned by a member
@@ -46,11 +46,11 @@ public class MembershipController extends AbstractDaoController<MembershipDao> {
         }
 
         return taskList.stream()
-                .map(p -> String.format("<li id='%s'>%s</li>", p.getId(), p.getName()))
+                .map(p -> String.format("<%s id='%s'>%s</%s>", htmlObject, p.getId(), p.getName(), htmlObject))
                 .collect(Collectors.joining("")); //Parses this to list being shown in browser
     }
 
-    private String getMembers() throws SQLException {
+    private String getMembers(String htmlObject) throws SQLException {
         list = dao.listMembersByTaskId(Long.parseLong(query.get("taskId"))); //List of tasks owned by a member
 
         List<Member> memberList = new ArrayList<>();
@@ -63,7 +63,7 @@ public class MembershipController extends AbstractDaoController<MembershipDao> {
         }
 
         return memberList.stream()
-                .map(p -> String.format("<li id='%s'>%s</li>", p.getId(), p.getName()))
+                .map(p -> String.format("<%s id='%s'>%s</%s>",htmlObject, p.getId(), p.getName(), htmlObject))
                 .collect(Collectors.joining(""));
     }
 

@@ -18,7 +18,7 @@ public class ListMembersController extends MemberController {
 
     public void handle(OutputStream outputStream, HttpRequest request) throws IOException, SQLException {
         super.handle(outputStream, request);
-        handleList();
+        handleList("option");
     }
 
 }

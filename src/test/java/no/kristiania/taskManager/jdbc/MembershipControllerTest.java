@@ -32,7 +32,7 @@ public class MembershipControllerTest {
         ListMembershipsController controller = new ListMembershipsController(memberShipDao, memberDao, taskDao);
 
         controller.setQuery(getDataMap(task));
-        assertThat(controller.getBody())
+        assertThat(controller.getBody("li"))
                 .contains(String.format("<li id='%s'>%s</li>", member.getId(), member.getName()));
     }
 
@@ -41,7 +41,7 @@ public class MembershipControllerTest {
         ListMembershipsController controller = new ListMembershipsController(memberShipDao, memberDao, taskDao);
 
         controller.setQuery(getDataMap(member));
-        assertThat(controller.getBody())
+        assertThat(controller.getBody("li"))
                 .contains(String.format("<li id='%s'>%s</li>", task.getId(), task.getName()));
 
     }

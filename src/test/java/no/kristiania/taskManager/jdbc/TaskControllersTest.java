@@ -25,7 +25,7 @@ public class TaskControllersTest {
         dao.insert(task2);
 
         ListTasksController controller = new ListTasksController(dao);
-        assertThat(controller.getBody())
+        assertThat(controller.getBody("option"))
                 .contains(String.format("<option value='%s' id='%s'>%s</option>", task1.getId(), task1.getId(), task1.getName()))
                 .contains(String.format("<option value='%s' id='%s'>%s</option>", task2.getId(), task2.getId(), task2.getName()));
     }

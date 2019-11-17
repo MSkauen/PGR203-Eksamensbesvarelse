@@ -14,9 +14,9 @@ public class TaskController extends AbstractDaoController<TaskDao>{
     }
 
     @Override
-    public String getBody() throws SQLException {
+    public String getBody(String htmlObject) throws SQLException {
         return dao.listAll().stream()
-                .map(p -> String.format("<option value='%s' id='%s'>%s</option>", p.getId(), p.getId(), p.getName()))
+                .map(p -> String.format("<%s value='%s' id='%s'>%s</%s>",htmlObject, p.getId(), p.getId(), p.getName(), htmlObject))
                 .collect(Collectors.joining(""));
     }
 
