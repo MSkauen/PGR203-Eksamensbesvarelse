@@ -10,13 +10,13 @@
 
 </ul>
 <script>
-    var tasks = document.getElementById("projects");
-    fetch("/api/projects?listProjects=Li")
+    var projects = document.getElementById("projects");
+    fetch("/api/projects?/listProjects=Li")
         .then(function (result) {
             return result.text();
         })
         .then(function (text) {
-            tasks.innerHTML = text;
+            projects.innerHTML = text;
         })
 </script>
 </body>

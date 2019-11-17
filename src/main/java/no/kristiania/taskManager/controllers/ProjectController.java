@@ -33,7 +33,7 @@ public class ProjectController extends AbstractDaoController<ProjectDao> impleme
             case "/api/projects?/addProject":
                 handleAdd();
                 break;
-            case "api/projects?/updateProject":
+            case "/api/projects?/updateProject":
                 handleUpdate();
             default:
                 response.executeResponse(STATUS_CODE.INTERNAL_SERVER_ERROR);
