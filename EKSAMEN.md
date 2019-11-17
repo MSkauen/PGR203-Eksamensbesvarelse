@@ -135,9 +135,9 @@ body {
 
 ### Koden
 
-* [ ] `mvn package` bygger en executable jar-fil
+* [x] `mvn package` bygger en executable jar-fil
 * [ ] Koden inneholder et godt sett med tester
-* [ ] `java -jar target/...jar` (etter `mvn package`) lar bruker legge til å liste ut data fra databasen
+* [x] `java -jar target/...jar` (etter `mvn package`) lar bruker legge til å liste ut data fra databasen
 * [x] Programmet leser `dataSource.url`, `dataSource.username` og `dataSource.password` fra `task-manager.properties` for å connecte til databasen
 * [x] Programmet bruker Flywaydb for å sette opp databaseskjema
 * [x] Server skriver nyttige loggmeldinger, inkludert informasjon om hvilken URL den kjører på ved oppstart
