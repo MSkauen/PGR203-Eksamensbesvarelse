@@ -31,4 +31,8 @@ public class Project {
     public void setName(String name) {
 
     }
+
+    public long getId() {
+        return id;
+    }
 }
