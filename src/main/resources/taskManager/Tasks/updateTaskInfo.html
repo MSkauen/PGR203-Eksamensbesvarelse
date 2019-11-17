@@ -6,8 +6,8 @@
 </head>
 <body>
 
-<h1>Edit Task</h1>
-<form method="POST" action="/api/updateTask">
+<h1>Edit Task or Set task status</h1>
+<form method="POST" action="/api/tasks?/updateTask">
     <label>Task
         <select id="tasks" name="id"></select>
         <br>
@@ -26,7 +26,7 @@
 </form>
 <script>
     var tasks = document.getElementById("tasks");
-    fetch("/api/listTasks")
+    fetch("/api/tasks?/listTasks=Option")
         .then(function (result) {
             return result.text();
         })

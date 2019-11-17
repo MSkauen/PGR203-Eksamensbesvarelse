@@ -6,11 +6,12 @@
 </head>
 <body>
 <h1>List of Projects</h1>
+<ul id="projects">
 
-<form action=""><label>Project <select name="" id="projects"></select></label></form>
+</ul>
 <script>
     var tasks = document.getElementById("projects");
-    fetch("/api/projects")
+    fetch("/api/projects?listProjects=Li")
         .then(function (result) {
             return result.text();
         })

@@ -6,14 +6,14 @@
 </head>
 <body>
 <h1>Create new task to project</h1>
-<form method="POST" action="/api/addTask">
+<form method="POST" action="/api/tasks?/addTask">
     <label>Task name<input type="text" name="name" /></label>
     <label>Select project <select name="" id="projects"></select></label>
     <button>Add</button>
 </form>
 <script>
     var tasks = document.getElementById("projects");
-    fetch("/api/projects")
+    fetch("/api/projects?/listProjects=Option")
         .then(function (result) {
             return result.text();
         })

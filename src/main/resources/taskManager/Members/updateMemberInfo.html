@@ -7,7 +7,7 @@
 <body>
 
 <h1>Edit MemberName</h1>
-<form method="POST" action="/api/updateMemberName">
+<form method="POST" action="/api/members?/updateMember">
     <label>Member <select id="members" name="id"></select></label>
     <label>Member name<input type="text" name="name"/></label>
     <label>Member age<input type="text" name="age"/></label>
@@ -15,7 +15,7 @@
 </form>
 <script>
     var members = document.getElementById("members");
-    fetch("/api/listMembers")
+    fetch("/api/members?/listMembers=Option")
         .then(function (result) {
             return result.text();
         })

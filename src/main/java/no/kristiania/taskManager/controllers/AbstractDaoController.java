@@ -9,27 +9,26 @@ import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.Map;
 
-public abstract class AbstractDaoController<DAO> implements HttpController {
+public abstract class AbstractDaoController<DAO> {
 
     protected DAO dao;
     protected OutputStream outputStream;
     protected Map<String, String> requestBodyParameters;
     protected HttpResponse response;
     protected String name;
-    private HttpRequest request;
+    protected HttpRequest request;
+    
 
     protected AbstractDaoController(DAO o) {
         this.dao = o;
     }
 
-    @Override
-    public void handle(OutputStream outputStream, HttpRequest request) throws IOException, SQLException {
-        this.outputStream = outputStream;
-        this.request = request;
+    public void handle() {
         response = new HttpResponse(request, outputStream);
     }
 
     public void handleAdd() throws IOException {
+        System.out.println(request.getBody());
         this.requestBodyParameters = request.parseRequestBody(request.getBody());
 
         try {
@@ -38,6 +37,7 @@ public abstract class AbstractDaoController<DAO> implements HttpController {
             response.executeResponse(STATUS_CODE.FOUND);
 
         } catch (SQLException | IllegalArgumentException e) {
+            e.printStackTrace();
             response.executeResponse(STATUS_CODE.INTERNAL_SERVER_ERROR);
         }
 
@@ -51,6 +51,7 @@ public abstract class AbstractDaoController<DAO> implements HttpController {
             response.setBody(getBody(htmlObject));
             response.executeResponse(STATUS_CODE.OK);
         } catch (SQLException e) {
+            e.printStackTrace();
             response.setHeader("Content-length", Integer.toString(e.toString().length()));
             response.setBody(e.toString());
             response.executeResponse(STATUS_CODE.INTERNAL_SERVER_ERROR);
@@ -64,7 +65,7 @@ public abstract class AbstractDaoController<DAO> implements HttpController {
             response.executeResponse(STATUS_CODE.FOUND);
 
         } catch (IllegalArgumentException | SQLException e) {
-            System.out.println(e);
+            e.printStackTrace();
             response.executeResponse(STATUS_CODE.INTERNAL_SERVER_ERROR);
         }
     }

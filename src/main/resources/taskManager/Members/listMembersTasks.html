@@ -5,14 +5,14 @@
     <title>See tasks assigned to member</title>
 </head>
 <body>
-<form method="POST" action="/api/listMemberships">
+<form method="POST" action="/api/memberships?/listMemberships=Li">
     <label>Select Member <select name="memberId" id="members"></select></label><br>
     <button>See members tasks</button>
 </form>
 </body>
 <script>
     var members = document.getElementById("members");
-    fetch("/api/listMembers")
+    fetch("/api/members?/listMembers=Option")
         .then(function (result) {
             return result.text();
         })

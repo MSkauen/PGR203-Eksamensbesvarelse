@@ -6,14 +6,14 @@
 </head>
 <body>
 <h1>Set member as responsible for task</h1>
-<form method="POST" action="/api/addMembership">
+<form method="POST" action="/api/memberships?/addMembership">
     <label>Select task <select name="taskId" id="tasks"></select></label>
     <label>Select member <select name="memberId" id="members"></select></label>
     <button type="submit">Confirm</button>
     </form>
 <script>
     var tasks = document.getElementById("tasks");
-    fetch("/api/listTasks")
+    fetch("/api/tasks?/listTasks=Option")
         .then(function (result) {
             return result.text();
         })
@@ -22,7 +22,7 @@
         });
 
     var members = document.getElementById("members");
-    fetch("/api/listMembers")
+    fetch("/api/members?/listMembers=Option")
         .then(function (result) {
             return result.text();
         })

@@ -1,15 +1,43 @@
 package no.kristiania.taskManager.controllers;
 
+import no.kristiania.taskManager.http.HttpRequest;
+import no.kristiania.taskManager.http.STATUS_CODE;
 import no.kristiania.taskManager.jdbc.Member;
 import no.kristiania.taskManager.jdbc.MemberDao;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class MemberController extends AbstractDaoController<MemberDao> {
+public class MemberController extends AbstractDaoController<MemberDao> implements HttpController {
     public MemberController(MemberDao o) {
         super(o);
+    }
+
+    @Override
+    public void handle(OutputStream outputStream, HttpRequest request) throws IOException {
+        super.outputStream = outputStream;
+        super.request = request;
+        super.handle();
+
+        switch (request.getRequestTarget()) {
+            case "/api/members?/listMembers=Option":
+                handleList("option");
+                break;
+            case "/api/members?/listMembers=Li":
+                handleList("li");
+                break;
+            case "/api/members?/addMember":
+                System.out.println("I got here");
+                handleAdd();
+                break;
+            case "api/members?/updateMember":
+                handleUpdate();
+            default:
+                response.executeResponse(STATUS_CODE.INTERNAL_SERVER_ERROR);
+        }
     }
 
     public void insertData(Map<String, String> requestBodyParameters) throws SQLException {

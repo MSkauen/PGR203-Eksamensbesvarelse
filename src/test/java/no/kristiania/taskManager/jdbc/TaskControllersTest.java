@@ -1,8 +1,6 @@
 package no.kristiania.taskManager.jdbc;
 
-import no.kristiania.taskManager.controllers.AddTaskController;
-import no.kristiania.taskManager.controllers.UpdateTaskController;
-import no.kristiania.taskManager.controllers.ListTasksController;
+import no.kristiania.taskManager.controllers.*;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
@@ -24,7 +22,7 @@ public class TaskControllersTest {
         dao.insert(task1);
         dao.insert(task2);
 
-        ListTasksController controller = new ListTasksController(dao);
+        TaskController controller = new TaskController(dao);
         assertThat(controller.getBody("option"))
                 .contains(String.format("<option value='%s' id='%s'>%s</option>", task1.getId(), task1.getId(), task1.getName()))
                 .contains(String.format("<option value='%s' id='%s'>%s</option>", task2.getId(), task2.getId(), task2.getName()));
@@ -36,7 +34,7 @@ public class TaskControllersTest {
 
         Map<String, String> data = getTaskDataMap(task1);
 
-        AddTaskController controller = new AddTaskController(dao);
+        TaskController controller = new TaskController(dao);
         controller.insertData(data);
 
         assertThat(dao.listAll())
@@ -52,12 +50,10 @@ public class TaskControllersTest {
         dao.insert(task1);
         dao.insert(task2);
 
-        UpdateTaskController controller = new UpdateTaskController(dao);
+        TaskController controller = new TaskController(dao);
         controller.alterData(getDataMapForAltering(task1, task2));
 
         assertEquals(dao.retrieve(task1.getId()).getName(), dao.retrieve(task2.getId()).getName());
-        System.out.println(dao.retrieve(task1.getId()).getTaskStatus());
-
 
     }
 

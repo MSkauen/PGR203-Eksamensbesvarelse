@@ -60,10 +60,15 @@ public class HttpMessage {
     }
 
     public void parseParameter(char splitChar, String message){
-        int charPos = message.indexOf(splitChar);
-        String name = message.substring(0, charPos).trim();
-        String value = message.substring(charPos + 1).trim();
-        headers.put(name, value);
+        try{
+            int charPos = message.indexOf(splitChar);
+            String name = message.substring(0, charPos);
+            String value = message.substring(charPos + 1);
+            headers.put(name, value);
+        } catch(StringIndexOutOfBoundsException e){
+            e.printStackTrace();
+        }
+
     }
 
     /*GETTERS AND SETTERS*/
@@ -96,7 +101,4 @@ public class HttpMessage {
         return Integer.parseInt(startLine.split(" ")[1]);
     }
 
-    public String getRequestMethod() {
-        return startLine.split(" ")[0];
-    }
 }

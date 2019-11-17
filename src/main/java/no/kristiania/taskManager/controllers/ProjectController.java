@@ -1,17 +1,43 @@
 package no.kristiania.taskManager.controllers;
 
+import no.kristiania.taskManager.http.HttpRequest;
+import no.kristiania.taskManager.http.STATUS_CODE;
 import no.kristiania.taskManager.jdbc.Project;
 import no.kristiania.taskManager.jdbc.ProjectDao;
-import no.kristiania.taskManager.jdbc.Task;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class ProjectController extends AbstractDaoController<ProjectDao> {
+public class ProjectController extends AbstractDaoController<ProjectDao> implements HttpController{
 
-    protected ProjectController(ProjectDao o) {
+    public ProjectController(ProjectDao o) {
         super(o);
+    }
+
+    @Override
+    public void handle(OutputStream outputStream, HttpRequest request) throws IOException {
+        super.outputStream = outputStream;
+        super.request = request;
+        super.handle();
+
+        switch (request.getRequestTarget()) {
+            case "/api/projects?/listProjects=Option":
+                handleList("option");
+                break;
+            case "/api/projects?/listProjects=Li":
+                handleList("li");
+                break;
+            case "/api/projects?/addProject":
+                handleAdd();
+                break;
+            case "api/projects?/updateProject":
+                handleUpdate();
+            default:
+                response.executeResponse(STATUS_CODE.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @Override
@@ -45,4 +71,6 @@ public class ProjectController extends AbstractDaoController<ProjectDao> {
             throw new IllegalArgumentException();
         }
     }
+
+
 }

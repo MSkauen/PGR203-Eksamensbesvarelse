@@ -7,14 +7,14 @@
 <body>
 
 <h3>See members assigned to a task</h3>
-<form method="POST" action="/api/listMemberships">
+<form method="POST" action="/api/memberships?/listMemberShips=Li">
     <label>Select Task <select name="taskId" id="tasks"></select></label><br>
     <button>See tasks members</button>
 </form>
 </body>
 <script>
     var tasks = document.getElementById("tasks");
-    fetch("/api/listTasks")
+    fetch("/api/tasks?/listTasks=Option")
         .then(function (result) {
             return result.text();
         })

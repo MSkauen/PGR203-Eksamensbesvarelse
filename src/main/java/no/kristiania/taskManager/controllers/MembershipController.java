@@ -1,25 +1,58 @@
 package no.kristiania.taskManager.controllers;
 
+import no.kristiania.taskManager.http.HttpRequest;
+import no.kristiania.taskManager.http.STATUS_CODE;
 import no.kristiania.taskManager.jdbc.*;
 
+import javax.sql.DataSource;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class MembershipController extends AbstractDaoController<MembershipDao> {
+public class MembershipController extends AbstractDaoController<MembershipDao> implements HttpController {
     protected MemberDao memberDao;
     protected TaskDao taskDao;
     protected Map<String, String> query;
     private List<Membership> list;
 
-    protected MembershipController(MembershipDao o, MemberDao memberDao, TaskDao taskDao){
+    public MembershipController(MembershipDao o, MemberDao memberDao, TaskDao taskDao){
         super(o);
         this.memberDao = memberDao;
         this.taskDao = taskDao;
     }
 
+
+    @Override
+    public void handle(OutputStream outputStream, HttpRequest request) throws IOException {
+        super.outputStream = outputStream;
+        super.request = request;
+        query = request.parseRequestBody(request.getBody());
+        super.handle();
+
+        switch (request.getRequestTarget()) {
+            case "/api/memberships?/listMemberships=Option":
+                handleList("option");
+                break;
+            case "/api/memberships?/listMemberships=Li":
+                System.out.println("I got here");
+                handleList("Li");
+                break;
+            case "/api/memberships?/addMembership":
+                handleAdd();
+                break;
+            case "api/memberships?/updateMembership":
+                handleUpdate();
+            default:
+                response.executeResponse(STATUS_CODE.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+    //IF requestpath is
     @Override
     public String getBody(String htmlObject) throws SQLException {
 
@@ -40,11 +73,9 @@ public class MembershipController extends AbstractDaoController<MembershipDao> {
         for (Membership membership : list) {
             taskList.add(taskDao.retrieve(membership.getTaskId())); //Adds tasks from tasks table to own list
         }
-
         if (taskList.isEmpty()) {
             return "There are no tasks assigned to this member <br> Back to http://localhost:8080/index.html";
         }
-
         return taskList.stream()
                 .map(p -> String.format("<%s id='%s'>%s</%s>", htmlObject, p.getId(), p.getName(), htmlObject))
                 .collect(Collectors.joining("")); //Parses this to list being shown in browser
@@ -87,4 +118,6 @@ public class MembershipController extends AbstractDaoController<MembershipDao> {
     public void alterData(Map<String, String> requestBodyParameters) {
         //ADD DROPPING TABLE HERE
     }
+
+
 }

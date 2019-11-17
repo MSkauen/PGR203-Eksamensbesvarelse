@@ -1,6 +1,6 @@
 package no.kristiania.taskManager.jdbc;
 
-import no.kristiania.taskManager.controllers.ListMembershipsController;
+import no.kristiania.taskManager.controllers.MembershipController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -29,7 +29,7 @@ public class MembershipControllerTest {
 
     @Test
     void shouldReturnMembersByTaskIdFromDatabase() throws SQLException {
-        ListMembershipsController controller = new ListMembershipsController(memberShipDao, memberDao, taskDao);
+        MembershipController controller = new MembershipController(memberShipDao, memberDao, taskDao);
 
         controller.setQuery(getDataMap(task));
         assertThat(controller.getBody("li"))
@@ -38,7 +38,7 @@ public class MembershipControllerTest {
 
     @Test
     void shouldReturnTasksByMemberIdFromDatabase() throws SQLException {
-        ListMembershipsController controller = new ListMembershipsController(memberShipDao, memberDao, taskDao);
+        MembershipController controller = new MembershipController(memberShipDao, memberDao, taskDao);
 
         controller.setQuery(getDataMap(member));
         assertThat(controller.getBody("li"))

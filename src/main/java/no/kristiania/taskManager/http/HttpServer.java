@@ -46,8 +46,9 @@ public class HttpServer {
 
                 logger.info("Handling request{} ", request.getStartLine());
 
+                System.out.println(getAbsolutePath(request));
                 controllers
-                        .getOrDefault(parseTargetIfEcho(request), defaultController)
+                        .getOrDefault(getAbsolutePath(request), defaultController)
                         .handle(socket.getOutputStream(), request);
 
 
@@ -62,12 +63,14 @@ public class HttpServer {
         controllers.put(requestPath, controller);
     }
 
-    private String parseTargetIfEcho(HttpRequest request) {
+    private String getAbsolutePath(HttpRequest request) {
         String requestTarget = request.getRequestTarget();
 
-        //If requestTarget includes a ?, ergo is a /echo?foo=bar request, it should return /echo to find the right controller.
+        //If requestPath is /foo?/bar it should return /foo to find the right controller.
         int questionPos = requestTarget.indexOf("?");
-        return questionPos == -1 ? requestTarget : requestTarget.substring(0, questionPos);
+        requestTarget = (questionPos == -1) ? requestTarget : requestTarget.substring(0, questionPos);
+
+        return requestTarget;
     }
 
     /*Getters and setters*/

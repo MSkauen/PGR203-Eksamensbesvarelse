@@ -1,8 +1,6 @@
 package no.kristiania.taskManager.jdbc;
 
-import no.kristiania.taskManager.controllers.AddMemberController;
-import no.kristiania.taskManager.controllers.UpdateMemberController;
-import no.kristiania.taskManager.controllers.ListMembersController;
+import no.kristiania.taskManager.controllers.MemberController;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
@@ -24,7 +22,7 @@ public class MemberControllersTest {
         dao.insert(member1);
         dao.insert(member2);
 
-        ListMembersController controller = new ListMembersController(dao);
+        MemberController controller = new MemberController(dao);
         assertThat(controller.getBody("option"))
                 .contains(String.format("<option value='%s' id='%s'>%s</option>", member1.getId(), member1.getId(), member1.getName()))
                 .contains(String.format("<option value='%s' id='%s'>%s</option>", member2.getId(), member2.getId(), member2.getName()));
@@ -36,7 +34,7 @@ public class MemberControllersTest {
 
         Map<String, String> data = getMemberDataMap(member1);
 
-        AddMemberController controller = new AddMemberController(dao);
+        MemberController controller = new MemberController(dao);
         controller.insertData(data);
 
         assertThat(dao.listAll())
@@ -52,7 +50,7 @@ public class MemberControllersTest {
         dao.insert(member1);
         dao.insert(member2);
 
-        UpdateMemberController controller = new UpdateMemberController(dao);
+        MemberController controller = new MemberController(dao);
         controller.alterData(getDataMapForAltering(member1, member2));
 
         assertEquals(dao.retrieve(member1.getId()).getName(), dao.retrieve(member2.getId()).getName());

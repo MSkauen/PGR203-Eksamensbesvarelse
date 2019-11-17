@@ -27,7 +27,7 @@ public class HttpRequest extends HttpMessage {
         Map<String, String> requestParameters = new HashMap<>();
 
         int questionPos = requestTarget.indexOf('?');
-        if (questionPos != -1) {
+        if (requestTarget.contains("/echo")) {
             String query = requestTarget.substring(questionPos + 1);
             requestParameters = parametersToMap(query);
         }
@@ -40,8 +40,14 @@ public class HttpRequest extends HttpMessage {
     }
 
     private Map<String, String> parametersToMap(String request) {
-        for (String parameter : request.split("&")) {
-            parseParameter('=', parameter);
+        System.out.println("I got here");
+        System.out.println(request);
+        if (!(request.indexOf('&') == -1)) {
+            for (String parameter : request.split("&")) {
+                parseParameter('=', parameter);
+            }
+        } else {
+            parseParameter('=', request);
         }
         return headers;
     }
