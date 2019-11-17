@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>See tasks assigned to member</title>
+</head>
+<body>
+<form method="POST" action="/api/listMemberships">
+    <label>Select Member <select name="memberId" id="members"></select></label><br>
+    <button>See members tasks</button>
+</form>
+</body>
+<script>
+    var members = document.getElementById("members");
+    fetch("/api/listMembers")
+        .then(function (result) {
+            return result.text();
+        })
+        .then(function (text) {
+            members.innerHTML = text;
+        });
+</script>
+</html>

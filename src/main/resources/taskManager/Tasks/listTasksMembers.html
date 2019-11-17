@@ -2,33 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>See Memberships</title>
+    <title>See members assigned to a task</title>
 </head>
 <body>
-<h1>Memberships</h1>
-<h3>List tasks assigned to a member</h3>
-<form method="POST" action="/api/listMemberships">
-    <label>Select Member <select name="memberId" id="members"></select></label><br>
-    <button>See members tasks</button>
-</form>
 
 <h3>See members assigned to a task</h3>
 <form method="POST" action="/api/listMemberships">
     <label>Select Task <select name="taskId" id="tasks"></select></label><br>
     <button>See tasks members</button>
 </form>
-
-
-
+</body>
 <script>
-    var members = document.getElementById("members");
-    fetch("/api/listMembers")
-        .then(function (result) {
-            return result.text();
-        })
-        .then(function (text) {
-            members.innerHTML = text;
-        });
     var tasks = document.getElementById("tasks");
     fetch("/api/listTasks")
         .then(function (result) {
@@ -38,5 +22,4 @@
             tasks.innerHTML = text;
         });
 </script>
-</body>
 </html>
