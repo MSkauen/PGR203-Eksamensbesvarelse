@@ -26,6 +26,7 @@ public class FileHttpController implements HttpController {
         if (file.isDirectory()) {
             file = new File(file, "taskManager/index.html");
         }
+
         if (file.exists()) {
             long length = file.length();
             response.setHeader("Content-length", Long.toString(length));
@@ -34,9 +35,11 @@ public class FileHttpController implements HttpController {
             try (FileInputStream fileInputStream = new FileInputStream(file)) {
                 fileInputStream.transferTo(outputStream);
             }
+
         } else if (request.getRequestTarget().equals("/")) {
             response.setHeader("Location", "/index.html");
             response.executeResponse(STATUS_CODE.FOUND);
+
         } else {
             response.executeResponse(STATUS_CODE.NOT_FOUND);
         }
