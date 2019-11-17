@@ -63,7 +63,7 @@ public class MemberController extends AbstractDaoController<MemberDao> implement
 
     public String getBody(String htmlObject) throws SQLException {
         return dao.listAll().stream()
-                .map(p -> String.format("<%s value='%s' id='%s'>NAME: %s | AGE: %s </%s>", htmlObject, p.getId(), p.getId(), p.getName(),p.getAge(), htmlObject))
+                .map(p -> String.format("<%s value='%s' id='%s'>NAME: %s | AGE: %s </%s>", htmlObject, p.getId(), p.getId(), p.getName(), p.getAge(), htmlObject))
                 .collect(Collectors.joining(""));
     }
 

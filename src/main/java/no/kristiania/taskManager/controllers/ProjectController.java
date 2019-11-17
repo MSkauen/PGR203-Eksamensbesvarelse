@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class ProjectController extends AbstractDaoController<ProjectDao> implements HttpController{
+public class ProjectController extends AbstractDaoController<ProjectDao> implements HttpController {
 
 
     public ProjectController(ProjectDao projectDao) {
@@ -45,7 +45,7 @@ public class ProjectController extends AbstractDaoController<ProjectDao> impleme
     @Override
     public String getBody(String htmlObject) throws SQLException {
         return dao.listAll().stream()
-                .map(p -> String.format("<%s value='%s' id='%s'>%s</%s>",htmlObject, p.getId(), p.getId(), p.getName(), htmlObject))
+                .map(p -> String.format("<%s value='%s' id='%s'>%s</%s>", htmlObject, p.getId(), p.getId(), p.getName(), htmlObject))
                 .collect(Collectors.joining(""));
     }
 
@@ -67,7 +67,7 @@ public class ProjectController extends AbstractDaoController<ProjectDao> impleme
 
     @Override
     void alterData(Map<String, String> requestBodyParameters) throws SQLException {
-        if(requestBodyParameters.containsKey("id") && requestBodyParameters.containsKey("name")){
+        if (requestBodyParameters.containsKey("id") && requestBodyParameters.containsKey("name")) {
             dao.update(requestBodyParameters.get("name"), Long.parseLong(requestBodyParameters.get("id")));
         } else {
             throw new IllegalArgumentException();

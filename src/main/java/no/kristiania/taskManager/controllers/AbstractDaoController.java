@@ -17,7 +17,7 @@ public abstract class AbstractDaoController<DAO> {
     protected HttpResponse response;
     protected String name;
     protected HttpRequest request;
-    
+
 
     protected AbstractDaoController(DAO o) {
         this.dao = o;
@@ -63,6 +63,8 @@ public abstract class AbstractDaoController<DAO> {
     }
 
     abstract String getBody(String htmlObject) throws SQLException;
+
     abstract void insertData(Map<String, String> query) throws SQLException;
+
     abstract void alterData(Map<String, String> requestBodyParameters) throws SQLException;
 }

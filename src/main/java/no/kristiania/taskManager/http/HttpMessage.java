@@ -18,7 +18,7 @@ public class HttpMessage {
 
     }
 
-    public HttpMessage(HttpRequest request, OutputStream outputStream){
+    public HttpMessage(HttpRequest request, OutputStream outputStream) {
         this.outputStream = outputStream;
         headers = request.parseRequestParameters();
         headers.putIfAbsent("status", "200");
@@ -59,13 +59,13 @@ public class HttpMessage {
         return body.toString();
     }
 
-    public void parseParameter(char splitChar, String message){
-        try{
+    public void parseParameter(char splitChar, String message) {
+        try {
             int charPos = message.indexOf(splitChar);
             String name = message.substring(0, charPos);
             String value = message.substring(charPos + 1);
             headers.put(name, value);
-        } catch(StringIndexOutOfBoundsException e){
+        } catch (StringIndexOutOfBoundsException e) {
             e.printStackTrace();
         }
 

@@ -27,21 +27,22 @@ public class TaskController extends AbstractDaoController<TaskDao> implements Ht
         super.request = request;
         super.handle();
 
-            //Depending on the different requestpaths we call different methods in the abstractController.
-            switch (request.getRequestTarget()) {
-                case "/api/tasks?/listTasks=Option":
-                    handleList("option");
-                    break;
-                case "/api/tasks?/listTasks=Li":
-                    handleList("li");
-                    break;
-                case "/api/tasks?/addTask":
-                    handleAdd();
-                    break;
-                case "api/tasks?/updateTasks":
-                    handleUpdate();
-                default: response.executeResponse(STATUS_CODE.INTERNAL_SERVER_ERROR);
-            }
+        //Depending on the different requestpaths we call different methods in the abstractController.
+        switch (request.getRequestTarget()) {
+            case "/api/tasks?/listTasks=Option":
+                handleList("option");
+                break;
+            case "/api/tasks?/listTasks=Li":
+                handleList("li");
+                break;
+            case "/api/tasks?/addTask":
+                handleAdd();
+                break;
+            case "api/tasks?/updateTasks":
+                handleUpdate();
+            default:
+                response.executeResponse(STATUS_CODE.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @Override

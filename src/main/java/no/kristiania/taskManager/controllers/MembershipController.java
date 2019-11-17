@@ -19,7 +19,7 @@ public class MembershipController extends AbstractDaoController<MembershipDao> i
     protected Map<String, String> query;
     private List<Membership> list;
 
-    public MembershipController(MembershipDao o, MemberDao memberDao, TaskDao taskDao){
+    public MembershipController(MembershipDao o, MemberDao memberDao, TaskDao taskDao) {
         super(o);
         this.memberDao = memberDao;
         this.taskDao = taskDao;
@@ -91,7 +91,7 @@ public class MembershipController extends AbstractDaoController<MembershipDao> i
         }
 
         return memberList.stream()
-                .map(p -> String.format("<%s id='%s'>%s</%s>",htmlObject, p.getId(), p.getName(), htmlObject))
+                .map(p -> String.format("<%s id='%s'>%s</%s>", htmlObject, p.getId(), p.getName(), htmlObject))
                 .collect(Collectors.joining(""));
     }
 

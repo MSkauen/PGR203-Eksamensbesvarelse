@@ -12,11 +12,11 @@ public class Task {
 
         private String statusString;
 
-        TASK_STATUS(String statusString){
+        TASK_STATUS(String statusString) {
             this.setStatusString(statusString);
         }
 
-        public static TASK_STATUS getTaskStatus(String inputString){
+        public static TASK_STATUS getTaskStatus(String inputString) {
             for (TASK_STATUS e : TASK_STATUS.values()) {
                 if (e.getStatusString().equals(inputString)) {
                     return e;
