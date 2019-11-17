@@ -42,7 +42,7 @@ public class HttpServer {
             try {
                 //The accept method is used to accept incoming requests to the socket.
                 Socket socket = serverSocket.accept();
-                HttpServerRequest request = new HttpServerRequest(socket.getInputStream());
+                HttpRequest request = new HttpRequest(socket.getInputStream());
 
                 logger.info("Handling request{} ", request.getStartLine());
 
@@ -62,7 +62,7 @@ public class HttpServer {
         controllers.put(requestPath, controller);
     }
 
-    private String parseTargetIfEcho(HttpServerRequest request) {
+    private String parseTargetIfEcho(HttpRequest request) {
         String requestTarget = request.getRequestTarget();
 
         //If requestTarget includes a ?, ergo is a /echo?foo=bar request, it should return /echo to find the right controller.

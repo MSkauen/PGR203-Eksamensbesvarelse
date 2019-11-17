@@ -3,13 +3,13 @@ package no.kristiania.taskManager.http;
 import java.io.IOException;
 import java.net.Socket;
 
-public class HttpClient extends HttpMessage {
+public class HttpClientRequest extends HttpMessage {
     private final String hostname;
     private final int port;
     private final String requestTarget;
     private String body = "";
 
-    public HttpClient(String hostname, int port, String requestTarget, String body) {
+    public HttpClientRequest(String hostname, int port, String requestTarget, String body) {
         super();
         this.hostname = hostname;
         this.port = port;
@@ -17,7 +17,7 @@ public class HttpClient extends HttpMessage {
         this.body = body;
     }
 
-    public HttpClient(String hostname, int port, String requestTarget) {
+    public HttpClientRequest(String hostname, int port, String requestTarget) {
         super();
         this.hostname = hostname;
         this.port = port;

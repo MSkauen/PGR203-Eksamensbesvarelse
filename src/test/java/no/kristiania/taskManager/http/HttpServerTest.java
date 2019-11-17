@@ -21,19 +21,19 @@ class HttpServerTest {
 
     @Test
     void shouldReturnStatusCode200() throws IOException {
-        HttpClient client = new HttpClient("localhost", server.getPort(), "/echo");
+        HttpClientRequest client = new HttpClientRequest("localhost", server.getPort(), "/echo");
         assertEquals(200, client.executeGet().getStatusCode());
     }
 
     @Test
     void shouldReturnStatusCode401() throws IOException {
-        HttpClient client = new HttpClient("localhost", server.getPort(), "/echo?status=401");
+        HttpClientRequest client = new HttpClientRequest("localhost", server.getPort(), "/echo?status=401");
         assertEquals(401, client.executeGet().getStatusCode());
     }
 
     @Test
     void shouldReturnHeaders() throws IOException {
-        HttpClient client = new HttpClient("localhost", server.getPort(), "/echo?status=302&location=http://www.example.com");
+        HttpClientRequest client = new HttpClientRequest("localhost", server.getPort(), "/echo?status=302&location=http://www.example.com");
 
         assertEquals(302, client.executeGet().getStatusCode());
         assertEquals("http://www.example.com", client.executeGet().getHeader("location"));
@@ -41,7 +41,7 @@ class HttpServerTest {
 
     @Test
     void shouldReturnBody() throws IOException {
-        HttpClient client = new HttpClient("localhost", server.getPort(), "/echo?body=HelloWorld");
+        HttpClientRequest client = new HttpClientRequest("localhost", server.getPort(), "/echo?body=HelloWorld");
         assertEquals("HelloWorld", client.executeGet().getBody());
     }
 
@@ -49,13 +49,13 @@ class HttpServerTest {
     void shouldReturnFileFromDisk() throws IOException {
         Files.writeString(Paths.get("target/mytestfile.txt"), "Hello Kristiania");
         server.setAssetRoot("target");
-        HttpClient client = new HttpClient("localhost", server.getPort(), "/mytestfile.txt");
+        HttpClientRequest client = new HttpClientRequest("localhost", server.getPort(), "/mytestfile.txt");
         assertEquals("Hello Kristiania", client.executeGet().getBody());
     }
 
     @Test
     void shouldReturnStatusCode404() throws IOException {
-        HttpClient client = new HttpClient("localhost", server.getPort(), "/foo");
+        HttpClientRequest client = new HttpClientRequest("localhost", server.getPort(), "/foo");
         assertEquals(404, client.executeGet().getStatusCode());
     }
 

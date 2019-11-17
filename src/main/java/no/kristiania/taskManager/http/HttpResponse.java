@@ -4,16 +4,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Map;
 
-public class HttpServerResponse {
+public class HttpResponse extends HttpMessage {
 
-    private OutputStream outputStream;
-    private String body = "";
-    private Map<String, String> headers;
-
-    public HttpServerResponse(HttpServerRequest request, OutputStream outputStream) {
-        this.outputStream = outputStream;
-        headers = request.parseRequestParameters();
-        headers.putIfAbsent("status", "200");
+    public HttpResponse(HttpRequest request, OutputStream outputStream) {
+        super(request, outputStream);
     }
 
     public void executeResponse(STATUS_CODE status_code) throws IOException {
@@ -21,7 +15,6 @@ public class HttpServerResponse {
     }
 
     private String responseString(STATUS_CODE status_code) {
-
         alterHeaderTable();
 
         StringBuilder responseString = new StringBuilder();
@@ -37,7 +30,7 @@ public class HttpServerResponse {
 
     private void alterHeaderTable() {
         /*
-            We need to make the header hashmap into only http-headers, so we remove status and body from it.
+            We need to make the header hashmap into only actual headers, so we remove status and body from it.
             We also need to make sure the Content-length header is present.
         */
         if (headers.containsKey("body")) {
@@ -49,15 +42,5 @@ public class HttpServerResponse {
         headers.putIfAbsent("Content-length", Integer.toString(body.length()));
     }
 
-    public void setBody(String body) {
-        this.body = body;
-    }
 
-    public void setHeader(String key, String value) {
-        headers.put(key, value);
-    }
-
-    public String getHeader(String key) {
-        return headers.get(key);
-    }
 }

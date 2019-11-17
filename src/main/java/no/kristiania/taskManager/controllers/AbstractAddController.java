@@ -1,7 +1,7 @@
 package no.kristiania.taskManager.controllers;
 
-import no.kristiania.taskManager.http.HttpServerResponse;
-import no.kristiania.taskManager.http.HttpServerRequest;
+import no.kristiania.taskManager.http.HttpResponse;
+import no.kristiania.taskManager.http.HttpRequest;
 import no.kristiania.taskManager.http.STATUS_CODE;
 
 import java.io.IOException;
@@ -14,17 +14,17 @@ public abstract class AbstractAddController<ENTITY> implements HttpController {
     protected ENTITY dao;
     protected OutputStream outputStream;
     protected Map<String, String> requestBodyParameters;
-    protected HttpServerResponse response;
+    protected HttpResponse response;
 
     protected AbstractAddController(ENTITY o) {
         this.dao = o;
     }
 
     @Override
-    public void handle(OutputStream outputStream, HttpServerRequest request) throws IOException {
+    public void handle(OutputStream outputStream, HttpRequest request) throws IOException {
         this.outputStream = outputStream;
         this.requestBodyParameters = request.parseRequestBody(request.getBody());
-        response = new HttpServerResponse(request, outputStream);
+        response = new HttpResponse(request, outputStream);
 
         try {
             insertData(requestBodyParameters);

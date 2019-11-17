@@ -3,17 +3,25 @@ package no.kristiania.taskManager.http;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
 public class HttpMessage {
 
-    private String body;
+    protected OutputStream outputStream;
+    protected Map<String, String> headers = new HashMap<>();
+    protected String body = "";
     private String startLine;
-    private Map<String, String> headers = new HashMap<>();
 
     public HttpMessage() {
 
+    }
+
+    public HttpMessage(HttpRequest request, OutputStream outputStream){
+        this.outputStream = outputStream;
+        headers = request.parseRequestParameters();
+        headers.putIfAbsent("status", "200");
     }
 
     public HttpMessage(InputStream inputStream) throws IOException {
@@ -23,7 +31,7 @@ public class HttpMessage {
             int colonPos = headerLine.indexOf(':');
             String headerName = headerLine.substring(0, colonPos).trim();
             String headerValue = headerLine.substring(colonPos + 1).trim();
-            headers.put(headerName.toLowerCase(), headerValue); // Stores the headerName as a key and headerValue as a value
+            headers.put(headerName.toLowerCase(), headerValue);
         }
         if (getHeader("Content-length") != null) {
             this.body = readBytes(inputStream, getContentLength());
@@ -51,10 +59,21 @@ public class HttpMessage {
         return body.toString();
     }
 
-    /*GETTERS*/
+    public void parseParameter(char splitChar, String message){
+        int charPos = message.indexOf(splitChar);
+        String name = message.substring(0, charPos).trim();
+        String value = message.substring(charPos + 1).trim();
+        headers.put(name, value);
+    }
+
+    /*GETTERS AND SETTERS*/
 
     public String getHeader(String headerName) {
         return headers.get(headerName.toLowerCase());
+    }
+
+    public void setHeader(String key, String value) {
+        headers.put(key, value.toLowerCase());
     }
 
     public int getContentLength() {
@@ -69,11 +88,12 @@ public class HttpMessage {
         return body;
     }
 
+    public void setBody(String body) {
+        this.body = body;
+    }
+
     public int getStatusCode() {
         return Integer.parseInt(startLine.split(" ")[1]);
     }
-
-
-
 
 }

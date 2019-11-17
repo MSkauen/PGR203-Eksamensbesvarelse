@@ -7,11 +7,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HttpServerRequest extends HttpMessage {
+public class HttpRequest extends HttpMessage {
 
     private String requestTarget;
 
-    public HttpServerRequest(InputStream inputStream) throws IOException {
+    public HttpRequest(InputStream inputStream) throws IOException {
         super(inputStream);
 
         //Get the requestTarget from the HTTP request
@@ -20,7 +20,6 @@ public class HttpServerRequest extends HttpMessage {
         } catch (ArrayIndexOutOfBoundsException e) {
             //ADD LOGGER
         }
-
     }
 
     //ADD MORE explanations to this part
@@ -41,15 +40,10 @@ public class HttpServerRequest extends HttpMessage {
     }
 
     private Map<String, String> parametersToMap(String request) {
-        Map<String, String> dataInput = new HashMap<>();
-
         for (String parameter : request.split("&")) {
-            int equalsPos = parameter.indexOf('=');
-            String parameterValue = parameter.substring(equalsPos + 1);
-            String parameterName = parameter.substring(0, equalsPos);
-            dataInput.put(parameterName, parameterValue);
+            parseParameter('=', parameter);
         }
-        return dataInput;
+        return headers;
     }
 
     public String getRequestTarget() {
