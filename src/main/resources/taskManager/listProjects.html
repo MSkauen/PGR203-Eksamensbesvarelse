@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>List of tasks</title>
+    <title>List of projects</title>
 </head>
 <body>
-<h1>List of Tasks</h1>
+<h1>List of Projects</h1>
 
-<form action=""><label>Task <select name="" id="tasks"></select></label></form>
+<form action=""><label>Project <select name="" id="projects"></select></label></form>
 <script>
-    var tasks = document.getElementById("tasks");
-    fetch("/api/listTasks")
+    var tasks = document.getElementById("projects");
+    fetch("/api/projects")
         .then(function (result) {
             return result.text();
         })

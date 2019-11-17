@@ -15,7 +15,7 @@
 </form>
 <script>
     var members = document.getElementById("members");
-    fetch("/api/members")
+    fetch("/api/listMembers")
         .then(function (result) {
             return result.text();
         })

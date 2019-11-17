@@ -37,14 +37,15 @@ public class TaskManagerServer {
     public void setUpTaskManagerServer(int port, DataSource dataSource) throws IOException {
         server = new HttpServer(port);
         server.setAssetRoot("src/main/resources/taskManager");
-        server.addController("/api/members", new ListMembersController(new MemberDao(dataSource)));
-        server.addController("/api/tasks", new ListTasksController(new TaskDao(dataSource)));
-        server.addController("/api/memberships", new ListMembershipsController(new MembershipDao(dataSource), new MemberDao(dataSource), new TaskDao(dataSource)));
-        server.addController("/members", new AddMemberController(new MemberDao(dataSource)));
-        server.addController("/tasks", new AddTaskController(new TaskDao(dataSource)));
-        server.addController("/memberships", new AddMembershipController(new MembershipDao(dataSource), new MemberDao(dataSource), new TaskDao(dataSource)));
+        server.addController("/api/listMembers", new ListMembersController(new MemberDao(dataSource)));
+        server.addController("/api/listMembers", new ListMembersController(new MemberDao(dataSource)));
+        server.addController("/api/listTasks", new ListTasksController(new TaskDao(dataSource)));
+        server.addController("/api/listMemberships", new ListMembershipsController(new MembershipDao(dataSource), new MemberDao(dataSource), new TaskDao(dataSource)));
+        server.addController("/api/addMember", new AddMemberController(new MemberDao(dataSource)));
+        server.addController("/api/addTask", new AddTaskController(new TaskDao(dataSource)));
+        server.addController("/api/addMembership", new AddMembershipController(new MembershipDao(dataSource), new MemberDao(dataSource), new TaskDao(dataSource)));
         server.addController("/api/updateMemberName", new UpdateMemberController(new MemberDao(dataSource)));
-        server.addController("/api/updateProject",new UpdateTaskController(new TaskDao(dataSource)));
+        server.addController("/api/updateTask",new UpdateTaskController(new TaskDao(dataSource)));
     }
 
     public static void main(String[] args) throws IOException {

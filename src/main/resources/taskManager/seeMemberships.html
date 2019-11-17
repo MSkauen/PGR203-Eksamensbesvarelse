@@ -6,23 +6,23 @@
 </head>
 <body>
 <h1>Memberships</h1>
-<h3>See tasks assigned to a member</h3>
-<form method="POST" action="/api/memberships">
-    <label>Select Member <select name="memberId" id="members"></select></label>
-    <button>find tasks</button>
+<h3>List tasks assigned to a member</h3>
+<form method="POST" action="/api/listMemberships">
+    <label>Select Member <select name="memberId" id="members"></select></label><br>
+    <button>See members tasks</button>
 </form>
 
 <h3>See members assigned to a task</h3>
-<form method="POST" action="/api/memberships">
-    <label>Select Task <select name="taskId" id="tasks"></select></label>
-    <button>find members</button>
+<form method="POST" action="/api/listMemberships">
+    <label>Select Task <select name="taskId" id="tasks"></select></label><br>
+    <button>See tasks members</button>
 </form>
 
 
 
 <script>
     var members = document.getElementById("members");
-    fetch("/api/members")
+    fetch("/api/listMembers")
         .then(function (result) {
             return result.text();
         })
@@ -30,7 +30,7 @@
             members.innerHTML = text;
         });
     var tasks = document.getElementById("tasks");
-    fetch("/api/tasks")
+    fetch("/api/listTasks")
         .then(function (result) {
             return result.text();
         })

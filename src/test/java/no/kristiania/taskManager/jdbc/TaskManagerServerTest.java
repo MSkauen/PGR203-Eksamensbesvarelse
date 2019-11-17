@@ -20,19 +20,19 @@ public class TaskManagerServerTest {
 
     @Test
     void shouldHandlePostRequests() throws IOException {
-        HttpClientRequest client = new HttpClientRequest("localhost", server.getPort(), "/members", "name=Guro&age=24");
+        HttpClientRequest client = new HttpClientRequest("localhost", server.getPort(), "/api/addMember", "name=Guro&age=24");
         assertEquals(302, client.executePost().getStatusCode());
     }
 
     @Test
     void shouldHandleListRequest() throws IOException {
-        HttpClientRequest client = new HttpClientRequest("localhost", server.getPort(), "/api/members");
+        HttpClientRequest client = new HttpClientRequest("localhost", server.getPort(), "/api/listMembers");
         assertEquals(200, client.executeGet().getStatusCode());
     }
 
     @Test
     void shouldReturnInternalServerError() throws IOException {
-        HttpClientRequest client = new HttpClientRequest("localhost", server.getPort(), "/members", "foo=bar&bar=foo");
+        HttpClientRequest client = new HttpClientRequest("localhost", server.getPort(), "/api/addMember", "foo=bar&bar=foo");
         assertEquals(500, client.executePost().getStatusCode());
     }
 

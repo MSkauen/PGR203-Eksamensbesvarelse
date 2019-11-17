@@ -5,13 +5,13 @@
     <title>Add Member To Task</title>
 </head>
 <body>
-<h1>Add Member To Task</h1>
+<h1>List of Members</h1>
     <form action=""><label>Member <select name="" id="members"></select></label></form>
 </body>
 
 <script>
     var members = document.getElementById("members");
-    fetch("/api/members")
+    fetch("/api/listMembers")
         .then(function (result) {
             return result.text();
         })
