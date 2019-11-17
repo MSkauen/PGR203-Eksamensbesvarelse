@@ -43,15 +43,11 @@ public class MembershipController extends AbstractDaoController<MembershipDao> i
             case "/api/memberships?/addMembership":
                 handleAdd();
                 break;
-            case "api/memberships?/updateMembership":
-                handleUpdate();
             default:
                 response.executeResponse(STATUS_CODE.INTERNAL_SERVER_ERROR);
         }
     }
 
-
-    //IF requestpath is
     @Override
     public String getBody(String htmlObject) throws SQLException {
 
@@ -116,9 +112,6 @@ public class MembershipController extends AbstractDaoController<MembershipDao> i
     }
 
     @Override
-    public void alterData(Map<String, String> requestBodyParameters) {
-        //ADD DROPPING TABLE HERE
+    void alterData(Map<String, String> requestBodyParameters) {
     }
-
-
 }

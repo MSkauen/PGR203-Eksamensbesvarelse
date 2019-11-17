@@ -29,7 +29,6 @@ public abstract class AbstractDaoController<DAO> {
     }
 
     public void handleAdd() throws IOException {
-
         try {
             insertData(requestBodyParameters);
             response.setHeader("Location", "http://localhost:8080/index.html");
@@ -39,21 +38,16 @@ public abstract class AbstractDaoController<DAO> {
             e.printStackTrace();
             response.executeResponse(STATUS_CODE.INTERNAL_SERVER_ERROR);
         }
-
     }
 
     public void handleList(String htmlObject) throws IOException {
         response.setHeader("Content-type", "text/html");
-        System.out.println("I got here");
 
         try {
-            System.out.println("Got here");
             response.setHeader("Content-length", Integer.toString(getBody(htmlObject).length()));
             response.setBody(getBody(htmlObject));
             response.executeResponse(STATUS_CODE.OK);
         } catch (SQLException e) {
-            System.out.println("I got to line 54");
-            e.printStackTrace();
             response.executeResponse(STATUS_CODE.INTERNAL_SERVER_ERROR);
         }
     }
@@ -63,9 +57,7 @@ public abstract class AbstractDaoController<DAO> {
             alterData(requestBodyParameters);
             response.setHeader("Location", "http://localhost:8080/index.html");
             response.executeResponse(STATUS_CODE.FOUND);
-
         } catch (IllegalArgumentException | SQLException e) {
-            e.printStackTrace();
             response.executeResponse(STATUS_CODE.INTERNAL_SERVER_ERROR);
         }
     }

@@ -10,10 +10,19 @@ public class Task {
         IN_PROGRESS("In progress"),
         FINISHED("Finished");
 
-        String statusString;
+        public String statusString;
 
         TASK_STATUS(String statusString){
             this.statusString = statusString;
+        }
+
+        public static TASK_STATUS getTaskStatus(String inputString){
+            for (TASK_STATUS e : TASK_STATUS.values()) {
+                if (e.statusString.equals(inputString)) {
+                    return e;
+                }
+            }
+            return null;
         }
     }
 
