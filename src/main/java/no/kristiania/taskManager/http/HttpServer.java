@@ -51,7 +51,7 @@ public class HttpServer {
                         .handle(socket.getOutputStream(), request);
 
 
-            } catch (IOException | SQLException e) {
+            } catch (IOException | NullPointerException | SQLException e) {
                 e.printStackTrace();
             }
         }
