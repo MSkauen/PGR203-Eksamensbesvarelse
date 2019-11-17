@@ -24,7 +24,7 @@ public class TaskDao extends AbstractDao<Task> {
     public void insert(Task task) throws SQLException {
         long id = insert(task, "INSERT INTO tasks (name) VALUES (?)");
         task.setId(id);
-        task.setTaskStatus(Task.TASK_STATUS.NOT_STARTED);
+        task.setTaskStatus(Task.TASK_STATUS.NOT_STARTED.getStatusString());
     }
 
     public void update(String name, long id) throws SQLException {
@@ -32,7 +32,7 @@ public class TaskDao extends AbstractDao<Task> {
     }
 
     public void update(Task.TASK_STATUS status, long id) throws SQLException {
-        update(status.statusString, id, "UPDATE tasks set status = ?::status WHERE id = ?");
+        update(status.getStatusString(), id, "UPDATE tasks set status = ?::status WHERE id = ?");
     }
 
     @Override
@@ -45,6 +45,7 @@ public class TaskDao extends AbstractDao<Task> {
         Task task = new Task();
         task.setId(rs.getLong("id"));
         task.setName(rs.getString("name"));
+        task.setTaskStatus(rs.getString("status"));
         return task;
     }
 

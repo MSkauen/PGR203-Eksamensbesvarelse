@@ -10,24 +10,32 @@ public class Task {
         IN_PROGRESS("In progress"),
         FINISHED("Finished");
 
-        public String statusString;
+        private String statusString;
 
         TASK_STATUS(String statusString){
-            this.statusString = statusString;
+            this.setStatusString(statusString);
         }
 
         public static TASK_STATUS getTaskStatus(String inputString){
             for (TASK_STATUS e : TASK_STATUS.values()) {
-                if (e.statusString.equals(inputString)) {
+                if (e.getStatusString().equals(inputString)) {
                     return e;
                 }
             }
             return null;
         }
+
+        public String getStatusString() {
+            return statusString;
+        }
+
+        public void setStatusString(String statusString) {
+            this.statusString = statusString;
+        }
     }
 
     private String name;
-    private String statusString;
+    private String status;
     private long id;
 
     public void setName(String name) {
@@ -67,11 +75,11 @@ public class Task {
         this.id = id;
     }
 
-    public void setTaskStatus(TASK_STATUS taskStatus) {
-        this.statusString = taskStatus.statusString;
+    public void setTaskStatus(String taskStatus) {
+        this.status = taskStatus;
     }
 
     public String getTaskStatus() {
-        return statusString;
+        return status;
     }
 }

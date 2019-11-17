@@ -43,7 +43,7 @@ public class TaskController extends AbstractDaoController<TaskDao> implements Ht
     @Override
     public String getBody(String htmlObject) throws SQLException {
         return dao.listAll().stream()
-                .map(p -> String.format("<%s value='%s' id='%s'>%s</%s>", htmlObject, p.getId(), p.getId(), p.getName(), htmlObject))
+                .map(p -> String.format("<%s value='%s' id='%s'>NAME: %s | STATUS: %s</%s>", htmlObject, p.getId(), p.getId(), p.getName(), p.getTaskStatus(), htmlObject))
                 .collect(Collectors.joining(""));
     }
 
