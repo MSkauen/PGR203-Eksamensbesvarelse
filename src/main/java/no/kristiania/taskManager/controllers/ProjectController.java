@@ -4,6 +4,7 @@ import no.kristiania.taskManager.http.HttpRequest;
 import no.kristiania.taskManager.http.STATUS_CODE;
 import no.kristiania.taskManager.jdbc.Project;
 import no.kristiania.taskManager.jdbc.ProjectDao;
+import no.kristiania.taskManager.jdbc.TaskDao;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -13,8 +14,9 @@ import java.util.stream.Collectors;
 
 public class ProjectController extends AbstractDaoController<ProjectDao> implements HttpController{
 
-    public ProjectController(ProjectDao o) {
-        super(o);
+
+    public ProjectController(ProjectDao projectDao) {
+        super(projectDao);
     }
 
     @Override

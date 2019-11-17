@@ -28,8 +28,8 @@ public class MemberControllersTest {
 
         MemberController controller = new MemberController(dao);
         assertThat(controller.getBody("option"))
-                .contains(String.format("<option value='%s' id='%s'>%s</option>", member1.getId(), member1.getId(), member1.getName()))
-                .contains(String.format("<option value='%s' id='%s'>%s</option>", member2.getId(), member2.getId(), member2.getName()));
+                .contains(String.format("<option value='%s' id='%s'>NAME: %s | AGE: %s </option>", member1.getId(), member1.getId(), member1.getName(), member1.getAge()))
+                .contains(String.format("<option value='%s' id='%s'>NAME: %s | AGE: %s </option>", member2.getId(), member2.getId(), member2.getName(), member2.getAge()));
     }
 
     @Test

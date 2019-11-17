@@ -1,10 +1,7 @@
 package no.kristiania.taskManager.controllers;
 
 import no.kristiania.taskManager.controllers.*;
-import no.kristiania.taskManager.jdbc.Task;
-import no.kristiania.taskManager.jdbc.TaskDao;
-import no.kristiania.taskManager.jdbc.TaskDaoTest;
-import no.kristiania.taskManager.jdbc.TestDatabase;
+import no.kristiania.taskManager.jdbc.*;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
@@ -17,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TaskControllersTest {
 
     private TaskDao dao = new TaskDao(TestDatabase.testDataSource());
+    private ProjectDao projectDao = new ProjectDao(TestDatabase.testDataSource());
 
     @Test
     void shouldReturnTaskFromDatabase() throws SQLException {
@@ -26,10 +24,13 @@ public class TaskControllersTest {
         dao.insert(task1);
         dao.insert(task2);
 
-        TaskController controller = new TaskController(dao);
+        TaskController controller = new TaskController(dao, projectDao);
         assertThat(controller.getBody("option"))
-                .contains(String.format("<option value='%s' id='%s'>%s</option>", task1.getId(), task1.getId(), task1.getName()))
-                .contains(String.format("<option value='%s' id='%s'>%s</option>", task2.getId(), task2.getId(), task2.getName()));
+                .contains(String.format("<option value='%s' id='%s'>NAME: %s <br> STATUS: %s <br> PROJECT: %s</option>", task1.getId(), task1.getId(), task1.getName(), task1.getTaskStatus(),
+                        (projectDao.retrieve(task1.getProjectId()) == null ? "Not set to project" : projectDao.retrieve(task1.getProjectId()))))
+                .contains(String.format("<option value='%s' id='%s'>NAME: %s <br> STATUS: %s <br> PROJECT: %s</option>", task2.getId(), task2.getId(), task2.getName(), task2.getTaskStatus(),
+                        (projectDao.retrieve(task2.getProjectId()) == null ? "Not set to project" : projectDao.retrieve(task2.getProjectId()))));
+
     }
 
     @Test
@@ -38,7 +39,7 @@ public class TaskControllersTest {
 
         Map<String, String> data = getTaskDataMap(task1);
 
-        TaskController controller = new TaskController(dao);
+        TaskController controller = new TaskController(dao, projectDao);
         controller.insertData(data);
 
         assertThat(dao.listAll())
@@ -54,7 +55,7 @@ public class TaskControllersTest {
         dao.insert(task1);
         dao.insert(task2);
 
-        TaskController controller = new TaskController(dao);
+        TaskController controller = new TaskController(dao, projectDao);
         controller.alterData(getDataMapForAltering(task1, task2));
 
         assertEquals(dao.retrieve(task1.getId()).getName(), dao.retrieve(task2.getId()).getName());

@@ -39,7 +39,7 @@ public class TaskManagerServer {
         server.setAssetRoot("src/main/resources/taskManager");
         server.addController("/api/members", new MemberController(new MemberDao(dataSource)));
         server.addController("/api/projects", new ProjectController(new ProjectDao(dataSource)));
-        server.addController("/api/tasks", new TaskController(new TaskDao(dataSource)));
+        server.addController("/api/tasks", new TaskController(new TaskDao(dataSource), new ProjectDao(dataSource)));
         server.addController("/api/memberships", new MembershipController(new MembershipDao(dataSource), new MemberDao(dataSource), new TaskDao(dataSource)));
     }
 

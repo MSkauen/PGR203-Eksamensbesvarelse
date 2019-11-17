@@ -19,7 +19,9 @@ public class ProjectDaoTest {
 
         dao.insert(project);
         assertThat(dao.listAll()).contains(project);
+        assertThat(dao.retrieve(project.getId())).isEqualToComparingFieldByField(project);
     }
+
 
     public static Project sampleProject(){
         Project project = new Project();

@@ -2,6 +2,7 @@ package no.kristiania.taskManager.controllers;
 
 import no.kristiania.taskManager.http.HttpRequest;
 import no.kristiania.taskManager.http.STATUS_CODE;
+import no.kristiania.taskManager.jdbc.ProjectDao;
 import no.kristiania.taskManager.jdbc.Task;
 import no.kristiania.taskManager.jdbc.TaskDao;
 
@@ -14,8 +15,11 @@ import java.util.stream.Collectors;
 
 public class TaskController extends AbstractDaoController<TaskDao> implements HttpController {
 
-    public TaskController(TaskDao o) {
+    ProjectDao projectDao;
+
+    public TaskController(TaskDao o, ProjectDao projectDao) {
         super(o);
+        this.projectDao = projectDao;
     }
 
     public void handle(OutputStream outputStream, HttpRequest request) throws IOException {
@@ -43,7 +47,17 @@ public class TaskController extends AbstractDaoController<TaskDao> implements Ht
     @Override
     public String getBody(String htmlObject) throws SQLException {
         return dao.listAll().stream()
-                .map(p -> String.format("<%s value='%s' id='%s'>NAME: %s | STATUS: %s</%s>", htmlObject, p.getId(), p.getId(), p.getName(), p.getTaskStatus(), htmlObject))
+                .map(p -> {
+                    try {
+                        return String.format("<%s value='%s' id='%s'>NAME: %s <br> STATUS: %s <br> PROJECT: %s</%s>",
+                                htmlObject, p.getId(), p.getId(), p.getName(), p.getTaskStatus(),
+                                (projectDao.retrieve(p.getProjectId()) == null ? "Not set to project" : projectDao.retrieve(p.getProjectId())),
+                                htmlObject);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    return null;
+                })
                 .collect(Collectors.joining(""));
     }
 
