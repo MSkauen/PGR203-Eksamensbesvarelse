@@ -2,6 +2,7 @@ package no.kristiania.taskManager.http;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 public class HttpResponse extends HttpMessage {
@@ -11,7 +12,7 @@ public class HttpResponse extends HttpMessage {
     }
 
     public void executeResponse(STATUS_CODE status_code) throws IOException {
-        outputStream.write(responseString(status_code).getBytes());
+        outputStream.write(responseString(status_code).getBytes(StandardCharsets.UTF_8));
     }
 
     private String responseString(STATUS_CODE status_code) {
