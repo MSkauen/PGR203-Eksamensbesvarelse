@@ -1,6 +1,7 @@
-package no.kristiania.taskManager.jdbc;
+package no.kristiania.taskManager.controllers;
 
 import no.kristiania.taskManager.controllers.MembershipController;
+import no.kristiania.taskManager.jdbc.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

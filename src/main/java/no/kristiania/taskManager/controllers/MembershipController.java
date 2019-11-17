@@ -34,12 +34,11 @@ public class MembershipController extends AbstractDaoController<MembershipDao> i
         super.handle();
 
         switch (request.getRequestTarget()) {
-            case "/api/memberships?/listMemberships=Option":
+            case "/api/memberships?/listMemberShips=Option":
                 handleList("option");
                 break;
             case "/api/memberships?/listMemberships=Li":
-                System.out.println("I got here");
-                handleList("Li");
+                handleList("li");
                 break;
             case "/api/memberships?/addMembership":
                 handleAdd();
@@ -59,6 +58,7 @@ public class MembershipController extends AbstractDaoController<MembershipDao> i
         if (query.get("memberId") != null) {
             return getTasks(htmlObject);
         } else if (query.get("taskId") != null) {
+            System.out.println("I got here");
             return getMembers(htmlObject);
         } else {
             throw new SQLException();
@@ -74,11 +74,12 @@ public class MembershipController extends AbstractDaoController<MembershipDao> i
             taskList.add(taskDao.retrieve(membership.getTaskId())); //Adds tasks from tasks table to own list
         }
         if (taskList.isEmpty()) {
-            return "There are no tasks assigned to this member <br> Back to http://localhost:8080/index.html";
+            return "There are no tasks assigned to this member <br> Back to <a href='http://localhost:8080/Members/index.html'>Back to members</a>";
         }
         return taskList.stream()
                 .map(p -> String.format("<%s id='%s'>%s</%s>", htmlObject, p.getId(), p.getName(), htmlObject))
                 .collect(Collectors.joining("")); //Parses this to list being shown in browser
+
     }
 
     private String getMembers(String htmlObject) throws SQLException {
@@ -90,7 +91,7 @@ public class MembershipController extends AbstractDaoController<MembershipDao> i
         }
 
         if (memberList.isEmpty()) {
-            return "There are no tasks assigned to this member <br> Back to http://localhost:8080/index.html";
+            return "There are no tasks assigned to this member <br> Back to <a href='http://localhost:8080/Tasks/index.html'>Back to tasks</a>";
         }
 
         return memberList.stream()

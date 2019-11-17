@@ -1,6 +1,10 @@
-package no.kristiania.taskManager.jdbc;
+package no.kristiania.taskManager.controllers;
 
 import no.kristiania.taskManager.controllers.MemberController;
+import no.kristiania.taskManager.jdbc.Member;
+import no.kristiania.taskManager.jdbc.MemberDao;
+import no.kristiania.taskManager.jdbc.MemberDaoTest;
+import no.kristiania.taskManager.jdbc.TestDatabase;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;

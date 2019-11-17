@@ -33,7 +33,8 @@ public class MemberController extends AbstractDaoController<MemberDao> implement
                 System.out.println("I got here");
                 handleAdd();
                 break;
-            case "api/members?/updateMember":
+            case "/api/members?/updateMember":
+                System.out.println("I got here");
                 handleUpdate();
             default:
                 response.executeResponse(STATUS_CODE.INTERNAL_SERVER_ERROR);

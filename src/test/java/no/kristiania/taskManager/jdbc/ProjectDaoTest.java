@@ -3,14 +3,12 @@ package no.kristiania.taskManager.jdbc;
 import org.junit.jupiter.api.Test;
 
 import javax.sql.DataSource;
-
 import java.sql.SQLException;
 import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
-class ProjectDaoTest {
+public class ProjectDaoTest {
 
     private DataSource dataSource = TestDatabase.testDataSource();
 

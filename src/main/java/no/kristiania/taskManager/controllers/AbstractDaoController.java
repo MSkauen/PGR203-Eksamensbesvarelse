@@ -25,11 +25,10 @@ public abstract class AbstractDaoController<DAO> {
 
     public void handle() {
         response = new HttpResponse(request, outputStream);
+        this.requestBodyParameters = request.parseRequestBody(request.getBody());
     }
 
     public void handleAdd() throws IOException {
-        System.out.println(request.getBody());
-        this.requestBodyParameters = request.parseRequestBody(request.getBody());
 
         try {
             insertData(requestBodyParameters);
@@ -45,15 +44,16 @@ public abstract class AbstractDaoController<DAO> {
 
     public void handleList(String htmlObject) throws IOException {
         response.setHeader("Content-type", "text/html");
+        System.out.println("I got here");
 
         try {
+            System.out.println("Got here");
             response.setHeader("Content-length", Integer.toString(getBody(htmlObject).length()));
             response.setBody(getBody(htmlObject));
             response.executeResponse(STATUS_CODE.OK);
         } catch (SQLException e) {
+            System.out.println("I got to line 54");
             e.printStackTrace();
-            response.setHeader("Content-length", Integer.toString(e.toString().length()));
-            response.setBody(e.toString());
             response.executeResponse(STATUS_CODE.INTERNAL_SERVER_ERROR);
         }
     }
