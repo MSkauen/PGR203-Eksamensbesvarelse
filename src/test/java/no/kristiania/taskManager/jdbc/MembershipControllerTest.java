@@ -12,7 +12,7 @@ import static no.kristiania.taskManager.jdbc.MemberDaoTest.sampleMember;
 import static no.kristiania.taskManager.jdbc.TaskDaoTest.sampleTask;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MemberShipControllerTest {
+public class MembershipControllerTest {
 
     private TaskDao taskDao = new TaskDao(TestDatabase.testDataSource());
     private Task task;

@@ -96,4 +96,7 @@ public class HttpMessage {
         return Integer.parseInt(startLine.split(" ")[1]);
     }
 
+    public String getRequestMethod() {
+        return startLine.split(" ")[0];
+    }
 }

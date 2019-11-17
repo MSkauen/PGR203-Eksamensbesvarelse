@@ -1,8 +1,8 @@
 package no.kristiania.taskManager.controllers;
 
-import no.kristiania.taskManager.http.HttpServerResponse;
+import no.kristiania.taskManager.http.HttpResponse;
 import no.kristiania.taskManager.http.HttpServer;
-import no.kristiania.taskManager.http.HttpServerRequest;
+import no.kristiania.taskManager.http.HttpRequest;
 import no.kristiania.taskManager.http.STATUS_CODE;
 
 import java.io.File;
@@ -18,9 +18,9 @@ public class FileHttpController implements HttpController {
     }
 
     @Override
-    public void handle(OutputStream outputStream, HttpServerRequest request) throws IOException {
+    public void handle(OutputStream outputStream, HttpRequest request) throws IOException {
 
-        HttpServerResponse response = new HttpServerResponse(request, outputStream);
+        HttpResponse response = new HttpResponse(request, outputStream);
 
         File file = new File(httpServer.getAssetRoot() + request.getRequestTarget());
         if (file.isDirectory()) {

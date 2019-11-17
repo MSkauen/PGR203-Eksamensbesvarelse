@@ -25,7 +25,6 @@ public class HttpResponse extends HttpMessage {
         responseString.append("Connection: close\r\n\r\n").append(body);
 
         return responseString.toString();
-
     }
 
     private void alterHeaderTable() {
