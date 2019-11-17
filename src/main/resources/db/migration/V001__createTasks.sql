@@ -15,5 +15,5 @@ CREATE TABLE TASKS
     id         SERIAL PRIMARY KEY,
     name       VARCHAR(1000) NOT NULL,
     status     STATUS        NOT NULL DEFAULT 'Not started',
-    project_id INTEGER       NOT NULL REFERENCES projects (id)
+    project_id INTEGER       REFERENCES projects (id)
 );
