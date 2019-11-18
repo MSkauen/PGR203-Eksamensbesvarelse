@@ -24,8 +24,11 @@
 
 ## Designbeskrivelse
 ####Database
+
 ![](databaseDiagram.png)
+
 ####Klasser
+
 ![](diagram.png)
 
 TaskManagerServeren i seg selv er bare en implementasjon av HttpServeren, men lagt til controllerne for å håndtere JDBC mot databasen. 
