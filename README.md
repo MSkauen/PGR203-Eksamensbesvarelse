@@ -1,5 +1,5 @@
 # PGR203 - Eksamen - TaskManager
-
+[![Build Status](https://travis-ci.com/Westerdals/pgr203-2019-eksamen-gulpipose.svg?token=44Bw2ysNN257T9ubGsZk&branch=master)](https://travis-ci.com/Westerdals/pgr203-2019-eksamen-gulpipose)
 ## Hvordan kjøre dette programmet
 
 ### Bygg og test executable jar-fil
