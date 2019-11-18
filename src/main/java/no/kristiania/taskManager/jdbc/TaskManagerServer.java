@@ -4,6 +4,8 @@ import no.kristiania.taskManager.controllers.*;
 import no.kristiania.taskManager.http.HttpServer;
 import org.flywaydb.core.Flyway;
 import org.postgresql.ds.PGSimpleDataSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.sql.DataSource;
 import java.io.FileReader;
@@ -11,10 +13,12 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class TaskManagerServer {
+    private static final Logger logger = LoggerFactory.getLogger(TaskManagerServer.class);
 
     private HttpServer server;
 
     public TaskManagerServer(int port) throws IOException {
+        logger.info("Server started at port: " + port);
         Properties properties = new Properties();
         try (FileReader fileReader = new FileReader("task-manager.properties")) {
             properties.load(fileReader);

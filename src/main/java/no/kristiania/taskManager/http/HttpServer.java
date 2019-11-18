@@ -45,8 +45,6 @@ public class HttpServer {
                 HttpRequest request = new HttpRequest(socket.getInputStream());
 
                 logger.info("Handling request{} ", request.getStartLine());
-
-                System.out.println(getAbsolutePath(request));
                 controllers
                         .getOrDefault(getAbsolutePath(request), defaultController)
                         .handle(socket.getOutputStream(), request);

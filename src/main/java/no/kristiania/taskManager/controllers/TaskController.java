@@ -6,6 +6,8 @@ import no.kristiania.taskManager.jdbc.ProjectDao;
 import no.kristiania.taskManager.jdbc.TASK_STATUS;
 import no.kristiania.taskManager.jdbc.Task;
 import no.kristiania.taskManager.jdbc.TaskDao;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -14,7 +16,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class TaskController extends AbstractDaoController<TaskDao> implements HttpController {
-
     ProjectDao projectDao;
 
     public TaskController(TaskDao o, ProjectDao projectDao) {
@@ -39,7 +40,6 @@ public class TaskController extends AbstractDaoController<TaskDao> implements Ht
                 handleAdd();
                 break;
             case "/api/tasks?/updateTask":
-                System.out.println("I GOT HERE");
                 handleUpdate();
             default:
                 response.executeResponse(STATUS_CODE.INTERNAL_SERVER_ERROR);
@@ -80,9 +80,10 @@ public class TaskController extends AbstractDaoController<TaskDao> implements Ht
     @Override
     public void alterData(Map<String, String> requestBodyParameters) throws SQLException {
 
-        //Checks if the request is correct
+        //Only if all requestParams are correct it will handle the request
+        //Then checks what requestParams are actually requested for(will be empty if field empty in html)
         if (requestBodyParameters.containsKey("id") && requestBodyParameters.containsKey("name") && requestBodyParameters.containsKey("status") && requestBodyParameters.containsKey("projectId")) {
-            //If
+
             if (!(requestBodyParameters.get("name").isBlank())) {
                 dao.update(requestBodyParameters.get("name"), Long.parseLong(requestBodyParameters.get("id")));
             }

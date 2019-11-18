@@ -54,7 +54,6 @@ public class MembershipController extends AbstractDaoController<MembershipDao> i
         if (query.get("memberId") != null) {
             return getTasks(htmlObject);
         } else if (query.get("taskId") != null) {
-            System.out.println("I got here");
             return getMembers(htmlObject);
         } else {
             throw new SQLException();

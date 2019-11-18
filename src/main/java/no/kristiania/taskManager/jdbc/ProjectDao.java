@@ -18,7 +18,6 @@ public class ProjectDao extends AbstractDao<Project> {
     }
 
     public List<Project> listAll() throws SQLException {
-        System.out.println("I got to listall");
         return listAll("SELECT * FROM projects");
     }
 

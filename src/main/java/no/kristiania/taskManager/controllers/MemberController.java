@@ -30,7 +30,6 @@ public class MemberController extends AbstractDaoController<MemberDao> implement
                 handleList("li");
                 break;
             case "/api/members?/addMember":
-                System.out.println("I got here");
                 handleAdd();
                 break;
             case "/api/members?/updateMember":
@@ -70,7 +69,6 @@ public class MemberController extends AbstractDaoController<MemberDao> implement
     @Override
     public void alterData(Map<String, String> requestBodyParameters) throws SQLException {
 
-        System.out.println(requestBodyParameters);
         if (requestBodyParameters.containsKey("id") && requestBodyParameters.containsKey("name") && requestBodyParameters.containsKey("age")) {
             if (!(requestBodyParameters.get("name").isBlank())) {
                 dao.update(requestBodyParameters.get("name"), Long.parseLong(requestBodyParameters.get("id")));
