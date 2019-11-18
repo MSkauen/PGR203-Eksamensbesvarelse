@@ -23,11 +23,11 @@
 * Under TASKS kan man se medlemmer tildelt en oppgave og endre oppgavens navn eller status.
 
 ## Designbeskrivelse
-####Database
+#### Database
 
 ![](databaseDiagram.png)
 
-####Klasser
+#### Klasser
 
 ![](diagram.png)
 
