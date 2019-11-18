@@ -4,12 +4,6 @@ CREATE TYPE STATUS AS ENUM (
     'Finished'
     );
 
-CREATE TABLE PROJECTS
-(
-    id   SERIAL PRIMARY KEY,
-    name varchar(100)
-);
-
 CREATE TABLE TASKS
 (
     id         SERIAL PRIMARY KEY,
