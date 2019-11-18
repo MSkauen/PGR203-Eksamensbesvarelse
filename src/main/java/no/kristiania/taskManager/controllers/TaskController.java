@@ -38,7 +38,7 @@ public class TaskController extends AbstractDaoController<TaskDao> implements Ht
             case "/api/tasks?/addTask":
                 handleAdd();
                 break;
-            case "api/tasks?/updateTasks":
+            case "/api/tasks?/updateTasks":
                 handleUpdate();
             default:
                 response.executeResponse(STATUS_CODE.INTERNAL_SERVER_ERROR);
@@ -76,7 +76,6 @@ public class TaskController extends AbstractDaoController<TaskDao> implements Ht
         dao.insert(task);
     }
 
-    //Updates name and status of member
     @Override
     public void alterData(Map<String, String> requestBodyParameters) throws SQLException {
 
