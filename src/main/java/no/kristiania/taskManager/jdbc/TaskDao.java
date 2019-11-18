@@ -24,15 +24,19 @@ public class TaskDao extends AbstractDao<Task> {
     public void insert(Task task) throws SQLException {
         long id = insert(task, "INSERT INTO tasks (name) VALUES (?)");
         task.setId(id);
-        task.setTaskStatus(Task.TASK_STATUS.NOT_STARTED.getStatusString());
+        task.setTaskStatus(TASK_STATUS.NOT_STARTED.getStatusString());
     }
 
     public void update(String name, long id) throws SQLException {
         update(name, id, "UPDATE tasks set name = ? WHERE id = ?");
     }
 
-    public void update(Task.TASK_STATUS status, long id) throws SQLException {
+    public void update(TASK_STATUS status, long id) throws SQLException {
         update(status.getStatusString(), id, "UPDATE tasks set status = ?::status WHERE id = ?");
+    }
+
+    public void update(long projectId, long id) throws SQLException {
+        update(projectId, id, "UPDATE tasks set project_id = ? WHERE id = ?");
     }
 
     @Override

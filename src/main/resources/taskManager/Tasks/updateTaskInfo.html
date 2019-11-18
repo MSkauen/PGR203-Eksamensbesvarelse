@@ -21,6 +21,10 @@
             <option value="Finished">Finished</option>
         </select>
     </label>
+    <label>Task project
+        <select name="projectId" id="projects">
+        </select>
+    </label>
     <br>
     <button>Edit</button>
 </form>
@@ -32,6 +36,15 @@
         })
         .then(function (text) {
             tasks.innerHTML = text;
+        });
+
+    var projects = document.getElementById("projects");
+    fetch("/api/projects?/listProjects=Option")
+        .then(function (result) {
+            return result.text();
+        })
+        .then(function (text) {
+            projects.innerHTML = text;
         })
 </script>
 </body>
