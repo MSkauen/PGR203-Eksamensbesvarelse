@@ -4,8 +4,9 @@
 
 ### Bygg og test executable jar-fil
 
-1. Bygg prosjektet ved å kjøre kommandoen: mvn package  
-3. Start TaskManager ved å kjøre kommandoen: java -jar target/http-server-1.0-SNAPSHOT.jar
+1. Legg til databaseinfo i en task-manager.properties fil
+2. Bygg prosjektet ved å kjøre kommandoen: mvn package  
+3. Start TaskManager ved å kjøre kommandoen: java -jar target/Task-Manager-1.0-SNAPSHOT.jar
 
 ### Funksjonalitet
 
