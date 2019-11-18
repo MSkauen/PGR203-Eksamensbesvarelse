@@ -48,7 +48,7 @@ public class TaskControllersTest {
     }
 
     @Test
-    void shouldAlterExistingMember() throws SQLException {
+    void shouldAlterExistingTask() throws SQLException {
         Task task1 = TaskDaoTest.sampleTask();
         Task task2 = TaskDaoTest.sampleTask();
 
@@ -67,6 +67,7 @@ public class TaskControllersTest {
         data.put("id", Long.toString(task1.getId()));
         data.put("name", task2.getName());
         data.put("status", task2.getTaskStatus());
+        data.put("projectId", "");
 
         return data;
     }

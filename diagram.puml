@@ -1,0 +1,40 @@
+@startuml
+class HttpServer
+class TaskManagerServer
+
+class HttpMessage
+class HttpRequest
+class HttpResponse
+
+class HttpController
+class FileHttpController
+
+HttpServer <|-- TaskManagerServer
+HttpServer *-- HttpMessage
+HttpServer o-- HttpController
+
+TaskManagerServer o-- AbstractDaoController
+
+HttpMessage <|-- HttpRequest
+HttpMessage <|-- HttpResponse
+
+HttpController <|-- FileHttpController
+AbstractDaoController <|-- MemberController
+AbstractDaoController <|-- TaskController
+AbstractDaoController <|-- ProjectController
+AbstractDaoController <|-- MembershipController
+
+
+AbstractDao <|-- MemberDao
+AbstractDao <|-- TaskDao
+AbstractDao <|-- ProjectDao
+AbstractDao <|-- MembershipDao
+
+MemberDao *-- Member
+TaskDao *-- Task
+ProjectDao *-- Project
+MembershipDao *-- Membership
+
+AbstractDao *-- AbstractDaoController
+
+@enduml

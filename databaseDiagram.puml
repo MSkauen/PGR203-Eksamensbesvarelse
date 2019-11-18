@@ -1,0 +1,15 @@
+@startuml
+
+hide thespot
+hide circle
+
+entity Project
+entity Tasks
+entity Members
+entity Task_Members
+
+Project |o..o{ Tasks
+Tasks ||..o{Task_Members
+Members ||..o{Task_Members
+
+@enduml
