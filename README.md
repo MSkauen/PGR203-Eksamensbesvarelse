@@ -4,8 +4,9 @@
 
 ### Bygg og test executable jar-fil
 
-1. Bygg prosjektet ved å kjøre kommandoen: mvn package  
-3. Start TaskManager ved å kjøre kommandoen: java -jar target/http-server-1.0-SNAPSHOT.jar
+1. Legg til databaseinfo i en task-manager.properties fil
+2. Bygg prosjektet ved å kjøre kommandoen: mvn package  
+3. Start TaskManager ved å kjøre kommandoen: java -jar target/Task-Manager-1.0-SNAPSHOT.jar
 
 ### Funksjonalitet
 
@@ -23,9 +24,12 @@
 * Under TASKS kan man se medlemmer tildelt en oppgave og endre oppgavens navn eller status.
 
 ## Designbeskrivelse
-####Database
+#### Database
+
 ![](databaseDiagram.png)
-####Klasser
+
+#### Klasser
+
 ![](diagram.png)
 
 TaskManagerServeren i seg selv er bare en implementasjon av HttpServeren, men lagt til controllerne for å håndtere JDBC mot databasen. 
