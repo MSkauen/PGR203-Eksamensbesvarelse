@@ -31,6 +31,7 @@ public class HttpServer {
     public static void main(String[] args) throws IOException {
         HttpServer httpServer = new HttpServer(8080);
         httpServer.start();
+        logger.info("Server started at: http://localhost:8080/");
     }
 
     public void start() {

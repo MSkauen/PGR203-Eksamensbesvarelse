@@ -18,7 +18,7 @@ public class TaskManagerServer {
     private HttpServer server;
 
     public TaskManagerServer(int port) throws IOException {
-        logger.info("Server started at port: " + port);
+
         Properties properties = new Properties();
         try (FileReader fileReader = new FileReader("task-manager.properties")) {
             properties.load(fileReader);
@@ -49,6 +49,7 @@ public class TaskManagerServer {
 
     public static void main(String[] args) throws IOException {
         new TaskManagerServer(8080).start();
+        logger.info("Server started at http://localhost:8080/");
     }
 
     public void start() {
