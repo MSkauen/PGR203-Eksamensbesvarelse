@@ -30,10 +30,10 @@
 
 #### Klasser
 
-TaskManagerServeren i seg selv er bare en implementasjon av HttpServeren, men lagt til controllerne for å håndtere JDBC mot databasen. 
+TaskManagerServeren i seg selv er en implementasjon av HttpServeren, men lagt til kontrollere for å håndtere JDBC mot databasen. 
 Det er implementert en kontroller for hver av databaseobjektene, og alle er AbstractDaoControllere.
 Den abstrakte kontrolleren består av metoder som håndterer de ulike tingene man kan gjøre mot databasen(liste objekter, lage nytt objekt, endre det) med riktig respons for HttpRequesten og kaller på metoder fra barneklassene for å få riktig format og data.
-Disse kontrollerene er altså avhengige av at både databaseObjektet og databaseDaoObjektet.
+Disse kontrollerene er altså avhengige av både databaseObjektet og databaseDaoObjektet.
 Det er url-ene localhost:8080/api/objekt? som vil føre til at de riktige kontrollerene blir brukt, imens resten av request-pathen håndtere i kontrolleren.
 
 HttpResponse og HttpRequest er begge HttpMessages, og er klasser for å håndtere innkommende request, generere nye requests/responser o.l.
@@ -50,7 +50,6 @@ Det er litt vanskelig å si noe konkret man har lært, for alt har jo egentlig v
 Vi er veldig fornøyde med at vi klarte å få til det vi syns er en ganske grei kontroller-håndtering. Fra starten av hadde vi fokus på at kontrollerene skulle gjøre det lett å implementere nye.
 Selv om det er kanskje delen som har forandret seg mest i løpet av hele prosessen, mye fordi det var vanskelig å finne ut av hvordan vi skulle opprettholde lesbarheten til kontrollerene, og vi føler vi har klart det kanskje hovedsaklig ved at de er alle er veldig like.
 
-Vi har 
 ### Hva vi skulle ønske vi hadde gjort annerledes
 Selv om vi har fått til å skille ut HttpRequest til en barneklasse av HttpMessage er fortsatt den delen ganske rotete, og vi skulle ønske vi brukte bedre tid på å refactorere HttpMessage og dens barneklasser.
 I tillegg er vi ganske sikre på at det er en del rot her og der vi ikke har helt oversikt over. Og kanskje sist men ikke minst så tenker vi at vi garantert hadde gjort godt av litt flere, og kanskje bedre tester.
@@ -63,4 +62,4 @@ Men det er kanskje det vi har funnet mest utfordrende med denne oppgaven. Spesie
 * [Link til issues](https://github.com/Westerdals/pgr203-2019-eksamen-hansmaast/issues)
     
 ## Annet
-*  [Link til pingpong-programmering video](https://vimeo.com/373804252)
+
