@@ -30,8 +30,6 @@
 
 #### Klasser
 
-![](diagram.png)
-
 TaskManagerServeren i seg selv er bare en implementasjon av HttpServeren, men lagt til controllerne for å håndtere JDBC mot databasen. 
 Det er implementert en kontroller for hver av databaseobjektene, og alle er AbstractDaoControllere.
 Den abstrakte kontrolleren består av metoder som håndterer de ulike tingene man kan gjøre mot databasen(liste objekter, lage nytt objekt, endre det) med riktig respons for HttpRequesten og kaller på metoder fra barneklassene for å få riktig format og data.
