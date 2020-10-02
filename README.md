@@ -1,5 +1,12 @@
 # PGR203 - Eksamen - TaskManager
 [![Build Status](https://travis-ci.com/Westerdals/pgr203-2019-eksamen-gulpipose.svg?token=44Bw2ysNN257T9ubGsZk&branch=master)](https://travis-ci.com/Westerdals/pgr203-2019-eksamen-gulpipose)
+
+## Om prosjektet
+
+Dette er en eksamensbesvarelese i faget PGR203 Avansert Javaprogrammering ved Høyskolen Kristiania.
+Oppgaven gikk ut på å utvikle en HTTP-server for en Task-Manager applikasjon. 
+Besvarelesen ble sensurert til en A. 
+
 ## Hvordan kjøre dette programmet
 
 ### Bygg og test executable jar-fil
